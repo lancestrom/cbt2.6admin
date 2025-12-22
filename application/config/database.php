@@ -6,7 +6,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '192.168.1.8',
+	'hostname' => '103.126.117.66',
 	'username' => 'cbt',
 	'password' => 'smktkjTH46',
 	'database' => 'cbtonline_db',
@@ -26,7 +26,7 @@ $db['default'] = array(
 	'save_queries' => TRUE
 );
 
-// $db['default'] = array(
+$db['default'] = array(
 // 	'dsn'	=> '',
 // 	'hostname' => 'localhost',
 // 	'username' => 'root',
