@@ -180,6 +180,8 @@ class Dashboard extends CI_Controller
         $this->db->empty_table('a_jadwal');
         $this->db->empty_table('soal');
         $this->db->empty_table('bank_soal');
+        $this->db->empty_table('jadwal_soal');
+        $this->db->empty_table('siswa_jawab');
 
         $this->session->set_flashdata('pesan', '<div class="row">
         <div class="col-md mt-2">
@@ -271,6 +273,57 @@ class Dashboard extends CI_Controller
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
+    }
+
+    public function siswa_block()
+    {
+        $data = array(
+            'id' => $this->input->post('id'),
+            'no_peserta' => $this->input->post('no_peserta'),
+            'nama_siswa' => $this->input->post('nama_siswa'),
+            'kelas' => $this->input->post('kelas'),
+            'jurusan' => $this->input->post('jurusan'),
+            'username' => $this->input->post('username'),
+            'password' => $this->input->post('password'),
+            'level' => $this->input->post('level'),
+            'status' => 0,
+        );
+
+        $this->db->where('id', $this->input->post('id'));
+        $this->db->update('a_siswa', $data);
+        redirect('Dashboard/siswa');
+    }
+
+    public function siswa_daftar_block()
+    {
+        $this->Model_keamanan->getKeamanan();
+        $isi['siswa'] = $this->Model_siswa->dataSiswaBlock();
+
+
+        $isi2['title'] = 'CBT | Administrator';
+        $isi['content'] = 'tampilan_siswa_daftar_block';
+        $this->load->view('templates/header', $isi2);
+        $this->load->view('tampilan_dashboard', $isi);
+        $this->load->view('templates/footer');
+    }
+
+    public function siswa_buka_block()
+    {
+        $data = array(
+            'id' => $this->input->post('id'),
+            'no_peserta' => $this->input->post('no_peserta'),
+            'nama_siswa' => $this->input->post('nama_siswa'),
+            'kelas' => $this->input->post('kelas'),
+            'jurusan' => $this->input->post('jurusan'),
+            'username' => $this->input->post('username'),
+            'password' => $this->input->post('password'),
+            'level' => $this->input->post('level'),
+            'status' => 1,
+        );
+
+        $this->db->where('id', $this->input->post('id'));
+        $this->db->update('a_siswa', $data);
+        redirect('Dashboard/siswa');
     }
 
 

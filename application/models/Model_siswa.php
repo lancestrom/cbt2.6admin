@@ -38,10 +38,16 @@ GROUP BY a_siswa.kelas;";
 
     public function dataSiswa()
     {
-        $sql = "SELECT a_siswa.nama_siswa,a_jurusan.jurusan,a_kelas.kelas,a_siswa.username,a_siswa.password,IF(a_siswa.status=1,'AKTIF',null) AS keterangan FROM `a_siswa` 
-INNER JOIN a_kelas on a_siswa.kelas=a_kelas.slug
-INNER JOIN a_jurusan ON a_siswa.jurusan=a_jurusan.kode 
-order by a_siswa.id;";
+        $sql = "SELECT * FROM `a_siswa`
+WHERE a_siswa.status='1';";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function dataSiswaBlock()
+    {
+        $sql = "SELECT * FROM `a_siswa`
+WHERE a_siswa.status='0';";
         $query = $this->db->query($sql);
         return $query->result_array();
     }

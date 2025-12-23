@@ -39,11 +39,20 @@
                     <a class="collapse-item" href="<?= base_url() ?>Dashboard/jurusan">Master Jurusan</a>
                     <a class="collapse-item" href="<?= base_url() ?>Dashboard/kelas">Master Kelas</a>
                     <a class="collapse-item" href="<?= base_url() ?>Dashboard/mata_pelajaran">Master Mata Pelajaran</a>
-                    <a class="collapse-item" href="<?= base_url() ?>Dashboard/siswa">Peserta Ujian</a>
+                    <!-- <a class="collapse-item" href="<?= base_url() ?>Dashboard/siswa">Peserta Ujian</a> -->
                 </div>
             </div>
         </li>
-
+        <li class="nav-item">
+            <a class="nav-link" href="<?= base_url() ?>Dashboard/siswa">
+                <i class="far fa-calendar-alt"></i>
+                <span>Peserta Ujian</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<?= base_url() ?>Dashboard/siswa_daftar_block">
+                <i class="far fa-calendar-alt"></i>
+                <span>Peserta Block</span></a>
+        </li>
 
         <li class="nav-item">
             <a class="nav-link" href="<?= base_url() ?>Dashboard/jadwal_ujian">
