@@ -323,7 +323,7 @@ class Dashboard extends CI_Controller
 
         $this->db->where('id', $this->input->post('id'));
         $this->db->update('a_siswa', $data);
-        redirect('Dashboard/siswa');
+        redirect('Dashboard/siswa_daftar_block');
     }
 
 
