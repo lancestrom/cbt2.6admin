@@ -10,6 +10,14 @@ class Model_siswa extends CI_Model
         return $query->row()->siswa;
     }
 
+    public function countSiswaAKL()
+    {
+        $sql = "SELECT COUNT(*) AS jumlah_siswa FROM `a_siswa`
+WHERE jurusan='akl';";
+        $query = $this->db->query($sql);
+        return $query->row()->jumlah_siswa;
+    }
+
     public function dataSiswaByTingkat($tingkat)
     {
         $sql = "SELECT a_kelas.kelas,count(a_siswa.nama_siswa) AS jumlah_siswa FROM a_kelas
@@ -40,6 +48,14 @@ GROUP BY a_siswa.kelas;";
     {
         $sql = "SELECT * FROM `a_siswa`
 WHERE a_siswa.status='1';";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function dataSiswaAKL()
+    {
+        $sql = "SELECT * FROM `a_siswa`
+WHERE jurusan='AKL' AND STATUS='1';";
         $query = $this->db->query($sql);
         return $query->result_array();
     }

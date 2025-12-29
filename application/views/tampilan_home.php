@@ -28,7 +28,7 @@
             </div>
         </div>
     </div>
-    <!-- <div class="col-sm mt-2">
+    <div class="col-sm mt-2">
         <div class="card">
             <div class="card-body bg-success">
                 <div class="row">
@@ -40,7 +40,7 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
     <div class="col-sm mt-2">
         <div class="card">
             <div class="card-body bg-primary">

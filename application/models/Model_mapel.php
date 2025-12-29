@@ -10,6 +10,14 @@ class Model_mapel extends CI_Model
         return $query->row()->mapel;
     }
 
+    public function countMapelAKL()
+    {
+        $sql = "SELECT COUNT(*) AS mapel FROM `a_mapel`
+WHERE a_mapel.nama_mapel LIKE '%AKL%';";
+        $query = $this->db->query($sql);
+        return $query->row()->mapel;
+    }
+
     public function dataMapel()
     {
         $sql = "SELECT * FROM `a_mapel`

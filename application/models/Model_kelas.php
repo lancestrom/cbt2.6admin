@@ -12,10 +12,10 @@ class Model_kelas extends CI_Model
 
     public function countKelasAKL()
     {
-        $sql = "SELECT count(*) AS kelas_akl FROM `a_kelas`
+        $sql = "SELECT count(*) AS kelas FROM `a_kelas`
                 WHERE kelas LIKE '%AKL%'";
         $query = $this->db->query($sql);
-        return $query->row()->kelas_akl;
+        return $query->row()->kelas;
     }
 
     public function countKelasBDP()

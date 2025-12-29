@@ -18,7 +18,7 @@ class Dashboard extends CI_Controller
 
         $isi['kelas'] = $this->Model_kelas->countKelas();
         $isi['mapel'] = $this->Model_mapel->countMapel();
-        // $isi['ujian'] = $this->Model_ujian->countUjian();
+        $isi['ujian'] = $this->Model_ujian->countUjian();
 
         // Kelas
         $isi['x'] = $this->Model_siswa->dataSiswaX();
@@ -716,6 +716,21 @@ class Dashboard extends CI_Controller
         $isi['nilai'] = $this->Model_ujian->print_nilai($id_jadwal);
         $this->load->view('Master/tampilan_print_nilai', $isi);
     }
+
+    public function status_ujian()
+    {
+        $this->Model_keamanan->getKeamanan();
+
+        $tanggal = date('Y-m-d');
+        $isi['status_ujian'] = $this->Model_ujian->data_status_ujian($tanggal);
+
+        $isi2['title'] = 'CBT | Administrator';
+        $isi['content'] = 'Master/tampilan_status_ujian';
+        $this->load->view('templates/header', $isi2);
+        $this->load->view('tampilan_dashboard', $isi);
+        $this->load->view('templates/footer');
+    }
+
 
     public function logout()
     {
