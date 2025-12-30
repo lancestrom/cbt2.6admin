@@ -70,7 +70,7 @@
                     <div class="card-header alert alert-success">
                         <h4 class="text-center font-weight-bold">Ujian Terdaftar Hari Ini</h4>
                     </div>
-                    <!-- <div class="card-body">
+                    <div class="card-body">
                         <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
@@ -85,14 +85,14 @@
                                     $no = 1;
                                     foreach ($ujian_hari_ini as $row) {
                                     ?>
-                                        <td class="text-center"><?= $no++ ?></td>
-                                        <td class="text-uppercase"><?= $row['fullname'] ?></td>
-                                        <td class="text-uppercase text-center"><?= $row['jumlah_siswa'] ?> Siswa</td>
+                                    <td class="text-center"><?= $no++ ?></td>
+                                    <td class="text-uppercase"><?= $row['nama_mapel'] ?></td>
+                                    <td class="text-uppercase text-center"><?= $row['jumlah_siswa'] ?> Siswa</td>
                                 </tr>
-                            <?php } ?>
+                                <?php } ?>
                             </tbody>
                         </table>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>

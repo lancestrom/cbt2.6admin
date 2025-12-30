@@ -28,6 +28,16 @@ WHERE a_mapel.id_mapel NOT IN (SELECT a_jadwal.id_mapel FROM `a_jadwal`);";
         return $query->result_array();
     }
 
+    public function dataMapelAKL()
+    {
+        $sql = "SELECT a_mapel.id_mapel,a_kelas.kelas,a_mapel.nama_mapel FROM `a_mapel`
+INNER JOIN a_kelas
+ON a_mapel.id_kelas=a_kelas.id
+WHERE a_mapel.id_mapel NOT IN (SELECT a_jadwal.id_mapel FROM `a_jadwal`) AND a_mapel.nama_mapel LIKE '%akl%';";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
 
 
     public function buat_mapel_jadwal($id_mapel)

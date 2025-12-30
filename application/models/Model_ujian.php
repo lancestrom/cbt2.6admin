@@ -21,6 +21,21 @@ WHERE a_mapel.nama_mapel LIKE '%AKL%';";
         return $query->row()->ujian;
     }
 
+    public function ujian_hari_ini_akl($tanggal)
+    {
+        $sql = "SELECT a_jadwal.id_jadwal,a_mapel.id_mapel,a_mapel.id_kelas,a_mapel.nama_mapel,COUNT(*) AS jumlah_siswa,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai FROM `a_jadwal`
+INNER JOIN a_mapel
+ON a_jadwal.id_mapel=a_mapel.id_mapel
+INNER JOIN a_kelas
+ON a_mapel.id_kelas=a_kelas.id
+INNER JOIN a_siswa
+on a_kelas.slug=a_siswa.kelas
+WHERE a_jadwal.tanggal_mulai='$tanggal' AND a_mapel.nama_mapel LIKE '%akl%'
+GROUP BY a_jadwal.id_jadwal;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
     public function jadwalUjian()
     {
         $sql = "SELECT a_jadwal.id_jadwal,a_mapel.nama_mapel,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai,((

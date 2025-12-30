@@ -60,6 +60,14 @@ WHERE jurusan='AKL' AND STATUS='1';";
         return $query->result_array();
     }
 
+    public function dataSiswaAKLBlock()
+    {
+        $sql = "SELECT * FROM `a_siswa`
+WHERE jurusan='AKL' AND STATUS='0';";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
     public function dataSiswaBlock()
     {
         $sql = "SELECT * FROM `a_siswa`

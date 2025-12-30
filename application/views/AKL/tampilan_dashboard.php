@@ -36,14 +36,14 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url() ?>Dashboard_akl/siswa_akl_moodle">
+            <a class="nav-link" href="<?= base_url() ?>Dashboard_akl/siswa_akl_block">
                 <i class="fas fa-user-graduate"></i>
                 <span>Peserta Block</span></a>
         </li>
 
 
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url() ?>Dashboard_akl/jadwal_ujian_akl">
+            <a class="nav-link" href="<?= base_url() ?>Dashboard_akl/mata_pelajaran">
                 <i class="far fa-calendar-alt"></i>
                 <span>Mapel Ujian</span></a>
         </li>
