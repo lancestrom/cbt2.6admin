@@ -56,7 +56,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url() ?>Dashboard_akl/jadwal_ujian_akl">
+            <a class="nav-link" href="<?= base_url() ?>Dashboard_akl/bank_soal">
                 <i class="far fa-calendar-alt"></i>
                 <span>Bank Soal</span></a>
         </li>

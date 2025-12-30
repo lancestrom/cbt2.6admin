@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+require_once APPPATH . 'third_party/spout/src/Spout/Autoloader/autoload.php';
+
+use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
+
 class Dashboard_akl extends CI_Controller
 {
 
@@ -158,59 +162,232 @@ class Dashboard_akl extends CI_Controller
     {
         $this->Model_keamanan->getKeamanan();
 
-        $isi['ujian_akl'] = $this->Model_ujian->jadwalUjianAKL();
+        $isi['ujian'] = $this->Model_ujian->jadwalUjianAKL();
 
         $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'AKL/Ujian/tampilan_ujain';
+        $isi['content'] = 'AKL/Ujian/tampilan_ujian';
         $this->load->view('templates/header', $isi2);
         $this->load->view('AKL/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
 
-    public function status_peserta_akl()
+    public function edit_jadwal($id_jadwal)
     {
         $this->Model_keamanan->getKeamanan();
-        $isi['status'] = $this->Model_ujian->statusPesertaAKL();
+        $isi['mapel'] = $this->Model_ujian->edit_jadwal_id($id_jadwal);
 
         $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'AKL/Ujian/tampilan_status_peserta';
+        $isi['content'] = 'AKL/Ujian/tampilan_edit_jadwal';
         $this->load->view('templates/header', $isi2);
         $this->load->view('AKL/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
 
-    public function filter_status_peserta()
+    public function simpan_edit_jadwal()
     {
         $this->Model_keamanan->getKeamanan();
-        $isi['status'] = $this->Model_ujian->FilterstatusPesertaAKL();
 
+        $id_jadwal = $this->input->post('id_jadwal', TRUE);
+        $id_mapel = $this->input->post('id_mapel', TRUE);
+        $tanggal_mulai = $this->input->post('tanggal_mulai', TRUE);
+        $waktu_mulai = $this->input->post('waktu_mulai', TRUE);
+        $waktu_selesal = $this->input->post('waktu_selesai', TRUE);
+
+        $data = array(
+            'id_jadwal' =>  $id_jadwal,
+            'id_mapel' => $id_mapel,
+            'tanggal_mulai' => $tanggal_mulai,
+            'waktu_mulai' => $waktu_mulai,
+            'waktu_selesai' => $waktu_selesal
+        );
+
+        $this->db->where('id_jadwal', $id_jadwal);
+        $this->db->update('a_jadwal', $data);
+        redirect('Dashboard_akl/jadwal_ujian_akl');
+    }
+
+    public function pilih_soal($id_jadwal)
+    {
+        $this->Model_keamanan->getKeamanan();
+        $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
+        $isi['bank_soal'] = $this->Model_ujian->pilihBankSoalAKL();
 
         $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'AKL/Ujian/filter_tampilan_status_peserta';
+        $isi['content'] = 'AKL/Ujian/tampilan_pilih_soal';
         $this->load->view('templates/header', $isi2);
         $this->load->view('AKL/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
 
-    public function rekap_nilai_akl()
+    public function simpan_pilih_soal()
+    {
+        $id_jadwal_soal = rand(11111111, 99999999);
+        $id_jadwal = $this->input->post_get('id_jadwal');
+        $id_bank_soal = $this->input->post_get('id_bank_soal');
+
+        $data = array(
+            'id_jadwal_soal' => $id_jadwal_soal,
+            'id_jadwal ' => $id_jadwal,
+            'id_bank_soal' => $id_bank_soal
+        );
+
+        $this->db->insert('jadwal_soal', $data);
+        $this->session->set_flashdata('pesan', '<div class="row">
+        <div class="col-md mt-2">
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <strong>Jadwal Soal Berhasil Di Tambah</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+        </div>
+        </div>');
+
+        redirect('Dashboard_akl/jadwal_ujian_akl');
+    }
+
+    public function detail_jadwal_soal($id_jadwal)
     {
         $this->Model_keamanan->getKeamanan();
-        $isi['rekap_akl'] = $this->Model_ujian->rekap_nilai_akl();
+        $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
+        $isi['jadwal_soal'] = $this->Model_ujian->jadwalSoal_bankSoal($id_jadwal);
 
         $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'AKL/Ujian/tampilan_rekap_nilai';
+        $isi['content'] = 'AKL/Ujian/tampilan_detail_jadwal_soal';
         $this->load->view('templates/header', $isi2);
         $this->load->view('AKL/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
 
-    public function print_nilai_akl($id_course)
+    public function bank_soal()
     {
         $this->Model_keamanan->getKeamanan();
-        $isi['header'] = $this->Model_ujian->print_nilai_header($id_course);
-        $isi['rekap'] = $this->Model_ujian->print_nilai_rekap($id_course);
+        $isi['bank_soal'] = $this->Model_ujian->namaBankSoalAKL();
 
         $isi2['title'] = 'CBT | Administrator';
-        $this->load->view('Ujian/tampilan_print_nilai', $isi);
+        $isi['content'] = 'AKL/Ujian/tampilan_bank_soal';
+        $this->load->view('templates/header', $isi2);
+        $this->load->view('AKL/tampilan_dashboard', $isi);
+        $this->load->view('templates/footer');
+    }
+
+    public function hapus_banksoal($id_bank_soal_temp)
+    {
+        $this->Model_keamanan->getKeamanan();
+
+        $this->db->where('id_bank_soal', $id_bank_soal_temp);
+        $this->db->delete('bank_soal');
+
+        $this->db->where('id_bank_soal', $id_bank_soal_temp);
+        $this->db->delete('soal');
+
+
+        $this->session->set_flashdata('pesan', '<div class="row">
+        <div class="col-md mt-2">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Bank Soal Berhasil Di Hapus</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+        </div>
+        </div>');
+        redirect('Dashboard_akl/bank_soal');
+    }
+
+    public function simpan_bank_soal()
+    {
+        $this->Model_keamanan->getKeamanan();
+
+        $data = array(
+            'id_bank_soal' => rand(11111111, 99999999),
+            'nama_bank_soal' => $this->input->post('nama_bank_soal', TRUE),
+            'jurusan' => $this->input->post('jurusan', TRUE)
+        );
+
+        $this->db->insert('bank_soal', $data);
+        $this->session->set_flashdata('pesan', '<div class="row">
+        <div class="col-md mt-2">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Bank Soal Berhasil Di Tambah</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+        </div>
+        </div>');
+        redirect('Dashboard_akl/bank_soal');
+    }
+
+    public function upload_banksoal($id_bank_soal_temp)
+    {
+        $this->Model_keamanan->getKeamanan();
+        $isi['header'] = $this->Model_ujian->HeadersimpanBankSoalTemp($id_bank_soal_temp);
+
+        $isi2['title'] = 'CBT | Administrator';
+        $isi['content'] = 'AKL/Ujian/tampilan_bank_soal_upload';
+        $this->load->view('templates/header', $isi2);
+        $this->load->view('AKL/tampilan_dashboard', $isi);
+        $this->load->view('templates/footer');
+    }
+
+    public function upload_bank_soal()
+    {
+        // protect the upload endpoint
+        if ($this->input->post('submit', TRUE) == 'upload') {
+            $config['upload_path']      = './temp_doc/';
+            $config['allowed_types']    = 'xlsx|xls';
+            $config['file_name']        = 'doc' . time();
+
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('excel')) {
+                $file   = $this->upload->data();
+
+                $reader = ReaderEntityFactory::createXLSXReader();
+                $reader->open('temp_doc/' . $file['file_name']);
+
+
+                foreach ($reader->getSheetIterator() as $sheet) {
+                    $numRow = 1;
+                    $save   = array();
+                    $id_random = rand(11111111, 99999999);
+                    foreach ($sheet->getRowIterator() as $row) {
+
+                        if ($numRow > 1) {
+
+                            $cells = $row->getCells();
+
+                            // Extract cell values safely (cast to string and trim)
+                            $data = array(
+                                'id_soal'   => $cells[0],
+                                'id_bank_soal' => $cells[1],
+                                'soal'      => $cells[2],
+                                'pilA'       => $cells[3],
+                                'pilB'       => $cells[4],
+                                'pilC'       => $cells[5],
+                                'pilD'       => $cells[6],
+                                'pilE'       => $cells[7],
+                                'kunci'     => $cells[8],
+                            );
+                            array_push($save, $data);
+                        }
+                        $numRow++;
+                    }
+                    $this->Model_ujian->simpan($save);
+                    $reader->close();
+
+                    unlink('temp_doc/' . $file['file_name']);
+                    $this->session->set_flashdata('pesan', '<div class="alert alert-success">Soal berhasil diunggah</div>');
+                    redirect('Dashboard_akl/bank_soal');
+                }
+            } else {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger">Upload error: ' . strip_tags($this->upload->display_errors()) . '</div>');
+                redirect('Dashboard/bank_soal');
+            }
+        }
     }
 }

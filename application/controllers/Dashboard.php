@@ -651,7 +651,8 @@ class Dashboard extends CI_Controller
 
         $data = array(
             'id_bank_soal' => rand(11111111, 99999999),
-            'nama_bank_soal' => $this->input->post('nama_bank_soal', TRUE)
+            'nama_bank_soal' => $this->input->post('nama_bank_soal', TRUE),
+            'jurusan' => $this->input->post('jurusan', TRUE)
         );
 
         $this->db->insert('bank_soal', $data);

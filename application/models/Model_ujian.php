@@ -47,6 +47,18 @@ ON a_jadwal.id_mapel=a_mapel.id_mapel;";
         return $query->result_array();
     }
 
+    public function jadwalUjianAKL()
+    {
+        $sql = "SELECT a_jadwal.id_jadwal,a_mapel.nama_mapel,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai,((
+TIME_TO_SEC(a_jadwal.waktu_selesai)-TIME_TO_SEC(a_jadwal.waktu_mulai) )) / 60 AS waktu
+FROM `a_jadwal`
+INNER join a_mapel
+ON a_jadwal.id_mapel=a_mapel.id_mapel
+WHERE a_mapel.nama_mapel LIKE '%AKL%';";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
     public function uploadSoalID($id_jadwal)
     {
         $sql = "SELECT a_jadwal.id_jadwal,a_mapel.nama_mapel,a_kelas.kelas FROM `a_jadwal`
@@ -150,9 +162,20 @@ WHERE bank_soal.id_bank_soal='$id_bank_soal';";
 
     public function namaBankSoal()
     {
-        $sql = "SELECT bank_soal.id_bank_soal,bank_soal.nama_bank_soal,IF(COUNT(*)>0,count(soal.soal),'0') AS jumlah_soal FROM `soal`
+        $sql = "SELECT bank_soal.id_bank_soal,bank_soal.nama_bank_soal,bank_soal.jurusan,IF(COUNT(*)>0,count(soal.soal),'0') AS jumlah_soal FROM `soal`
 RIGHT JOIN bank_soal
 ON bank_soal.id_bank_soal=soal.id_bank_soal
+GROUP BY bank_soal.id_bank_soal;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function namaBankSoalAKL()
+    {
+        $sql = "SELECT bank_soal.id_bank_soal,bank_soal.nama_bank_soal,bank_soal.jurusan,IF(COUNT(*)>0,count(soal.soal),'0') AS jumlah_soal FROM `soal`
+RIGHT JOIN bank_soal
+ON bank_soal.id_bank_soal=soal.id_bank_soal
+WHERE bank_soal.jurusan LIKE '%AKL%' OR bank_soal.jurusan LIKE '%UMUM%'
 GROUP BY bank_soal.id_bank_soal;";
         $query = $this->db->query($sql);
         return $query->result_array();
@@ -178,9 +201,20 @@ WHERE bank_soal.id_bank_soal='$id_bank_soal';";
 
     public function pilihBankSoal()
     {
-        $sql = "SELECT bank_soal.id_bank_soal,bank_soal.nama_bank_soal,count(bank_soal.id_bank_soal) AS jumlah_soal FROM `soal`
+        $sql = "SELECT bank_soal.id_bank_soal,bank_soal.nama_bank_soal,bank_soal.jurusan,count(bank_soal.id_bank_soal) AS jumlah_soal FROM `soal`
 INNER JOIN bank_soal
 ON bank_soal.id_bank_soal=soal.id_bank_soal
+GROUP BY bank_soal.id_bank_soal;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function pilihBankSoalAKL()
+    {
+        $sql = "SELECT bank_soal.id_bank_soal,bank_soal.nama_bank_soal,bank_soal.jurusan,count(bank_soal.id_bank_soal) AS jumlah_soal FROM `soal`
+INNER JOIN bank_soal
+ON bank_soal.id_bank_soal=soal.id_bank_soal
+WHERE bank_soal.jurusan LIKE '%AKL%' OR bank_soal.jurusan LIKE '%UMUM%'
 GROUP BY bank_soal.id_bank_soal;";
         $query = $this->db->query($sql);
         return $query->result_array();

@@ -48,31 +48,31 @@
                                 $no = 1;
                                 foreach ($bank_soal as $row) {
                                 ?>
-                                    <td><?php echo $no++; ?></td>
-                                    <td class="text-center"><?= $row['nama_bank_soal'] ?></td>
-                                    <td class="text-center"><?= $row['jurusan'] ?></td>
-                                    <td class="text-center"><?= $row['jumlah_soal'] ?> Soal</td>
-                                    <td>
-                                        <h5>
-                                            <form action="<?= base_url() ?>Dashboard/simpan_pilih_soal" method="post">
-                                                <input type="text" value="<?= $ujian['id_jadwal'] ?>" name="id_jadwal"
-                                                    hidden>
-                                                <input type="text" value="<?= $row['id_bank_soal'] ?>" name="id_bank_soal"
-                                                    hidden>
-                                                <div class="row">
-                                                    <div class="col-md">
-                                                        <h5 class="text-center">
-                                                            <button type="submit"
-                                                                class="btn btn-primary btn-sm">PILIH</button>
-                                                        </h5>
-                                                    </div>
+                                <td><?php echo $no++; ?></td>
+                                <td class="text-center"><?= $row['nama_bank_soal'] ?></td>
+                                <td class="text-center"><?= $row['jurusan'] ?></td>
+                                <td class="text-center"><?= $row['jumlah_soal'] ?> Soal</td>
+                                <td>
+                                    <h5>
+                                        <form action="<?= base_url() ?>Dashboard_akl/simpan_pilih_soal" method="post">
+                                            <input type="text" value="<?= $ujian['id_jadwal'] ?>" name="id_jadwal"
+                                                hidden>
+                                            <input type="text" value="<?= $row['id_bank_soal'] ?>" name="id_bank_soal"
+                                                hidden>
+                                            <div class="row">
+                                                <div class="col-md">
+                                                    <h5 class="text-center">
+                                                        <button type="submit"
+                                                            class="btn btn-primary btn-sm">PILIH</button>
+                                                    </h5>
                                                 </div>
+                                            </div>
 
-                                            </form>
-                                        </h5>
-                                    </td>
+                                        </form>
+                                    </h5>
+                                </td>
                             </tr>
-                        <?php } ?>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
