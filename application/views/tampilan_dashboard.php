@@ -144,7 +144,7 @@
             <div class="container my-auto">
                 <div class="copyright text-center text-white my-auto">
                     <h5 class="text-center font-weight-bold text-uppercase">Copyright &copy; tunas harapan</h5>
-
+                    <h5 class="text-center text-white font-weight-bold">Design By Rahmadika S Setiawan, S.Kom</h5>
                 </div>
             </div>
         </footer>

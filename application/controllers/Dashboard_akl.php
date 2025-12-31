@@ -390,4 +390,17 @@ class Dashboard_akl extends CI_Controller
             }
         }
     }
+
+    public function detail_banksoal($id_bank_soal)
+    {
+        $this->Model_keamanan->getKeamanan();
+        $isi['header'] = $this->Model_ujian->headerBankSoal($id_bank_soal);
+        $isi['soal'] = $this->Model_ujian->detailBankSoal($id_bank_soal);
+
+        $isi2['title'] = 'CBT | Administrator';
+        $isi['content'] = 'AKL//Ujian/tampilan_detail_bank_soal';
+        $this->load->view('templates/header', $isi2);
+        $this->load->view('AKL/tampilan_dashboard', $isi);
+        $this->load->view('templates/footer');
+    }
 }
