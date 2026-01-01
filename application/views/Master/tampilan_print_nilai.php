@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>CBT 2.6 - SMK TUNAS HARAPAN</title>
+    <link rel="icon" type="image/png" href="<?= base_url() ?>assets/images/logo.png" />
 </head>
 
 <body>
@@ -60,12 +61,12 @@
                                 $no = 1;
                                 foreach ($nilai as $row) {
                                 ?>
-                                <td><?php echo $no++; ?></td>
-                                <td class="text-center"><?= $row['nama_siswa'] ?></td>
-                                <td class="text-center"><?= $row['kelas'] ?></td>
-                                <td class="text-center"><?= $row['nilai'] ?></td>
+                                    <td><?php echo $no++; ?></td>
+                                    <td class="text-center"><?= $row['nama_siswa'] ?></td>
+                                    <td class="text-center"><?= $row['kelas'] ?></td>
+                                    <td class="text-center"><?= $row['nilai'] ?></td>
                             </tr>
-                            <?php } ?>
+                        <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -73,7 +74,9 @@
         </div>
     </div>
 
-
+    <script>
+        window.print();
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">

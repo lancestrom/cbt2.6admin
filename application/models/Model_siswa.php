@@ -18,6 +18,14 @@ WHERE jurusan='akl';";
         return $query->row()->jumlah_siswa;
     }
 
+    public function countSiswaMPLB()
+    {
+        $sql = "SELECT COUNT(*) AS jumlah_siswa FROM `a_siswa`
+WHERE jurusan='mplb';";
+        $query = $this->db->query($sql);
+        return $query->row()->jumlah_siswa;
+    }
+
     public function dataSiswaByTingkat($tingkat)
     {
         $sql = "SELECT a_kelas.kelas,count(a_siswa.nama_siswa) AS jumlah_siswa FROM a_kelas

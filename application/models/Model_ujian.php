@@ -21,6 +21,16 @@ WHERE a_mapel.nama_mapel LIKE '%AKL%';";
         return $query->row()->ujian;
     }
 
+    public function countUjianMPLB()
+    {
+        $sql = "SELECT COUNT(*) AS ujian FROM `a_jadwal`
+INNER JOIN a_mapel
+on a_jadwal.id_mapel=a_mapel.id_mapel
+WHERE a_mapel.nama_mapel LIKE '%MPLB%';";
+        $query = $this->db->query($sql);
+        return $query->row()->ujian;
+    }
+
     public function ujian_hari_ini_akl($tanggal)
     {
         $sql = "SELECT a_jadwal.id_jadwal,a_mapel.id_mapel,a_mapel.id_kelas,a_mapel.nama_mapel,COUNT(*) AS jumlah_siswa,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai FROM `a_jadwal`
@@ -31,6 +41,21 @@ ON a_mapel.id_kelas=a_kelas.id
 INNER JOIN a_siswa
 on a_kelas.slug=a_siswa.kelas
 WHERE a_jadwal.tanggal_mulai='$tanggal' AND a_mapel.nama_mapel LIKE '%akl%'
+GROUP BY a_jadwal.id_jadwal;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function ujian_hari_ini_mplb($tanggal)
+    {
+        $sql = "SELECT a_jadwal.id_jadwal,a_mapel.id_mapel,a_mapel.id_kelas,a_mapel.nama_mapel,COUNT(*) AS jumlah_siswa,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai FROM `a_jadwal`
+INNER JOIN a_mapel
+ON a_jadwal.id_mapel=a_mapel.id_mapel
+INNER JOIN a_kelas
+ON a_mapel.id_kelas=a_kelas.id
+INNER JOIN a_siswa
+on a_kelas.slug=a_siswa.kelas
+WHERE a_jadwal.tanggal_mulai='$tanggal' AND a_mapel.nama_mapel LIKE '%mplb%'
 GROUP BY a_jadwal.id_jadwal;";
         $query = $this->db->query($sql);
         return $query->result_array();
@@ -252,6 +277,26 @@ INNER JOIN a_mapel
 ON a_mapel.id_kelas=a_kelas.id
 INNER JOIN a_jadwal
 ON a_jadwal.id_mapel=a_mapel.id_mapel
+GROUP BY a_mapel.id_mapel;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function rekap_nilai_mapelAKL()
+    {
+        $sql = "SELECT a_kelas.id,a_mapel.id_mapel,a_jadwal.id_jadwal,a_mapel.nama_mapel
+FROM `siswa_jawab`
+INNER JOIN soal
+ON siswa_jawab.soal_id=soal.id_soal
+INNER JOIN a_siswa
+ON siswa_jawab.username=a_siswa.username
+INNER JOIN a_kelas
+ON a_siswa.kelas=a_kelas.slug
+INNER JOIN a_mapel
+ON a_mapel.id_kelas=a_kelas.id
+INNER JOIN a_jadwal
+ON a_jadwal.id_mapel=a_mapel.id_mapel
+WHERE a_mapel.nama_mapel LIKE '%AKL%'
 GROUP BY a_mapel.id_mapel;";
         $query = $this->db->query($sql);
         return $query->result_array();

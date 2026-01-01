@@ -18,6 +18,14 @@ WHERE a_mapel.nama_mapel LIKE '%AKL%';";
         return $query->row()->mapel;
     }
 
+    public function countMapelMPLB()
+    {
+        $sql = "SELECT COUNT(*) AS mapel FROM `a_mapel`
+WHERE a_mapel.nama_mapel LIKE '%MPLB%';";
+        $query = $this->db->query($sql);
+        return $query->row()->mapel;
+    }
+
     public function dataMapel()
     {
         $sql = "SELECT * FROM `a_mapel`

@@ -5,7 +5,7 @@ require_once APPPATH . 'third_party/spout/src/Spout/Autoloader/autoload.php';
 
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 
-class Dashboard_akl extends CI_Controller
+class Dashboard_otkp extends CI_Controller
 {
 
 
@@ -13,18 +13,18 @@ class Dashboard_akl extends CI_Controller
     {
         $this->Model_keamanan->getKeamanan();
         // $isi['admin'] = $this->db->get_where('auth', ['username' => $this->session->userdata('username')])->row_array();
-        $isi['siswa'] = $this->Model_siswa->countSiswaAKL();
-        $isi['kelas'] = $this->Model_kelas->countKelasAKL();
-        $isi['ujian'] = $this->Model_ujian->countUjianAKL();
-        $isi['mapel'] = $this->Model_mapel->countMapelAKL();
+        $isi['siswa'] = $this->Model_siswa->countSiswaMPLB();
+        $isi['kelas'] = $this->Model_kelas->countKelasMPLB();
+        $isi['ujian'] = $this->Model_ujian->countUjianMPLB();
+        $isi['mapel'] = $this->Model_mapel->countMapelMPLB();
 
         $tanggal = date('Y-m-d');
         $isi['ujian_hari_ini'] = $this->Model_ujian->ujian_hari_ini_akl($tanggal);
 
         $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'AKL/tampilan_home';
+        $isi['content'] = 'MPLB/tampilan_home';
         $this->load->view('templates/header', $isi2);
-        $this->load->view('AKL/tampilan_dashboard', $isi);
+        $this->load->view('MPLB/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
 

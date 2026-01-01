@@ -5,8 +5,9 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url() ?>Dashboard_akl">
-            <div class="sidebar-brand-text mx-3">CBT 2.6 <br> ADMIN AKL</div>
+        <a class="sidebar-brand d-flex align-items-center justify-content-center"
+            href="<?= base_url() ?>Dashboard_otkp">
+            <div class="sidebar-brand-text mx-3">CBT 2.6 <br> ADMIN MPLB</div>
         </a>
 
         <!-- Divider -->
@@ -14,7 +15,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <a class="nav-link" href="<?= base_url() ?>Dashboard_akl">
+            <a class="nav-link" href="<?= base_url() ?>Dashboard_otkp">
                 <i class="fas fa-school"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -30,33 +31,33 @@
         <!-- Nav Item - Pages Collapse Menu -->
 
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url() ?>Dashboard_akl/siswa_akl">
+            <a class="nav-link" href="<?= base_url() ?>Dashboard_otkp/siswa_akl">
                 <i class="fas fa-user-graduate"></i>
                 <span>Peserta Ujian</span></a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url() ?>Dashboard_akl/siswa_akl_block">
+            <a class="nav-link" href="<?= base_url() ?>Dashboard_otkp/siswa_akl_block">
                 <i class="fas fa-user-graduate"></i>
                 <span>Peserta Block</span></a>
         </li>
 
 
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url() ?>Dashboard_akl/mata_pelajaran">
+            <a class="nav-link" href="<?= base_url() ?>Dashboard_otkp/mata_pelajaran">
                 <i class="far fa-calendar-alt"></i>
                 <span>Mapel Ujian</span></a>
         </li>
 
 
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url() ?>Dashboard_akl/jadwal_ujian_akl">
+            <a class="nav-link" href="<?= base_url() ?>Dashboard_otkp/jadwal_ujian_akl">
                 <i class="far fa-calendar-alt"></i>
                 <span>Jadwal Ujian</span></a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url() ?>Dashboard_akl/bank_soal">
+            <a class="nav-link" href="<?= base_url() ?>Dashboard_otkp/bank_soal">
                 <i class="far fa-calendar-alt"></i>
                 <span>Bank Soal</span></a>
         </li>
@@ -78,7 +79,7 @@
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="<?= base_url() ?>Dashboard_akl/rekap_nilai">Cetak Daftar
+                    <a class="collapse-item" href="<?= base_url() ?>Dashboard_otkp/rekap_nilai">Cetak Daftar
                         Nilai</a>
                 </div>
             </div>
