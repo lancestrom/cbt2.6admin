@@ -41,23 +41,23 @@
                                 $no = 1;
                                 foreach ($bank_soal as $row) {
                                 ?>
-                                    <td><?php echo $no++; ?></td>
-                                    <td class="text-center"><?= $row['id_bank_soal'] ?></td>
-                                    <td class="text-center"><?= $row['nama_bank_soal'] ?></td>
-                                    <td class="text-center"><?= $row['jurusan'] ?></td>
-                                    <td class="text-center"><?= $row['jumlah_soal'] ?> Soal</td>
-                                    <td>
-                                        <h5 class="text-center">
-                                            <a class="btn btn-primary btn-sm text-uppercase font-weight-bolder"
-                                                href="<?= base_url() ?>Dashboard_akl/upload_banksoal/<?= $row['id_bank_soal'] ?>">UPLOAD</a>
-                                            <a class="btn btn-success btn-sm text-uppercase font-weight-bolder"
-                                                href="<?= base_url() ?>Dashboard_akl/detail_banksoal/<?= $row['id_bank_soal'] ?>">DETAIL</a>
-                                            <a class="btn btn-danger btn-sm text-uppercase font-weight-bolder"
-                                                href="<?= base_url() ?>Dashboard_akl/hapus_banksoal/<?= $row['id_bank_soal'] ?>">HAPUS</a>
-                                        </h5>
-                                    </td>≈
+                                <td><?php echo $no++; ?></td>
+                                <td class="text-center"><?= $row['id_bank_soal'] ?></td>
+                                <td class="text-center"><?= $row['nama_bank_soal'] ?></td>
+                                <td class="text-center"><?= $row['jurusan'] ?></td>
+                                <td class="text-center"><?= $row['jumlah_soal'] ?> Soal</td>
+                                <td>
+                                    <h5 class="text-center">
+                                        <a class="btn btn-primary btn-sm text-uppercase font-weight-bolder"
+                                            href="<?= base_url() ?>Dashboard_otkp/upload_banksoal/<?= $row['id_bank_soal'] ?>">UPLOAD</a>
+                                        <a class="btn btn-success btn-sm text-uppercase font-weight-bolder"
+                                            href="<?= base_url() ?>Dashboard_otkp/detail_banksoal/<?= $row['id_bank_soal'] ?>">DETAIL</a>
+                                        <a class="btn btn-danger btn-sm text-uppercase font-weight-bolder"
+                                            href="<?= base_url() ?>Dashboard_otkp/hapus_banksoal/<?= $row['id_bank_soal'] ?>">HAPUS</a>
+                                    </h5>
+                                </td>≈
                             </tr>
-                        <?php } ?>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -89,9 +89,9 @@
                     <div class="row mb-3 text-center">
                         <div class="col-md">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="jurusan" value="AKL">
+                                <input class="form-check-input" type="radio" name="jurusan" value="MPLB">
                                 <label
-                                    class="form-check-label text-uppercase font-weight-bolder text-dark text-text-uppercase font-weight-bolder text-dark">AKL</label>
+                                    class="form-check-label text-uppercase font-weight-bolder text-dark text-text-uppercase font-weight-bolder text-dark">MPLB</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="jurusan" value="UMUM">

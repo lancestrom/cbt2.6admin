@@ -31,13 +31,13 @@
         <!-- Nav Item - Pages Collapse Menu -->
 
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url() ?>Dashboard_otkp/siswa_akl">
+            <a class="nav-link" href="<?= base_url() ?>Dashboard_otkp/siswa_mplb">
                 <i class="fas fa-user-graduate"></i>
                 <span>Peserta Ujian</span></a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url() ?>Dashboard_otkp/siswa_akl_block">
+            <a class="nav-link" href="<?= base_url() ?>Dashboard_otkp/siswa_mplb_block">
                 <i class="fas fa-user-graduate"></i>
                 <span>Peserta Block</span></a>
         </li>
@@ -51,7 +51,7 @@
 
 
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url() ?>Dashboard_otkp/jadwal_ujian_akl">
+            <a class="nav-link" href="<?= base_url() ?>Dashboard_otkp/jadwal_ujian_mplb">
                 <i class="far fa-calendar-alt"></i>
                 <span>Jadwal Ujian</span></a>
         </li>

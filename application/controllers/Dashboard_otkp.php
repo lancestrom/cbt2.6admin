@@ -19,7 +19,7 @@ class Dashboard_otkp extends CI_Controller
         $isi['mapel'] = $this->Model_mapel->countMapelMPLB();
 
         $tanggal = date('Y-m-d');
-        $isi['ujian_hari_ini'] = $this->Model_ujian->ujian_hari_ini_akl($tanggal);
+        $isi['ujian_hari_ini'] = $this->Model_ujian->ujian_hari_ini_mplb($tanggal);
 
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'MPLB/tampilan_home';
@@ -28,27 +28,15 @@ class Dashboard_otkp extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function mata_pelajaran_akl()
+    public function siswa_mplb()
     {
         $this->Model_keamanan->getKeamanan();
-        $isi['data_mapel_akl'] = $this->Model_mapel->dataMapelAKL();
+        $isi['data_siswa'] = $this->Model_siswa->dataSiswaMPLB();
 
         $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'AKL/tampilan_mata_pelajaran_akl';
+        $isi['content'] = 'MPLB/tampilan_siswa_otkp';
         $this->load->view('templates/header', $isi2);
-        $this->load->view('AKL/tampilan_dashboard', $isi);
-        $this->load->view('templates/footer');
-    }
-
-    public function siswa_akl()
-    {
-        $this->Model_keamanan->getKeamanan();
-        $isi['data_siswa'] = $this->Model_siswa->dataSiswaAKL();
-
-        $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'AKL/tampilan_siswa_akl';
-        $this->load->view('templates/header', $isi2);
-        $this->load->view('AKL/tampilan_dashboard', $isi);
+        $this->load->view('MPLB/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
 
@@ -68,18 +56,18 @@ class Dashboard_otkp extends CI_Controller
 
         $this->db->where('id', $this->input->post('id'));
         $this->db->update('a_siswa', $data);
-        redirect('Dashboard_akl/siswa_akl');
+        redirect('Dashboard_otkp/siswa_mplb');
     }
 
-    public function siswa_akl_block()
+    public function siswa_mplb_block()
     {
         $this->Model_keamanan->getKeamanan();
-        $isi['data_siswa'] = $this->Model_siswa->dataSiswaAKLBlock();
+        $isi['data_siswa'] = $this->Model_siswa->dataSiswaMPLBBlock();
 
         $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'AKL/tampilan_siswa_akl_block';
+        $isi['content'] = 'MPLB/tampilan_siswa_otkp_block';
         $this->load->view('templates/header', $isi2);
-        $this->load->view('AKL/tampilan_dashboard', $isi);
+        $this->load->view('MPLB/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
 
@@ -99,19 +87,19 @@ class Dashboard_otkp extends CI_Controller
 
         $this->db->where('id', $this->input->post('id'));
         $this->db->update('a_siswa', $data);
-        redirect('Dashboard_akl/siswa_akl_block');
+        redirect('Dashboard_otkp/siswa_mplb_block');
     }
 
     public function mata_pelajaran()
     {
         $this->Model_keamanan->getKeamanan();
-        $isi['mapel'] = $this->Model_mapel->dataMapelAKL();
+        $isi['mapel'] = $this->Model_mapel->dataMapelMPLB();
 
 
         $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'AKL/tampilan_mata_pelajaran';
+        $isi['content'] = 'MPLB/tampilan_mata_pelajaran';
         $this->load->view('templates/header', $isi2);
-        $this->load->view('AKL/tampilan_dashboard', $isi);
+        $this->load->view('MPLB/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
 
@@ -122,9 +110,9 @@ class Dashboard_otkp extends CI_Controller
 
 
         $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'AKL/Ujian/tampilan_buat_jadwal';
+        $isi['content'] = 'MPLB/Ujian/tampilan_buat_jadwal';
         $this->load->view('templates/header', $isi2);
-        $this->load->view('AKL/tampilan_dashboard', $isi);
+        $this->load->view('MPLB/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
 
@@ -152,22 +140,22 @@ class Dashboard_otkp extends CI_Controller
 
         </div>
         </div>');
-        redirect('Dashboard_akl/mata_pelajaran');
+        redirect('Dashboard_otkp/mata_pelajaran');
     }
 
 
 
 
-    public function jadwal_ujian_akl()
+    public function jadwal_ujian_mplb()
     {
         $this->Model_keamanan->getKeamanan();
 
-        $isi['ujian'] = $this->Model_ujian->jadwalUjianAKL();
+        $isi['ujian'] = $this->Model_ujian->jadwalUjianMPLB();
 
         $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'AKL/Ujian/tampilan_ujian';
+        $isi['content'] = 'MPLB/Ujian/tampilan_ujian';
         $this->load->view('templates/header', $isi2);
-        $this->load->view('AKL/tampilan_dashboard', $isi);
+        $this->load->view('MPLB/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
 
@@ -177,9 +165,9 @@ class Dashboard_otkp extends CI_Controller
         $isi['mapel'] = $this->Model_ujian->edit_jadwal_id($id_jadwal);
 
         $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'AKL/Ujian/tampilan_edit_jadwal';
+        $isi['content'] = 'MPLB/Ujian/tampilan_edit_jadwal';
         $this->load->view('templates/header', $isi2);
-        $this->load->view('AKL/tampilan_dashboard', $isi);
+        $this->load->view('MPLB/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
 
@@ -203,19 +191,19 @@ class Dashboard_otkp extends CI_Controller
 
         $this->db->where('id_jadwal', $id_jadwal);
         $this->db->update('a_jadwal', $data);
-        redirect('Dashboard_akl/jadwal_ujian_akl');
+        redirect('Dashboard_otkp/jadwal_ujian_mplb');
     }
 
     public function pilih_soal($id_jadwal)
     {
         $this->Model_keamanan->getKeamanan();
         $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
-        $isi['bank_soal'] = $this->Model_ujian->pilihBankSoalAKL();
+        $isi['bank_soal'] = $this->Model_ujian->pilihBankSoalMPLB();
 
         $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'AKL/Ujian/tampilan_pilih_soal';
+        $isi['content'] = 'MPLB/Ujian/tampilan_pilih_soal';
         $this->load->view('templates/header', $isi2);
-        $this->load->view('AKL/tampilan_dashboard', $isi);
+        $this->load->view('MPLB/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
 
@@ -244,7 +232,7 @@ class Dashboard_otkp extends CI_Controller
         </div>
         </div>');
 
-        redirect('Dashboard_akl/jadwal_ujian_akl');
+        redirect('Dashboard_otkp/jadwal_ujian_mplb');
     }
 
     public function detail_jadwal_soal($id_jadwal)
@@ -254,9 +242,9 @@ class Dashboard_otkp extends CI_Controller
         $isi['jadwal_soal'] = $this->Model_ujian->jadwalSoal_bankSoal($id_jadwal);
 
         $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'AKL/Ujian/tampilan_detail_jadwal_soal';
+        $isi['content'] = 'MPLB/Ujian/tampilan_detail_jadwal_soal';
         $this->load->view('templates/header', $isi2);
-        $this->load->view('AKL/tampilan_dashboard', $isi);
+        $this->load->view('MPLB/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
 
@@ -266,9 +254,9 @@ class Dashboard_otkp extends CI_Controller
         $isi['bank_soal'] = $this->Model_ujian->namaBankSoalAKL();
 
         $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'AKL/Ujian/tampilan_bank_soal';
+        $isi['content'] = 'MPLB/Ujian/tampilan_bank_soal';
         $this->load->view('templates/header', $isi2);
-        $this->load->view('AKL/tampilan_dashboard', $isi);
+        $this->load->view('MPLB/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
 
@@ -294,7 +282,7 @@ class Dashboard_otkp extends CI_Controller
 
         </div>
         </div>');
-        redirect('Dashboard_akl/bank_soal');
+        redirect('Dashboard_otkp/bank_soal');
     }
 
     public function simpan_bank_soal()
@@ -319,7 +307,7 @@ class Dashboard_otkp extends CI_Controller
 
         </div>
         </div>');
-        redirect('Dashboard_akl/bank_soal');
+        redirect('Dashboard_otkp/bank_soal');
     }
 
     public function upload_banksoal($id_bank_soal_temp)
@@ -328,9 +316,9 @@ class Dashboard_otkp extends CI_Controller
         $isi['header'] = $this->Model_ujian->HeadersimpanBankSoalTemp($id_bank_soal_temp);
 
         $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'AKL/Ujian/tampilan_bank_soal_upload';
+        $isi['content'] = 'MPLB/Ujian/tampilan_bank_soal_upload';
         $this->load->view('templates/header', $isi2);
-        $this->load->view('AKL/tampilan_dashboard', $isi);
+        $this->load->view('MPLB/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
 
@@ -382,7 +370,7 @@ class Dashboard_otkp extends CI_Controller
 
                     unlink('temp_doc/' . $file['file_name']);
                     $this->session->set_flashdata('pesan', '<div class="alert alert-success">Soal berhasil diunggah</div>');
-                    redirect('Dashboard_akl/bank_soal');
+                    redirect('Dashboard_otkp/bank_soal');
                 }
             } else {
                 $this->session->set_flashdata('pesan', '<div class="alert alert-danger">Upload error: ' . strip_tags($this->upload->display_errors()) . '</div>');
@@ -398,9 +386,9 @@ class Dashboard_otkp extends CI_Controller
         $isi['soal'] = $this->Model_ujian->detailBankSoal($id_bank_soal);
 
         $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'AKL//Ujian/tampilan_detail_bank_soal';
+        $isi['content'] = 'MPLB//Ujian/tampilan_detail_bank_soal';
         $this->load->view('templates/header', $isi2);
-        $this->load->view('AKL/tampilan_dashboard', $isi);
+        $this->load->view('MPLB/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
 
@@ -408,12 +396,12 @@ class Dashboard_otkp extends CI_Controller
     {
         $this->Model_keamanan->getKeamanan();
         // $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
-        $isi['rekap'] = $this->Model_ujian->rekap_nilai_mapelAKL();
+        $isi['rekap'] = $this->Model_ujian->rekap_nilai_mapelMPLB();
 
         $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'AKL/Ujian/tampilan_rekap_nilai';
+        $isi['content'] = 'MPLB/Ujian/tampilan_rekap_nilai';
         $this->load->view('templates/header', $isi2);
-        $this->load->view('AKL/tampilan_dashboard', $isi);
+        $this->load->view('MPLB/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
 }

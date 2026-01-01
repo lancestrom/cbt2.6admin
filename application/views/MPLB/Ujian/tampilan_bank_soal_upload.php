@@ -27,7 +27,7 @@
                 <h6 class="text-uppercase font-weight-bolder">Upload Soal</h6>
             </div>
             <div class="card-body">
-                <?= form_open_multipart('Dashboard_akl/upload_bank_soal'); ?>
+                <?= form_open_multipart('Dashboard_otkp/upload_bank_soal'); ?>
                 <div class="form-group">
                     <input type="file" name="excel" class="form-control-file" name="file" required accept=".xlsx">
                 </div>

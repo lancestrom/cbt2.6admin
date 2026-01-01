@@ -1,5 +1,5 @@
-<div class="alert alert-danger" role="alert">
-    <h4 class="text-center font-weight-bold">Siswa Block</h4>
+<div class="alert alert-success" role="alert">
+    <h4 class="text-center font-weight-bold">Siswa</h4>
 </div>
 
 
@@ -34,7 +34,7 @@
                                     <td class="text-center"><?= $row['password'] ?></td>
                                     <td class="text-center">
                                         <h5 class="text-center">
-                                            <form action="<?= base_url() ?>Dashboard_akl/siswa_buka_block" method="post">
+                                            <form action="<?= base_url() ?>Dashboard_otkp/siswa_block" method="post">
                                                 <input type="text" value="<?= $row['id']; ?>" name="id" hidden>
                                                 <input type="text" value="<?= $row['no_peserta']; ?>" name="no_peserta"
                                                     hidden>

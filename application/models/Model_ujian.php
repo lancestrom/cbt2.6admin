@@ -84,6 +84,18 @@ WHERE a_mapel.nama_mapel LIKE '%AKL%';";
         return $query->result_array();
     }
 
+    public function jadwalUjianMPLB()
+    {
+        $sql = "SELECT a_jadwal.id_jadwal,a_mapel.nama_mapel,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai,((
+TIME_TO_SEC(a_jadwal.waktu_selesai)-TIME_TO_SEC(a_jadwal.waktu_mulai) )) / 60 AS waktu
+FROM `a_jadwal`
+INNER join a_mapel
+ON a_jadwal.id_mapel=a_mapel.id_mapel
+WHERE a_mapel.nama_mapel LIKE '%MPLB%';";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
     public function uploadSoalID($id_jadwal)
     {
         $sql = "SELECT a_jadwal.id_jadwal,a_mapel.nama_mapel,a_kelas.kelas FROM `a_jadwal`
@@ -206,6 +218,17 @@ GROUP BY bank_soal.id_bank_soal;";
         return $query->result_array();
     }
 
+    public function namaBankSoalMPLB()
+    {
+        $sql = "SELECT bank_soal.id_bank_soal,bank_soal.nama_bank_soal,bank_soal.jurusan,IF(COUNT(*)>0,count(soal.soal),'0') AS jumlah_soal FROM `soal`
+RIGHT JOIN bank_soal
+ON bank_soal.id_bank_soal=soal.id_bank_soal
+WHERE bank_soal.jurusan LIKE '%MPLB%' OR bank_soal.jurusan LIKE '%UMUM%'
+GROUP BY bank_soal.id_bank_soal;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
     public function headerBankSoal($id_bank_soal)
     {
         $sql = "SELECT bank_soal.id_bank_soal,bank_soal.nama_bank_soal FROM `bank_soal`
@@ -240,6 +263,17 @@ GROUP BY bank_soal.id_bank_soal;";
 INNER JOIN bank_soal
 ON bank_soal.id_bank_soal=soal.id_bank_soal
 WHERE bank_soal.jurusan LIKE '%AKL%' OR bank_soal.jurusan LIKE '%UMUM%'
+GROUP BY bank_soal.id_bank_soal;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function pilihBankSoalMPLB()
+    {
+        $sql = "SELECT bank_soal.id_bank_soal,bank_soal.nama_bank_soal,bank_soal.jurusan,count(bank_soal.id_bank_soal) AS jumlah_soal FROM `soal`
+INNER JOIN bank_soal
+ON bank_soal.id_bank_soal=soal.id_bank_soal
+WHERE bank_soal.jurusan LIKE '%MPLB%' OR bank_soal.jurusan LIKE '%UMUM%'
 GROUP BY bank_soal.id_bank_soal;";
         $query = $this->db->query($sql);
         return $query->result_array();
@@ -297,6 +331,26 @@ ON a_mapel.id_kelas=a_kelas.id
 INNER JOIN a_jadwal
 ON a_jadwal.id_mapel=a_mapel.id_mapel
 WHERE a_mapel.nama_mapel LIKE '%AKL%'
+GROUP BY a_mapel.id_mapel;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function rekap_nilai_mapelMPLB()
+    {
+        $sql = "SELECT a_kelas.id,a_mapel.id_mapel,a_jadwal.id_jadwal,a_mapel.nama_mapel
+FROM `siswa_jawab`
+INNER JOIN soal
+ON siswa_jawab.soal_id=soal.id_soal
+INNER JOIN a_siswa
+ON siswa_jawab.username=a_siswa.username
+INNER JOIN a_kelas
+ON a_siswa.kelas=a_kelas.slug
+INNER JOIN a_mapel
+ON a_mapel.id_kelas=a_kelas.id
+INNER JOIN a_jadwal
+ON a_jadwal.id_mapel=a_mapel.id_mapel
+WHERE a_mapel.nama_mapel LIKE '%MPLB%'
 GROUP BY a_mapel.id_mapel;";
         $query = $this->db->query($sql);
         return $query->result_array();

@@ -68,10 +68,26 @@ WHERE jurusan='AKL' AND STATUS='1';";
         return $query->result_array();
     }
 
+    public function dataSiswaMPLB()
+    {
+        $sql = "SELECT * FROM `a_siswa`
+WHERE jurusan='MPLB' AND STATUS='1';";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
     public function dataSiswaAKLBlock()
     {
         $sql = "SELECT * FROM `a_siswa`
 WHERE jurusan='AKL' AND STATUS='0';";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function dataSiswaMPLBBlock()
+    {
+        $sql = "SELECT * FROM `a_siswa`
+WHERE jurusan='MPLB' AND STATUS='0';";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
