@@ -32,6 +32,34 @@ class Dashboard extends CI_Controller
         $this->load->view('templates/footer', $isi);
     }
 
+    public function token()
+    {
+        $this->Model_keamanan->getKeamanan();
+        $isi['token'] = $this->Model_token->dataToken();
+
+
+        $isi2['title'] = 'CBT | Administrator';
+        $isi['content'] = 'tampilan_token';
+        $this->load->view('templates/header', $isi2);
+        $this->load->view('tampilan_dashboard', $isi);
+        $this->load->view('templates/footer');
+    }
+
+    public function refresh_token()
+    {
+        $id = $this->input->post('id');
+
+        $data = array(
+            'id' => $this->input->post('id'),
+            'token_keluar' => 'CBT' . rand(11111, 99999),
+        );
+
+        $this->db->where('id', $id);
+        $this->db->update('token_keluar', $data);
+
+        redirect('Dashboard/token');
+    }
+
     public function jurusan()
     {
         $this->Model_keamanan->getKeamanan();
