@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../cbt2.5"
+		},
+		{
+			"path": "../list_jurusan"
 		}
 	],
 	"settings": {}
