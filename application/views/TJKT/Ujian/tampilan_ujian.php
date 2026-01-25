@@ -50,11 +50,11 @@
                                     <td>
                                         <h5 class="text-center">
                                             <a class="btn btn-primary btn-sm"
-                                                href="<?= base_url() ?>Dashboard_akl/pilih_soal/<?= $row['id_jadwal']; ?>">TAMBAH</a>
+                                                href="<?= base_url() ?>Dashboard_tkj/pilih_soal/<?= $row['id_jadwal']; ?>">TAMBAH</a>
                                             <a class=" btn btn-danger btn-sm"
-                                                href="<?= base_url() ?>Dashboard_akl/edit_jadwal/<?= $row['id_jadwal']; ?>">EDIT</a>
+                                                href="<?= base_url() ?>Dashboard_tkj/edit_jadwal/<?= $row['id_jadwal']; ?>">EDIT</a>
                                             <a class="btn btn-success btn-sm"
-                                                href="<?= base_url() ?>Dashboard_akl/detail_jadwal_soal/<?= $row['id_jadwal']; ?>">DETAIL</a>
+                                                href="<?= base_url() ?>Dashboard_tkj/detail_jadwal_soal/<?= $row['id_jadwal']; ?>">DETAIL</a>
                                         </h5>
                                     </td>
                             </tr>

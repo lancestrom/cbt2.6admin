@@ -26,6 +26,22 @@ WHERE jurusan='mplb';";
         return $query->row()->jumlah_siswa;
     }
 
+    public function countSiswaTJKT()
+    {
+        $sql = "SELECT COUNT(*) AS jumlah_siswa FROM `a_siswa`
+WHERE jurusan='tjkt';";
+        $query = $this->db->query($sql);
+        return $query->row()->jumlah_siswa;
+    }
+
+    public function countSiswaPM_DKV()
+    {
+        $sql = "SELECT COUNT(*) AS jumlah_siswa FROM `a_siswa`
+WHERE jurusan='pm_dkvdataSiswaMPLBdataSiswaMPLB';";
+        $query = $this->db->query($sql);
+        return $query->row()->jumlah_siswa;
+    }
+
     public function dataSiswaByTingkat($tingkat)
     {
         $sql = "SELECT a_kelas.kelas,count(a_siswa.nama_siswa) AS jumlah_siswa FROM a_kelas
@@ -76,6 +92,14 @@ WHERE jurusan='MPLB' AND STATUS='1';";
         return $query->result_array();
     }
 
+    public function dataSiswaTJKT()
+    {
+        $sql = "SELECT * FROM `a_siswa`
+WHERE jurusan='TJKT' AND STATUS='1';";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
     public function dataSiswaAKLBlock()
     {
         $sql = "SELECT * FROM `a_siswa`
@@ -88,6 +112,14 @@ WHERE jurusan='AKL' AND STATUS='0';";
     {
         $sql = "SELECT * FROM `a_siswa`
 WHERE jurusan='MPLB' AND STATUS='0';";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function dataSiswaTJKTBlock()
+    {
+        $sql = "SELECT * FROM `a_siswa`
+WHERE jurusan='TJKT' AND STATUS='0';";
         $query = $this->db->query($sql);
         return $query->result_array();
     }

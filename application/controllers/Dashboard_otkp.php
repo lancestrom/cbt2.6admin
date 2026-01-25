@@ -125,7 +125,8 @@ class Dashboard_otkp extends CI_Controller
             'id_mapel' => $this->input->post('id_mapel', TRUE),
             'tanggal_mulai' => $this->input->post('tanggal_mulai', TRUE),
             'waktu_mulai' => $this->input->post('waktu_mulai', TRUE),
-            'waktu_selesai' => $this->input->post('waktu_selesai', TRUE)
+            'waktu_selesai' => $this->input->post('waktu_selesai', TRUE),
+            'durasi' => $this->input->post('durasi', true)
         );
 
         $this->db->insert('a_jadwal', $data);

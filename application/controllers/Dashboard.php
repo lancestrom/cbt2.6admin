@@ -51,7 +51,7 @@ class Dashboard extends CI_Controller
 
         $data = array(
             'id' => $this->input->post('id'),
-            'token_keluar' => 'CBT' . rand(11111, 99999),
+            'token_keluar' => 'CBT' . rand(1111, 9999),
         );
 
         $this->db->where('id', $id);
@@ -171,7 +171,7 @@ class Dashboard extends CI_Controller
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
-
+ 
     public function simpan_jadwal()
     {
         $this->Model_keamanan->getKeamanan();

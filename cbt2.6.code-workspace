@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "../list_jurusan"
+		},
+		{
+			"path": "../token"
 		}
 	],
 	"settings": {}

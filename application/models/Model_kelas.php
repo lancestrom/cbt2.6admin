@@ -34,7 +34,7 @@ class Model_kelas extends CI_Model
         return $query->row()->kelas;
     }
 
-    public function countKelasTKJ()
+    public function countKelasTJKT()
     {
         $sql = "SELECT count(*) AS kelas_tkj FROM `a_kelas`
                 WHERE kelas LIKE '%TJKT%'";

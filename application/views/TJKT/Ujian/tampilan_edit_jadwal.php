@@ -11,7 +11,7 @@
     <div class="col-md mt-3">
         <div class="card">
             <div class="card-body">
-                <form method="post" action="<?= base_url() ?>Dashboard_akl/simpan_edit_jadwal">
+                <form method="post" action="<?= base_url() ?>Dashboard_tkj/simpan_edit_jadwal">
                     <div class="form-group">
                         <input type="text" value="<?= $mapel['id_jadwal'] ?>" name="id_jadwal" class="form-control"
                             hidden>
@@ -54,6 +54,7 @@
                             </div>
                         </div>
                     </div>
+
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
