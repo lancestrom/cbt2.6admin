@@ -6,7 +6,7 @@
                     <div class="col-md">
                         <div class="card">
                             <div class="card-body">
-                                <h6 class="text-uppercase font-weight-bolder">ID : <?= $ujian['id_jadwal'] ?></h5>
+                                <h6 class="text-uppercase font-weight-bolder">ID : <?= $ujian['id_jadwal'] ?></h6>
                             </div>
                         </div>
                     </div>
@@ -36,18 +36,27 @@
                         <div class="mb-4">
                             <div class="mb-2"><strong><?= ($i + 1) ?>.</strong> <?= $row['soal'] ?></div>
                             <div class="mb-2 text-center">
-                                <img src="<?= base_url('assets/images/gambar/' . $row['gambar']) ?>"
-                                    class="img-fluid d-block mx-auto"
-                                    style="max-height:400px; object-fit:contain; height:200px;"
-                                    alt="Gambar soal <?= ($i + 1) ?>" loading="lazy">
+                                <?php
+                                $filename = isset($row['gambar']) ? $row['gambar'] : '';
+                                $full_path = FCPATH . 'assets/images/gambar/' . $filename;
+                                $url = base_url('assets/images/gambar/' . $filename);
+                                ?>
+                                <?php if (!empty($filename) && file_exists($full_path)): ?>
+                                    <img src="<?= $url ?>" class="img-fluid d-block mx-auto"
+                                        style="max-width:100%; max-height:400px; object-fit:contain;"
+                                        alt="Gambar soal <?= ($i + 1) ?>" loading="lazy">
+                                <?php else: ?>
+                                    <div class="text-muted small">File: <?= htmlspecialchars($filename ?: 'Tidak ada file') ?></div>
+                                <?php endif; ?>
                             </div>
-                            <ul class="list-unstyled mb-2">
-                                <li><strong>A.</strong> <?= $row['pilA'] ?></li>
-                                <li><strong>B.</strong> <?= $row['pilB'] ?></li>
-                                <li><strong>C.</strong> <?= $row['pilC'] ?></li>
-                                <li><strong>D.</strong> <?= $row['pilD'] ?></li>
-                                <li><strong>E.</strong> <?= $row['pilE'] ?></li>
-                                <li><strong>Kunci Jawaban : </strong> <?= $row['kunci'] ?></li>
+                            <ul class="list-group list-group-flush mb-2">
+                                <li class="list-group-item p-2"><strong>A.</strong> <?= $row['pilA'] ?></li>
+                                <li class="list-group-item p-2"><strong>B.</strong> <?= $row['pilB'] ?></li>
+                                <li class="list-group-item p-2"><strong>C.</strong> <?= $row['pilC'] ?></li>
+                                <li class="list-group-item p-2"><strong>D.</strong> <?= $row['pilD'] ?></li>
+                                <li class="list-group-item p-2"><strong>E.</strong> <?= $row['pilE'] ?></li>
+                                <li class="list-group-item p-2"><strong>Kunci Jawaban:</strong> <span
+                                        class="badge badge-success ml-2"><?= htmlspecialchars($row['kunci']) ?></span></li>
                             </ul>
                             <hr>
                         </div>
