@@ -41,6 +41,16 @@ WHERE a_mapel.nama_mapel LIKE '%TJKT%';";
         return $query->row()->ujian;
     }
 
+    public function countUjianPM()
+    {
+        $sql = "SELECT COUNT(*) AS ujian FROM `a_jadwal`
+INNER JOIN a_mapel
+on a_jadwal.id_mapel=a_mapel.id_mapel
+WHERE a_mapel.nama_mapel LIKE '%PM%' or a_mapel.nama_mapel LIKE '%DKV%';";
+        $query = $this->db->query($sql);
+        return $query->row()->ujian;
+    }
+
     public function ujian_hari_ini_akl($tanggal)
     {
         $sql = "SELECT a_jadwal.id_jadwal,a_mapel.id_mapel,a_mapel.id_kelas,a_mapel.nama_mapel,COUNT(*) AS jumlah_siswa,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai FROM `a_jadwal`
@@ -86,6 +96,21 @@ GROUP BY a_jadwal.id_jadwal;";
         return $query->result_array();
     }
 
+    public function ujian_hari_ini_pm($tanggal)
+    {
+        $sql = "SELECT a_jadwal.id_jadwal,a_mapel.id_mapel,a_mapel.id_kelas,a_mapel.nama_mapel,COUNT(*) AS jumlah_siswa,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai FROM `a_jadwal`
+INNER JOIN a_mapel
+ON a_jadwal.id_mapel=a_mapel.id_mapel
+INNER JOIN a_kelas
+ON a_mapel.id_kelas=a_kelas.id
+INNER JOIN a_siswa
+on a_kelas.slug=a_siswa.kelas
+WHERE a_jadwal.tanggal_mulai='$tanggal' AND (a_mapel.nama_mapel LIKE '%PM%' OR a_mapel.nama_mapel LIKE '%DKV%')
+GROUP BY a_jadwal.id_jadwal;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
     public function jadwalUjian()
     {
         $sql = "SELECT a_jadwal.id_jadwal,a_mapel.nama_mapel,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai,a_jadwal.durasi AS waktu
@@ -125,6 +150,17 @@ FROM `a_jadwal`
 INNER join a_mapel
 ON a_jadwal.id_mapel=a_mapel.id_mapel
 WHERE a_mapel.nama_mapel LIKE '%TJKT%';";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function jadwalUjianPM()
+    {
+        $sql = "SELECT a_jadwal.id_jadwal,a_mapel.nama_mapel,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai,a_jadwal.durasi as waktu
+FROM `a_jadwal`
+INNER join a_mapel
+ON a_jadwal.id_mapel=a_mapel.id_mapel
+WHERE a_mapel.nama_mapel LIKE '%PM%' OR a_mapel.nama_mapel LIKE '%DKV%';";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
@@ -273,6 +309,17 @@ GROUP BY bank_soal.id_bank_soal;";
         return $query->result_array();
     }
 
+    public function namaBankSoalPM()
+    {
+        $sql = "SELECT bank_soal.id_bank_soal,bank_soal.nama_bank_soal,bank_soal.jurusan,IF(COUNT(*)>0,count(soal.soal),'0') AS jumlah_soal FROM `soal`
+RIGHT JOIN bank_soal
+ON bank_soal.id_bank_soal=soal.id_bank_soal
+WHERE bank_soal.jurusan LIKE '%PM%' OR bank_soal.jurusan LIKE '%DKV%'  OR bank_soal.jurusan LIKE '%UMUM%'
+GROUP BY bank_soal.id_bank_soal;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
     public function headerBankSoal($id_bank_soal)
     {
         $sql = "SELECT bank_soal.id_bank_soal,bank_soal.nama_bank_soal FROM `bank_soal`
@@ -337,7 +384,7 @@ GROUP BY bank_soal.id_bank_soal;";
     public function jadwalSoal_bankSoal($id_jadwal)
     {
         $sql = "SELECT a_jadwal.id_jadwal,a_jadwal.id_mapel,jadwal_soal.id_bank_soal,a_mapel.nama_mapel,
-soal.soal,soal.pilA,soal.pilB,soal.pilC,soal.pilD,soal.pilE,soal.kunci
+soal.soal,soal.pilA,soal.pilB,soal.pilC,soal.pilD,soal.pilE,soal.kunci,soal.gambar
 FROM `jadwal_soal`
 INNER JOIN a_jadwal
 ON jadwal_soal.id_jadwal=a_jadwal.id_jadwal

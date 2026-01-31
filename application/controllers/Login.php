@@ -12,7 +12,7 @@ class Login extends CI_Controller
     }
 
     public function proses_login()
-    { 
+    {
         $username = $this->input->post('username');
         $password = $this->input->post('password');
         $pass = md5($password);
@@ -31,7 +31,7 @@ class Login extends CI_Controller
             } elseif ($sess_data['level'] == 'adminakl') {
                 redirect('Dashboard_akl');
             } elseif ($sess_data['level'] == 'adminbdp') {
-                redirect('Dashboard_bdp');
+                redirect('Dashboard_pm');
             } elseif ($sess_data['level'] == 'adminotkp') {
                 redirect('Dashboard_otkp');
             } elseif ($sess_data['level'] == 'admintkj') {

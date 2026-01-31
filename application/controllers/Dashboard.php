@@ -171,7 +171,7 @@ class Dashboard extends CI_Controller
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
- 
+
     public function simpan_jadwal()
     {
         $this->Model_keamanan->getKeamanan();
@@ -557,6 +557,7 @@ class Dashboard extends CI_Controller
                                 'pilD'       => $cells[6],
                                 'pilE'       => $cells[7],
                                 'kunci'     => $cells[8],
+                                'gambar'    => $cells[9]
                             );
                             array_push($save, $data);
                         }

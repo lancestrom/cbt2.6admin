@@ -35,12 +35,6 @@
                     <?php foreach ($jadwal_soal as $i => $row): ?>
                         <div class="mb-4">
                             <div class="mb-2"><strong><?= ($i + 1) ?>.</strong> <?= $row['soal'] ?></div>
-                            <div class="mb-2 text-center">
-                                <img src="<?= base_url('assets/images/gambar/' . $row['gambar']) ?>"
-                                    class="img-fluid d-block mx-auto"
-                                    style="max-height:400px; object-fit:contain; height:200px;"
-                                    alt="Gambar soal <?= ($i + 1) ?>" loading="lazy">
-                            </div>
                             <ul class="list-unstyled mb-2">
                                 <li><strong>A.</strong> <?= $row['pilA'] ?></li>
                                 <li><strong>B.</strong> <?= $row['pilB'] ?></li>

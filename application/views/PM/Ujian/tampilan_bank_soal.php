@@ -49,11 +49,11 @@
                                     <td>
                                         <h5 class="text-center">
                                             <a class="btn btn-primary btn-sm text-uppercase font-weight-bolder"
-                                                href="<?= base_url() ?>Dashboard/upload_banksoal/<?= $row['id_bank_soal'] ?>">UPLOAD</a>
+                                                href="<?= base_url() ?>Dashboard_pm/upload_banksoal/<?= $row['id_bank_soal'] ?>">UPLOAD</a>
                                             <a class="btn btn-success btn-sm text-uppercase font-weight-bolder"
-                                                href="<?= base_url() ?>Dashboard/detail_banksoal/<?= $row['id_bank_soal'] ?>">DETAIL</a>
+                                                href="<?= base_url() ?>Dashboard_pm/detail_banksoal/<?= $row['id_bank_soal'] ?>">DETAIL</a>
                                             <a class="btn btn-danger btn-sm text-uppercase font-weight-bolder"
-                                                href="<?= base_url() ?>Dashboard/hapus_banksoal/<?= $row['id_bank_soal'] ?>">HAPUS</a>
+                                                href="<?= base_url() ?>Dashboard_pm/hapus_banksoal/<?= $row['id_bank_soal'] ?>">HAPUS</a>
                                         </h5>
                                     </td>≈
                             </tr>
@@ -76,7 +76,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="<?= base_url() ?>Dashboard/simpan_bank_soal" method="post">
+                <form action="<?= base_url() ?>Dashboard_pm/simpan_bank_soal" method="post">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md text-center">
@@ -89,29 +89,14 @@
                     <div class="row mb-3 text-center">
                         <div class="col-md">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="jurusan" value="AKL">
-                                <label
-                                    class="form-check-label text-uppercase font-weight-bolder text-dark text-text-uppercase font-weight-bolder text-dark">AKL</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="jurusan" value="MPLB">
-                                <label class="form-check-label text-uppercase font-weight-bolder text-dark"
-                                    for="inlineRadio1">MPLB</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="jurusan" value="TJKT">
-                                <label class="form-check-label text-uppercase font-weight-bolder text-dark"
-                                    for="inlineRadio1">TJKT</label>
-                            </div>
-                            <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="jurusan" value="PM">
-                                <label class="form-check-label text-uppercase font-weight-bolder text-dark"
-                                    for="inlineRadio1">PM</label>
+                                <label
+                                    class="form-check-label text-uppercase font-weight-bolder text-dark text-text-uppercase font-weight-bolder text-dark">PM</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="jurusan" value="DKV">
-                                <label class="form-check-label text-uppercase font-weight-bolder text-dark"
-                                    for="inlineRadio1">DKV</label>
+                                <label
+                                    class="form-check-label text-uppercase font-weight-bolder text-dark text-text-uppercase font-weight-bolder text-dark">DKV</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="jurusan" value="UMUM">
