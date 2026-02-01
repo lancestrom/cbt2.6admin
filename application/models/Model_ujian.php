@@ -401,18 +401,11 @@ WHERE a_jadwal.id_jadwal='$id_jadwal';";
 
     public function rekap_nilai_mapel()
     {
-        $sql = "SELECT a_kelas.id,a_mapel.id_mapel,a_jadwal.id_jadwal,a_mapel.nama_mapel
-FROM `siswa_jawab`
-INNER JOIN soal
-ON siswa_jawab.soal_id=soal.id_soal
-INNER JOIN a_siswa
-ON siswa_jawab.username=a_siswa.username
-INNER JOIN a_kelas
-ON a_siswa.kelas=a_kelas.slug
+        $sql = "SELECT a_mapel.id_mapel,a_jadwal.id_jadwal,a_mapel.nama_mapel FROM `siswa_jawab`
 INNER JOIN a_mapel
-ON a_mapel.id_kelas=a_kelas.id
+ON siswa_jawab.id_mapel=a_mapel.id_mapel
 INNER JOIN a_jadwal
-ON a_jadwal.id_mapel=a_mapel.id_mapel
+ON a_mapel.id_mapel=a_jadwal.id_mapel
 GROUP BY a_mapel.id_mapel;";
         $query = $this->db->query($sql);
         return $query->result_array();
@@ -513,6 +506,20 @@ INNER JOIN a_siswa
 on a_kelas.slug=a_siswa.kelas
 WHERE a_jadwal.tanggal_mulai='$tanggal'
 GROUP BY a_jadwal.id_jadwal;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function data_status_peserta()
+    {
+        $sql = "SELECT siswa_status.id_status_peserta,siswa_status.id_jadwal,siswa_status.username,a_siswa.nama_siswa,a_mapel.nama_mapel,siswa_status.status FROM `siswa_status`
+INNER JOIN a_jadwal
+ON siswa_status.id_jadwal=a_jadwal.id_jadwal
+INNER JOIN a_mapel
+ON a_jadwal.id_mapel=a_mapel.id_mapel
+INNER JOIN a_siswa
+ON siswa_status.username=a_siswa.username  
+ORDER BY `siswa_status`.`status` ASC";
         $query = $this->db->query($sql);
         return $query->result_array();
     }

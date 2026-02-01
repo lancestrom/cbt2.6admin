@@ -763,6 +763,19 @@ class Dashboard extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function status_peserta()
+    {
+        $this->Model_keamanan->getKeamanan();
+        // $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
+        $isi['rekap'] = $this->Model_ujian->data_status_peserta();
+
+        $isi2['title'] = 'CBT | Administrator';
+        $isi['content'] = 'Master/tampilan_status_peserta';
+        $this->load->view('templates/header', $isi2);
+        $this->load->view('tampilan_dashboard', $isi);
+        $this->load->view('templates/footer');
+    }
+
 
     public function logout()
     {
