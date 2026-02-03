@@ -253,7 +253,7 @@ class Dashboard_otkp extends CI_Controller
     public function bank_soal()
     {
         $this->Model_keamanan->getKeamanan();
-        $isi['bank_soal'] = $this->Model_ujian->namaBankSoalAKL();
+        $isi['bank_soal'] = $this->Model_ujian->namaBankSoalMPLB();
 
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'MPLB/Ujian/tampilan_bank_soal';
@@ -362,6 +362,7 @@ class Dashboard_otkp extends CI_Controller
                                 'pilD'       => $cells[6],
                                 'pilE'       => $cells[7],
                                 'kunci'     => $cells[8],
+                                'gambar'    => $cells[9],
                             );
                             array_push($save, $data);
                         }
@@ -393,6 +394,20 @@ class Dashboard_otkp extends CI_Controller
         $this->load->view('MPLB/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
+
+    public function status_peserta()
+    {
+        $this->Model_keamanan->getKeamanan();
+        // $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
+        $isi['rekap'] = $this->Model_ujian->data_status_pesertaMPLB();
+
+        $isi2['title'] = 'CBT | Administrator';
+        $isi['content'] = 'MPLB/Ujian/tampilan_status_peserta';
+        $this->load->view('templates/header', $isi2);
+        $this->load->view('MPLB/tampilan_dashboard', $isi);
+        $this->load->view('templates/footer');
+    }
+
 
     public function rekap_nilai()
     {

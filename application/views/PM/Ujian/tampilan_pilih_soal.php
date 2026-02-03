@@ -54,7 +54,7 @@
                                      <td class="text-center"><?= $row['jumlah_soal'] ?> Soal</td>
                                      <td>
                                          <h5>
-                                             <form action="<?= base_url() ?>Dashboard_tkj/simpan_pilih_soal" method="post">
+                                             <form action="<?= base_url() ?>Dashboard_pm/simpan_pilih_soal" method="post">
                                                  <input type="text" value="<?= $ujian['id_jadwal'] ?>" name="id_jadwal"
                                                      hidden>
                                                  <input type="text" value="<?= $row['id_bank_soal'] ?>" name="id_bank_soal"

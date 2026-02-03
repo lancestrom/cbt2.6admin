@@ -200,7 +200,7 @@ class Dashboard_pm extends CI_Controller
     {
         $this->Model_keamanan->getKeamanan();
         $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
-        $isi['bank_soal'] = $this->Model_ujian->pilihBankSoalTJKT();
+        $isi['bank_soal'] = $this->Model_ujian->pilihBankSoalPM();
 
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'PM/Ujian/tampilan_pilih_soal';
@@ -395,11 +395,24 @@ class Dashboard_pm extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function status_peserta()
+    {
+        $this->Model_keamanan->getKeamanan();
+        // $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
+        $isi['rekap'] = $this->Model_ujian->data_status_pesertaPM();
+
+        $isi2['title'] = 'CBT | Administrator';
+        $isi['content'] = 'PM/Ujian/tampilan_status_peserta';
+        $this->load->view('templates/header', $isi2);
+        $this->load->view('PM/tampilan_dashboard', $isi);
+        $this->load->view('templates/footer');
+    }
+
     public function rekap_nilai()
     {
         $this->Model_keamanan->getKeamanan();
         // $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
-        $isi['rekap'] = $this->Model_ujian->rekap_nilai_mapelMPLB();
+        $isi['rekap'] = $this->Model_ujian->rekap_nilai_mapelPM();
 
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'PM/Ujian/tampilan_rekap_nilai';

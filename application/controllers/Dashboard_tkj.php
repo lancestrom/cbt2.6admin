@@ -362,6 +362,7 @@ class Dashboard_tkj extends CI_Controller
                                 'pilD'       => $cells[6],
                                 'pilE'       => $cells[7],
                                 'kunci'     => $cells[8],
+                                'gambar'    => $cells[9],
                             );
                             array_push($save, $data);
                         }
@@ -389,6 +390,19 @@ class Dashboard_tkj extends CI_Controller
 
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'TJKT//Ujian/tampilan_detail_bank_soal';
+        $this->load->view('templates/header', $isi2);
+        $this->load->view('TJKT/tampilan_dashboard', $isi);
+        $this->load->view('templates/footer');
+    }
+
+    public function status_peserta()
+    {
+        $this->Model_keamanan->getKeamanan();
+        // $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
+        $isi['rekap'] = $this->Model_ujian->data_status_pesertaTJKT();
+
+        $isi2['title'] = 'CBT | Administrator';
+        $isi['content'] = 'TJKT/Ujian/tampilan_status_peserta';
         $this->load->view('templates/header', $isi2);
         $this->load->view('TJKT/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
