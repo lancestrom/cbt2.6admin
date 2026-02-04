@@ -3,19 +3,7 @@
 </div>
 
 
-<?= $this->session->flashdata('pesan') ?>
 
-<div class="row">
-    <div class="col-md">
-        <div class="card">
-            <div class="card-body">
-                <a class="btn btn-danger btn-sm text-uppercase font-weight-bold"
-                    href="<?= base_url() ?>Dashboard/hapus_all_jadwal"><i class="fas fa-trash"></i> Hapus Jadwal
-                    Ujian</a>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="row mt-2">
     <div class="col-md">

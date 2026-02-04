@@ -3,8 +3,6 @@
 </div>
 
 
-<?= $this->session->flashdata('pesan') ?>
-
 
 
 <div class="row mt-2">
@@ -31,34 +29,34 @@
                                 $no = 1;
                                 foreach ($ujian as $row) {
                                 ?>
-                                    <td><?php echo $no++; ?></td>
-                                    <td>
-                                        <h4 class="badge badge-info text-uppercase"><?= $row['nama_mapel']; ?></h4>
-                                    </td>
-                                    <td>
-                                        <h4 class="badge badge-info"><?= $row['tanggal_mulai']; ?></h4>
-                                    </td>
-                                    <td>
-                                        <h4 class="badge badge-success"><?= $row['waktu_mulai']; ?></h4>
-                                    </td>
-                                    <td>
-                                        <h4 class="badge badge-danger"><?= $row['waktu_selesai']; ?></h4>
-                                    </td>
-                                    <td>
-                                        <h4 class="badge badge-secondary"><?= number_format($row['waktu']); ?> Menit</h4>
-                                    </td>
-                                    <td>
-                                        <h5 class="text-center">
-                                            <a class="btn btn-primary btn-sm"
-                                                href="<?= base_url() ?>Dashboard_pm/pilih_soal/<?= $row['id_jadwal']; ?>">TAMBAH</a>
-                                            <a class=" btn btn-danger btn-sm"
-                                                href="<?= base_url() ?>Dashboard_pm/edit_jadwal/<?= $row['id_jadwal']; ?>">EDIT</a>
-                                            <a class="btn btn-success btn-sm"
-                                                href="<?= base_url() ?>Dashboard_pm/detail_jadwal_soal/<?= $row['id_jadwal']; ?>">DETAIL</a>
-                                        </h5>
-                                    </td>
+                                <td><?php echo $no++; ?></td>
+                                <td>
+                                    <h4 class="badge badge-info text-uppercase"><?= $row['nama_mapel']; ?></h4>
+                                </td>
+                                <td>
+                                    <h4 class="badge badge-info"><?= $row['tanggal_mulai']; ?></h4>
+                                </td>
+                                <td>
+                                    <h4 class="badge badge-success"><?= $row['waktu_mulai']; ?></h4>
+                                </td>
+                                <td>
+                                    <h4 class="badge badge-danger"><?= $row['waktu_selesai']; ?></h4>
+                                </td>
+                                <td>
+                                    <h4 class="badge badge-secondary"><?= number_format($row['waktu']); ?> Menit</h4>
+                                </td>
+                                <td>
+                                    <h5 class="text-center">
+                                        <a class="btn btn-primary btn-sm"
+                                            href="<?= base_url() ?>Dashboard_pm/pilih_soal/<?= $row['id_jadwal']; ?>">TAMBAH</a>
+                                        <a class=" btn btn-danger btn-sm"
+                                            href="<?= base_url() ?>Dashboard_pm/edit_jadwal/<?= $row['id_jadwal']; ?>">EDIT</a>
+                                        <a class="btn btn-success btn-sm"
+                                            href="<?= base_url() ?>Dashboard_pm/detail_jadwal_soal/<?= $row['id_jadwal']; ?>">DETAIL</a>
+                                    </h5>
+                                </td>
                             </tr>
-                        <?php } ?>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
