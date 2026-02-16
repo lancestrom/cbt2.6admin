@@ -775,7 +775,16 @@ class Dashboard extends CI_Controller
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
- 
+
+    public function hapus_all_status_peserta()
+    {
+        $this->Model_keamanan->getKeamanan();
+        $this->db->empty_table('siswa_jawab');
+        $this->db->empty_table('siswa_status');
+
+        redirect('Dashboard/status_peserta');
+    }
+
 
     public function logout()
     {

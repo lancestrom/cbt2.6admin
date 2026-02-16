@@ -2,6 +2,17 @@
     <h4 class="text-center font-weight-bold">Status Peserta</h4>
 </div>
 
+<div class="row">
+    <div class="col-md">
+        <div class="card">
+            <div class="card-body">
+                <a class="btn btn-danger btn-sm text-uppercase font-weight-bolder"
+                    href="<?= base_url('Dashboard/hapus_all_status_peserta') ?>">Hapus All Status
+                    Peserta</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="row mb-2 mt-2">
     <div class="col-md">

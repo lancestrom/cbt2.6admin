@@ -14,7 +14,7 @@ class Model_ujian extends CI_Model
     public function countUjianAKL()
     {
         $sql = "SELECT COUNT(*) AS ujian FROM `a_jadwal`
-INNER JOIN a_mapel
+INNER JOIN a_mapelrekap_nilai_mapel
 on a_jadwal.id_mapel=a_mapel.id_mapel
 WHERE a_mapel.nama_mapel LIKE '%AKL%';";
         $query = $this->db->query($sql);
@@ -424,18 +424,11 @@ GROUP BY a_mapel.id_mapel;";
 
     public function rekap_nilai_mapelAKL()
     {
-        $sql = "SELECT a_kelas.id,a_mapel.id_mapel,a_jadwal.id_jadwal,a_mapel.nama_mapel
-FROM `siswa_jawab`
-INNER JOIN soal
-ON siswa_jawab.soal_id=soal.id_soal
-INNER JOIN a_siswa
-ON siswa_jawab.username=a_siswa.username
-INNER JOIN a_kelas
-ON a_siswa.kelas=a_kelas.slug
+        $sql = "SELECT a_mapel.id_mapel,a_jadwal.id_jadwal,a_mapel.nama_mapel FROM `siswa_jawab`
 INNER JOIN a_mapel
-ON a_mapel.id_kelas=a_kelas.id
+ON siswa_jawab.id_mapel=a_mapel.id_mapel
 INNER JOIN a_jadwal
-ON a_jadwal.id_mapel=a_mapel.id_mapel
+ON a_mapel.id_mapel=a_jadwal.id_mapel
 WHERE a_mapel.nama_mapel LIKE '%AKL%'
 GROUP BY a_mapel.id_mapel;";
         $query = $this->db->query($sql);
@@ -444,18 +437,24 @@ GROUP BY a_mapel.id_mapel;";
 
     public function rekap_nilai_mapelMPLB()
     {
-        $sql = "SELECT a_kelas.id,a_mapel.id_mapel,a_jadwal.id_jadwal,a_mapel.nama_mapel
-FROM `siswa_jawab`
-INNER JOIN soal
-ON siswa_jawab.soal_id=soal.id_soal
-INNER JOIN a_siswa
-ON siswa_jawab.username=a_siswa.username
-INNER JOIN a_kelas
-ON a_siswa.kelas=a_kelas.slug
+        $sql = "SELECT a_mapel.id_mapel,a_jadwal.id_jadwal,a_mapel.nama_mapel FROM `siswa_jawab`
 INNER JOIN a_mapel
-ON a_mapel.id_kelas=a_kelas.id
+ON siswa_jawab.id_mapel=a_mapel.id_mapel
 INNER JOIN a_jadwal
-ON a_jadwal.id_mapel=a_mapel.id_mapel
+ON a_mapel.id_mapel=a_jadwal.id_mapel
+WHERE a_mapel.nama_mapel LIKE '%MPLB%'
+GROUP BY a_mapel.id_mapel;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function rekap_nilai_mapelTJKT()
+    {
+        $sql = "SELECT a_mapel.id_mapel,a_jadwal.id_jadwal,a_mapel.nama_mapel FROM `siswa_jawab`
+INNER JOIN a_mapel
+ON siswa_jawab.id_mapel=a_mapel.id_mapel
+INNER JOIN a_jadwal
+ON a_mapel.id_mapel=a_jadwal.id_mapel
 WHERE a_mapel.nama_mapel LIKE '%MPLB%'
 GROUP BY a_mapel.id_mapel;";
         $query = $this->db->query($sql);

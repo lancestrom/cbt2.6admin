@@ -412,7 +412,7 @@ class Dashboard_tkj extends CI_Controller
     {
         $this->Model_keamanan->getKeamanan();
         // $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
-        $isi['rekap'] = $this->Model_ujian->rekap_nilai_mapelMPLB();
+        $isi['rekap'] = $this->Model_ujian->rekap_nilai_mapelTJKT();
 
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'TJKT/Ujian/tampilan_rekap_nilai';
