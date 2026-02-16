@@ -53,7 +53,7 @@
                     <div class="card-body bg-primary">
                         <div class="row">
                             <div class="col">
-                                <h3 class="text-white  font-italic font-weight-bold"><?= $mapel ?></h3>
+                                <h3 class="text-white  font-italic font-weight-bold">0</h3>
                                 <h4 class="text-white  font-italic font-weight-bold">Mapel</h4>
                             </div>
 
@@ -85,11 +85,11 @@
                                     $no = 1;
                                     foreach ($ujian_hari_ini as $row) {
                                     ?>
-                                    <td class="text-center"><?= $no++ ?></td>
-                                    <td class="text-uppercase"><?= $row['nama_mapel'] ?></td>
-                                    <td class="text-uppercase text-center"><?= $row['jumlah_siswa'] ?> Siswa</td>
+                                        <td class="text-center"><?= $no++ ?></td>
+                                        <td class="text-uppercase"><?= $row['nama_mapel'] ?></td>
+                                        <td class="text-uppercase text-center"><?= $row['jumlah_siswa'] ?> Siswa</td>
                                 </tr>
-                                <?php } ?>
+                            <?php } ?>
                             </tbody>
                         </table>
                     </div>

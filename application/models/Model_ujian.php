@@ -14,7 +14,7 @@ class Model_ujian extends CI_Model
     public function countUjianAKL()
     {
         $sql = "SELECT COUNT(*) AS ujian FROM `a_jadwal`
-INNER JOIN a_mapelrekap_nilai_mapel
+INNER JOIN a_mapel
 on a_jadwal.id_mapel=a_mapel.id_mapel
 WHERE a_mapel.nama_mapel LIKE '%AKL%';";
         $query = $this->db->query($sql);
