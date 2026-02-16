@@ -41,23 +41,23 @@
                                 $no = 1;
                                 foreach ($bank_soal as $row) {
                                 ?>
-                                <td><?php echo $no++; ?></td>
-                                <td class="text-center"><?= $row['id_bank_soal'] ?></td>
-                                <td class="text-center"><?= $row['nama_bank_soal'] ?></td>
-                                <td class="text-center"><?= $row['jurusan'] ?></td>
-                                <td class="text-center"><?= $row['jumlah_soal'] ?> Soal</td>
-                                <td>
-                                    <h5 class="text-center">
-                                        <a class="btn btn-primary btn-sm text-uppercase font-weight-bolder"
-                                            href="<?= base_url() ?>Dashboard_otkp/upload_banksoal/<?= $row['id_bank_soal'] ?>">UPLOAD</a>
-                                        <a class="btn btn-success btn-sm text-uppercase font-weight-bolder"
-                                            href="<?= base_url() ?>Dashboard_otkp/detail_banksoal/<?= $row['id_bank_soal'] ?>">DETAIL</a>
-                                        <a class="btn btn-danger btn-sm text-uppercase font-weight-bolder"
-                                            href="<?= base_url() ?>Dashboard_otkp/hapus_banksoal/<?= $row['id_bank_soal'] ?>">HAPUS</a>
-                                    </h5>
-                                </td>≈
+                                    <td><?php echo $no++; ?></td>
+                                    <td class="text-center"><?= $row['id_bank_soal'] ?></td>
+                                    <td class="text-center"><?= $row['nama_bank_soal'] ?></td>
+                                    <td class="text-center"><?= $row['jurusan'] ?></td>
+                                    <td class="text-center"><?= $row['jumlah_soal'] ?> Soal</td>
+                                    <td>
+                                        <h5 class="text-center">
+                                            <a class="btn btn-primary btn-sm text-uppercase font-weight-bolder"
+                                                href="<?= base_url() ?>Dashboard_otkp/upload_banksoal/<?= $row['id_bank_soal'] ?>">UPLOAD</a>
+                                            <a class="btn btn-success btn-sm text-uppercase font-weight-bolder"
+                                                href="<?= base_url() ?>Dashboard_otkp/detail_banksoal/<?= $row['id_bank_soal'] ?>">DETAIL</a>
+                                            <a class="btn btn-danger btn-sm text-uppercase font-weight-bolder"
+                                                href="<?= base_url() ?>Dashboard_otkp/hapus_banksoal/<?= $row['id_bank_soal'] ?>">HAPUS</a>
+                                        </h5>
+                                    </td>≈
                             </tr>
-                            <?php } ?>
+                        <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -76,7 +76,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="<?= base_url() ?>Dashboard_akl/simpan_bank_soal" method="post">
+                <form action="<?= base_url() ?>Dashboard_otkp/simpan_bank_soal" method="post">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md text-center">

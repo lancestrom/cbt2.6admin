@@ -455,7 +455,7 @@ INNER JOIN a_mapel
 ON siswa_jawab.id_mapel=a_mapel.id_mapel
 INNER JOIN a_jadwal
 ON a_mapel.id_mapel=a_jadwal.id_mapel
-WHERE a_mapel.nama_mapel LIKE '%MPLB%'
+WHERE a_mapel.nama_mapel LIKE '%TJKT%'
 GROUP BY a_mapel.id_mapel;";
         $query = $this->db->query($sql);
         return $query->result_array();
@@ -463,18 +463,11 @@ GROUP BY a_mapel.id_mapel;";
 
     public function rekap_nilai_mapelPM()
     {
-        $sql = "SELECT a_kelas.id,a_mapel.id_mapel,a_jadwal.id_jadwal,a_mapel.nama_mapel
-FROM `siswa_jawab`
-INNER JOIN soal
-ON siswa_jawab.soal_id=soal.id_soal
-INNER JOIN a_siswa
-ON siswa_jawab.username=a_siswa.username
-INNER JOIN a_kelas
-ON a_siswa.kelas=a_kelas.slug
+        $sql = "SELECT a_mapel.id_mapel,a_jadwal.id_jadwal,a_mapel.nama_mapel FROM `siswa_jawab`
 INNER JOIN a_mapel
-ON a_mapel.id_kelas=a_kelas.id
+ON siswa_jawab.id_mapel=a_mapel.id_mapel
 INNER JOIN a_jadwal
-ON a_jadwal.id_mapel=a_mapel.id_mapel
+ON a_mapel.id_mapel=a_jadwal.id_mapel
 WHERE a_mapel.nama_mapel LIKE '%PM%' OR a_mapel.nama_mapel LIKE '%DKV%'
 GROUP BY a_mapel.id_mapel;";
         $query = $this->db->query($sql);
