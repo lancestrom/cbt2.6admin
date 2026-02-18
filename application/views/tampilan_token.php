@@ -191,7 +191,7 @@
                         }
 
                         // Auto-run every 3000 ms (3 seconds)
-                        setInterval(refreshTokenOnce, 3000);
+                        setInterval(refreshTokenOnce, 300000);
                     });
                 </script>
             </div>
