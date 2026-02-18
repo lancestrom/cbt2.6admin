@@ -36,10 +36,24 @@ class Dashboard extends CI_Controller
     {
         $this->Model_keamanan->getKeamanan();
         $isi['token'] = $this->Model_token->dataToken();
+        $isi['token_masuk'] = $this->Model_token->dataTokenMasuk();
 
 
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'tampilan_token';
+        $this->load->view('templates/header', $isi2);
+        $this->load->view('tampilan_dashboard', $isi);
+        $this->load->view('templates/footer');
+    }
+
+    public function token_masuk()
+    {
+        $this->Model_keamanan->getKeamanan();
+        $isi['token'] = $this->Model_token->dataTokenMasuk();
+
+
+        $isi2['title'] = 'CBT | Administrator';
+        $isi['content'] = 'tampilan_token_masuk';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
@@ -58,6 +72,36 @@ class Dashboard extends CI_Controller
         $this->db->update('token_keluar', $data);
 
         redirect('Dashboard/token');
+    }
+
+    public function hapus_token_keluar()
+    {
+        $id = $this->input->post('id');
+
+        $data = array(
+            'id' => $this->input->post('id'),
+            'token_keluar' => null,
+        );
+
+        $this->db->where('id', $id);
+        $this->db->update('token_keluar', $data);
+
+        redirect('Dashboard/token');
+    }
+
+    public function refresh_token_masuk()
+    {
+        $id = $this->input->post('id');
+
+        $data = array(
+            'id' => $this->input->post('id'),
+            'token_masuk' => 'CBT' . rand(1111, 9999),
+        );
+
+        $this->db->where('id', $id);
+        $this->db->update('token_masuk', $data);
+
+        redirect('Dashboard/token_masuk');
     }
 
     public function jurusan()

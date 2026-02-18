@@ -11,4 +11,11 @@ class Model_token extends CI_Model
         $query = $this->db->query($sql);
         return $query->result_array();
     }
+
+    public function dataTokenMasuk()
+    {
+        $sql = "SELECT * FROM `token_masuk`";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
 }
