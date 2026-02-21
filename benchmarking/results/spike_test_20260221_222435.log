@@ -1,0 +1,1 @@
+time="2026-02-21T22:26:12+07:00" level=error msg="invalid threshold \"value>850\" applied on metric successful_logins; reason: unsupported aggregation method value on metric of type counter. supported aggregation methods for this metric are: count, rate"

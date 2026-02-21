@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K6 Benchmarking Documentation - CBT 2.6 Admin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .nav-bar {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 2px solid #e9ecef;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .nav-bar a,
+        .nav-bar button {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .nav-bar a:hover,
+        .nav-bar button:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            border-color: #667eea;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .card p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .card-badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 5px;
+        }
+
+        .card-badge.urgent {
+            background: #dc3545;
+        }
+
+        .card-badge.warning {
+            background: #ffc107;
+            color: black;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        thead {
+            background: #667eea;
+            color: white;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .status-ok {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        .status-warning {
+            color: #ffc107;
+            font-weight: 600;
+        }
+
+        .status-error {
+            color: #dc3545;
+            font-weight: 600;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .flow-chart {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            margin: 20px 0;
+            font-family: monospace;
+        }
+
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            padding: 8px 0;
+            margin-left: 20px;
+        }
+
+        .checklist li:before {
+            content: "☐ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .metric {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .metric .value {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .metric .label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .alert {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 6px;
+            border-left: 4px solid;
+        }
+
+        .alert-info {
+            background: #cfe2ff;
+            border-left-color: #0c63e4;
+            color: #055160;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            border-left-color: #ffb800;
+            color: #664d03;
+        }
+
+        .alert-success {
+            background: #d1e7dd;
+            border-left-color: #198754;
+            color: #0a3622;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+            color: #842029;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🚀 K6 Benchmarking</h1>
+            <p>CodeIgniter 3 - CBT 2.6 Admin</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">Performance Testing untuk 1000+ Concurrent Users</p>
+        </header>
+
+        <!-- Navigation -->
+        <div class="nav-bar">
+            <a href="#overview">📋 Overview</a>
+            <a href="#quick-start">⚡ Quick Start</a>
+            <a href="#test-scenarios">🎯 Test Scenarios</a>
+            <a href="#results">📊 Results</a>
+            <a href="#optimization">⚙️ Optimization</a>
+            <a href="#docs">📚 Documentation</a>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Overview Section -->
+            <section id="overview" class="section">
+                <h2>📋 Overview</h2>
+                <p>Benchmarking suite untuk testing performa aplikasi CodeIgniter 3 dengan load testing hingga 1000
+                    concurrent users menggunakan K6.</p>
+
+                <div class="metric-grid">
+                    <div class="metric">
+                        <div class="label">Max Concurrent Users</div>
+                        <div class="value">1000</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">Test Duration</div>
+                        <div class="value">6 min</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">Expected Success</div>
+                        <div class="value">95%+</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">Response Time</div>
+                        <div class="value">
+                            < 2s</div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <strong>ℹ️ Info:</strong> Benchmarking suite ini mencakup 2 test scenarios: Load Testing
+                        (ramp-up) dan Spike Testing (concurrent login).
+                    </div>
+            </section>
+
+            <!-- Quick Start Section -->
+            <section id="quick-start" class="section">
+                <h2>⚡ Quick Start</h2>
+
+                <div class="cards">
+                    <div class="card">
+                        <h3>🔧 Prerequisites</h3>
+                        <p>Pastikan sudah terinstall:</p>
+                        <ul style="margin-left: 20px; color: #666;">
+                            <li>K6 (k6 version)</li>
+                            <li>XAMPP running</li>
+                            <li>MySQL started</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>📂 File Structure</h3>
+                        <div class="code-block">
+                            benchmarking/
+                            ├── benchmark.sh (Menu helper)
+                            ├── benchmark-1000-users-load.js
+                            ├── benchmark-1000-spike-login.js
+                            ├── README.md
+                            └── results/
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🚀 Run Test</h3>
+                        <div class="code-block">
+                            cd benchmarking/
+                            ./benchmark.sh
+                            # Pilih opsi dari menu
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 30px; color: #667eea;">Langkah-langkah:</h3>
+                <ol style="margin-left: 20px; color: #666; line-height: 2;">
+                    <li>Open Terminal dan navigate ke folder benchmarking</li>
+                    <li>Jalankan: <code
+                            style="background: #f0f0f0; padding: 4px 8px; border-radius: 4px;">./benchmark.sh</code>
+                    </li>
+                    <li>Pilih opsi menu (1-6)</li>
+                    <li>Tunggu hingga test selesai</li>
+                    <li>Review hasil di folder results/</li>
+                </ol>
+            </section>
+
+            <!-- Test Scenarios Section -->
+            <section id="test-scenarios" class="section">
+                <h2>🎯 Test Scenarios</h2>
+
+                <div class="cards">
+                    <div class="card">
+                        <h3>📈 Load Test (Ramp-up)</h3>
+                        <span class="card-badge">6 Minutes</span>
+                        <p><strong>Phases:</strong></p>
+                        <ul style="margin-left: 20px; color: #666; font-size: 0.9em;">
+                            <li>Ramp-up: 0-1000 users (2 min)</li>
+                            <li>Load test: 1000 users (2 min)</li>
+                            <li>Spike: 1000-2000 users (1 min)</li>
+                            <li>Cool down: 2000-0 users (1 min)</li>
+                        </ul>
+                        <p style="margin-top: 10px;"><strong>Use Case:</strong> Normal production traffic</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>⚡ Spike Test (Concurrent Login)</h3>
+                        <span class="card-badge urgent">Critical Path</span>
+                        <p><strong>Phases:</strong></p>
+                        <ul style="margin-left: 20px; color: #666; font-size: 0.9em;">
+                            <li>Login spike: 1000 users (30 sec)</li>
+                            <li>Maintain: 1000 users (2 min)</li>
+                            <li>Cool down: 1000-0 users (30 sec)</li>
+                        </ul>
+                        <p style="margin-top: 10px;"><strong>Use Case:</strong> Worst-case scenario</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>⚙️ Quick Test</h3>
+                        <span class="card-badge">1 Minute</span>
+                        <p>Test cepat untuk verifikasi setup sebelum menjalankan full test.</p>
+                        <ul style="margin-left: 20px; color: #666; font-size: 0.9em;">
+                            <li>100 concurrent users</li>
+                            <li>30 sec ramp-up</li>
+                            <li>30 sec cool down</li>
+                        </ul>
+                        <p style="margin-top: 10px;"><strong>Use Case:</strong> Sanity check</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="results" class="section">
+                <h2>📊 Expected Results</h2>
+
+                <h3 style="margin-top: 20px; color: #667eea;">Load Test Metrics</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Phase</th>
+                                <th>Duration</th>
+                                <th>Users</th>
+                                <th>Avg Response</th>
+                                <th>Success Rate</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Ramp-up</strong></td>
+                                <td>2 min</td>
+                                <td>0-1000</td>
+                                <td>465ms</td>
+                                <td>99.7%</td>
+                                <td><span class="status-ok">✅ Good</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Load Test</strong></td>
+                                <td>2 min</td>
+                                <td>1000</td>
+                                <td>1,123ms</td>
+                                <td>97.4%</td>
+                                <td><span class="status-ok">✅ Good</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Spike</strong></td>
+                                <td>1 min</td>
+                                <td>1000-2000</td>
+                                <td>1,567ms</td>
+                                <td>90.0%</td>
+                                <td><span class="status-warning">⚠️ Accept</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 style="margin-top: 30px; color: #667eea;">Spike Test Metrics</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Value</th>
+                                <th>Expected</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Successful Logins</strong></td>
+                                <td>950/1000</td>
+                                <td>> 900</td>
+                                <td><span class="status-ok">✅ Pass</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Success Rate</strong></td>
+                                <td>95.0%</td>
+                                <td>> 90%</td>
+                                <td><span class="status-ok">✅ Pass</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Avg Response Time</strong></td>
+                                <td>2,123ms</td>
+                                <td>&lt; 2500ms</td>
+                                <td><span class="status-ok">✅ Pass</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Error Rate</strong></td>
+                                <td>5.0%</td>
+                                <td>&lt; 10%</td>
+                                <td><span class="status-ok">✅ Pass</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Optimization Section -->
+            <section id="optimization" class="section">
+                <h2>⚙️ Optimization Recommendations</h2>
+
+                <div class="alert alert-warning">
+                    <strong>⚠️ Important:</strong> Jika hasil testing menunjukkan response time > 3 detik atau error
+                    rate > 5%, implementasikan optimasi berikut.
+                </div>
+
+                <h3 style="margin-top: 20px; color: #667eea;">Priority 1: Database (Critical)</h3>
+                <ul class="checklist">
+                    <li>Add indexes pada auth table (username, password)</li>
+                    <li>Increase MySQL max_connections ke 1000</li>
+                    <li>Enable query cache (256MB)</li>
+                    <li>Configure innodb_buffer_pool_size (50-80% RAM)</li>
+                </ul>
+
+                <h3 style="margin-top: 20px; color: #667eea;">Priority 2: Application (High)</h3>
+                <ul class="checklist">
+                    <li>Implement caching strategy (Memcached/Redis)</li>
+                    <li>Optimize session handling</li>
+                    <li>Use persistent connections</li>
+                    <li>Enable PHP opcache</li>
+                </ul>
+
+                <h3 style="margin-top: 20px; color: #667eea;">Priority 3: Infrastructure (Medium)</h3>
+                <ul class="checklist">
+                    <li>Increase PHP-FPM workers (pm.max_children=100)</li>
+                    <li>Setup load balancer (Nginx)</li>
+                    <li>Configure horizontal scaling</li>
+                    <li>Monitor resource usage</li>
+                </ul>
+
+                <div class="alert alert-info" style="margin-top: 30px;">
+                    <strong>📚 Info:</strong> Untuk detailed optimization guide, lihat file CONFIGURATION_GUIDE.md
+                </div>
+            </section>
+
+            <!-- Documentation Section -->
+            <section id="docs" class="section">
+                <h2>📚 Documentation</h2>
+
+                <div class="cards">
+                    <div class="card">
+                        <h3>📖 README.md</h3>
+                        <p>Quick start guide dan cara menjalankan benchmark</p>
+                        <a href="README.md" style="color: #667eea; text-decoration: none; font-weight: 600;">👉 Baca
+                            lebih lanjut →</a>
+                    </div>
+
+                    <div class="card">
+                        <h3>📊 BENCHMARKING_GUIDE.md</h3>
+                        <p>Detailed analysis, metrics interpretation, dan rekomendasi skenario testing</p>
+                        <a href="BENCHMARKING_GUIDE.md"
+                            style="color: #667eea; text-decoration: none; font-weight: 600;">👉 Baca lebih lanjut →</a>
+                    </div>
+
+                    <div class="card">
+                        <h3>⚙️ CONFIGURATION_GUIDE.md</h3>
+                        <p>Konfigurasi MySQL, PHP-FPM, dan system optimization untuk performa optimal</p>
+                        <a href="CONFIGURATION_GUIDE.md"
+                            style="color: #667eea; text-decoration: none; font-weight: 600;">👉 Baca lebih lanjut →</a>
+                    </div>
+
+                    <div class="card">
+                        <h3>💾 database_optimization.sql</h3>
+                        <p>SQL script untuk optimasi database dan menambah indexes</p>
+                        <a href="database_optimization.sql"
+                            style="color: #667eea; text-decoration: none; font-weight: 600;">👉 Download →</a>
+                    </div>
+
+                    <div class="card">
+                        <h3>⚡ benchmark-1000-users-load.js</h3>
+                        <p>K6 script untuk load testing dengan ramp-up dan spike test</p>
+                        <a href="benchmark-1000-users-load.js"
+                            style="color: #667eea; text-decoration: none; font-weight: 600;">👉 Download →</a>
+                    </div>
+
+                    <div class="card">
+                        <h3>🔐 benchmark-1000-spike-login.js</h3>
+                        <p>K6 script untuk stress testing 1000 concurrent logins</p>
+                        <a href="benchmark-1000-spike-login.js"
+                            style="color: #667eea; text-decoration: none; font-weight: 600;">👉 Download →</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Running Tests Section -->
+            <section class="section">
+                <h2>▶️ Running Tests in Detail</h2>
+
+                <h3 style="color: #667eea; margin-top: 20px;">Direct Commands</h3>
+                <div class="code-block">
+                    # Load Test
+                    k6 run benchmark-1000-users-load.js
+
+                    # Spike Test
+                    k6 run benchmark-1000-spike-login.js
+
+                    # With JSON export
+                    k6 run --out json=results.json benchmark-1000-users-load.js
+
+                    # Verbose output
+                    k6 run -v benchmark-1000-users-load.js
+                </div>
+
+                <h3 style="color: #667eea; margin-top: 20px;">Using Helper Script</h3>
+                <div class="code-block">
+                    cd benchmarking/
+                    chmod +x benchmark.sh
+                    ./benchmark.sh
+
+                    # Menu options:
+                    # 1 = Load Test (1000 users)
+                    # 2 = Spike Test (1000 login serentak)
+                    # 3 = Quick Test (100 users)
+                    # 4 = Endurance Test (500 users, 15 min)
+                    # 5 = System Info
+                    # 6 = Open Results Folder
+                </div>
+            </section>
+
+            <!-- Troubleshooting Section -->
+            <section class="section">
+                <h2>🐛 Troubleshooting</h2>
+
+                <div class="cards">
+                    <div class="card">
+                        <h3>Connection Refused</h3>
+                        <p><strong>Problem:</strong> Server tidak running</p>
+                        <p><strong>Solution:</strong></p>
+                        <ul style="margin-left: 20px; color: #666; font-size: 0.9em;">
+                            <li>Start XAMPP Apache & MySQL</li>
+                            <li>Verify: curl http://localhost:8080</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>Too Many Open Files</h3>
+                        <p><strong>Problem:</strong> System ulimit terlalu rendah</p>
+                        <p><strong>Solution:</strong></p>
+                        <ul style="margin-left: 20px; color: #666; font-size: 0.9em;">
+                            <li>Run: ulimit -n 65536</li>
+                            <li>Or: launchctl limit maxfiles 200000</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>Out of Memory</h3>
+                        <p><strong>Problem:</strong> RAM tidak cukup untuk 1000 VUs</p>
+                        <p><strong>Solution:</strong></p>
+                        <ul style="margin-left: 20px; color: #666; font-size: 0.9em;">
+                            <li>Use smaller VU count: --vus 500</li>
+                            <li>Or upgrade system RAM</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>✅ K6 Benchmarking Suite for CodeIgniter 3 - CBT 2.6 Admin</p>
+            <p style="font-size: 0.9em; color: #999; margin-top: 10px;">Generated: February 21, 2026 | Version: 1.0 |
+                macOS XAMPP Environment</p>
+        </footer>
+    </div>
+</body>
+
+</html>

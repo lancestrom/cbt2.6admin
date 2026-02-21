@@ -1,0 +1,1 @@
+time="2026-02-21T22:40:30+07:00" level=error msg="using `iterations` and `stages` options simultaneously is not allowed"
