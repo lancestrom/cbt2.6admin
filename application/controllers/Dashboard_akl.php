@@ -298,13 +298,13 @@ class Dashboard_akl extends CI_Controller
         </div>');
         redirect('Dashboard_akl/bank_soal');
     }
-
+ 
     public function simpan_bank_soal()
     {
         $this->Model_keamanan->getKeamanan();
 
         $data = array(
-            'id_bank_soal' => rand(11111111, 99999999),
+            'id_bank_soal' => rand(111111, 999999),
             'nama_bank_soal' => $this->input->post('nama_bank_soal', TRUE),
             'jurusan' => $this->input->post('jurusan', TRUE)
         );
