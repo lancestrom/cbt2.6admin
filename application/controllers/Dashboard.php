@@ -829,6 +829,27 @@ class Dashboard extends CI_Controller
         redirect('Dashboard/status_peserta');
     }
 
+    public function akun_peserta()
+    {
+        $this->Model_keamanan->getKeamanan();
+        $isi['akun'] = $this->Model_siswa->akun_peserta_ujiam();
+
+        $isi2['title'] = 'CBT | Administrator';
+        $isi['content'] = 'tampilan_akun_peserta';
+        $this->load->view('templates/header', $isi2);
+        $this->load->view('tampilan_dashboard', $isi);
+        $this->load->view('templates/footer');
+    }
+
+    public function akun_peserta_id($id_kelas)
+    {
+        $this->Model_keamanan->getKeamanan();
+        $isi['header'] = $this->Model_siswa->header_akun_peserta_ujiam_id($id_kelas);
+        $isi['siswa'] = $this->Model_siswa->akun_peserta_ujiam_id($id_kelas);
+
+        $this->load->view('tampilan_akun_peserta_id', $isi);
+    }
+
 
     public function logout()
     {

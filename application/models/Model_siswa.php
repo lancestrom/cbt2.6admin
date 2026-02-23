@@ -158,6 +158,43 @@ WHERE a_siswa.username='$sess';";
         return $query->row_array();
     }
 
+    public function akun_peserta_ujiam()
+    {
+        $sql = "SELECT a_kelas.id, a_kelas.kelas,a_jurusan.jurusan ,concat(COUNT(*),' Siswa') AS jumlah_siswa FROM `a_siswa`
+INNER JOIN a_kelas
+ON a_siswa.kelas=a_kelas.slug
+INNER JOIN a_jurusan
+ON a_kelas.kode=a_jurusan.kode
+GROUP BY a_kelas.id;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function akun_peserta_ujiam_id($id_kelas)
+    {
+        $sql = "SELECT a_kelas.id, a_siswa.nama_siswa,a_siswa.username,a_siswa.password FROM `a_siswa`
+INNER JOIN a_kelas
+ON a_siswa.kelas=a_kelas.slug
+INNER JOIN a_jurusan
+ON a_kelas.kode=a_jurusan.kode
+WHERE a_kelas.id='$id_kelas';";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function header_akun_peserta_ujiam_id($id_kelas)
+    {
+        $sql = "SELECT a_kelas.id,a_kelas.kelas FROM `a_siswa`
+INNER JOIN a_kelas
+ON a_siswa.kelas=a_kelas.slug
+INNER JOIN a_jurusan
+ON a_kelas.kode=a_jurusan.kode
+WHERE a_kelas.id='$id_kelas'
+GROUP BY a_kelas.kelas;";
+        $query = $this->db->query($sql);
+        return $query->row_array();
+    }
+
 
 
     function simpanSiswa($data = array())
