@@ -5,12 +5,13 @@ require_once APPPATH . 'third_party/spout/src/Spout/Autoloader/autoload.php';
 
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 
-class Dashboard_akl extends CI_Controller
+class Dashboard_akl extends MY_Controller
 {
 
 
     public function index()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         // $isi['admin'] = $this->db->get_where('auth', ['username' => $this->session->userdata('username')])->row_array();
         $isi['siswa'] = $this->Model_siswa->countSiswaAKL();
@@ -30,6 +31,7 @@ class Dashboard_akl extends CI_Controller
 
     public function mata_pelajaran_akl()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['data_mapel_akl'] = $this->Model_mapel->dataMapelAKL();
 
@@ -42,6 +44,7 @@ class Dashboard_akl extends CI_Controller
 
     public function siswa_akl()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['data_siswa'] = $this->Model_siswa->dataSiswaAKL();
 
@@ -54,6 +57,7 @@ class Dashboard_akl extends CI_Controller
 
     public function siswa_block()
     {
+        $this->require_login();
         $data = array(
             'id' => $this->input->post('id'),
             'no_peserta' => $this->input->post('no_peserta'),
@@ -73,6 +77,7 @@ class Dashboard_akl extends CI_Controller
 
     public function siswa_akl_block()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['data_siswa'] = $this->Model_siswa->dataSiswaAKLBlock();
 
@@ -85,6 +90,7 @@ class Dashboard_akl extends CI_Controller
 
     public function siswa_buka_block()
     {
+        $this->require_login();
         $data = array(
             'id' => $this->input->post('id'),
             'no_peserta' => $this->input->post('no_peserta'),
@@ -104,6 +110,7 @@ class Dashboard_akl extends CI_Controller
 
     public function mata_pelajaran()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['mapel'] = $this->Model_mapel->dataMapelAKL();
 
@@ -117,6 +124,7 @@ class Dashboard_akl extends CI_Controller
 
     public function buat_mapel_jadwal($id_mapel)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['mapel'] = $this->Model_mapel->buat_mapel_jadwal($id_mapel);
 
@@ -130,6 +138,7 @@ class Dashboard_akl extends CI_Controller
 
     public function simpan_jadwal()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
 
         $data = array(
@@ -161,6 +170,7 @@ class Dashboard_akl extends CI_Controller
 
     public function jadwal_ujian_akl()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
 
         $isi['ujian'] = $this->Model_ujian->jadwalUjianAKL();
@@ -174,6 +184,7 @@ class Dashboard_akl extends CI_Controller
 
     public function edit_jadwal($id_jadwal)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['mapel'] = $this->Model_ujian->edit_jadwal_id($id_jadwal);
 
@@ -186,6 +197,7 @@ class Dashboard_akl extends CI_Controller
 
     public function simpan_edit_jadwal()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
 
         $id_jadwal = $this->input->post('id_jadwal', TRUE);
@@ -210,6 +222,7 @@ class Dashboard_akl extends CI_Controller
 
     public function pilih_soal($id_jadwal)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
         $isi['bank_soal'] = $this->Model_ujian->pilihBankSoalAKL();
@@ -223,6 +236,7 @@ class Dashboard_akl extends CI_Controller
 
     public function simpan_pilih_soal()
     {
+        $this->require_login();
         $id_jadwal_soal = rand(11111111, 99999999);
         $id_jadwal = $this->input->post_get('id_jadwal');
         $id_bank_soal = $this->input->post_get('id_bank_soal');
@@ -251,6 +265,7 @@ class Dashboard_akl extends CI_Controller
 
     public function detail_jadwal_soal($id_jadwal)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
         $isi['jadwal_soal'] = $this->Model_ujian->jadwalSoal_bankSoal($id_jadwal);
@@ -264,6 +279,7 @@ class Dashboard_akl extends CI_Controller
 
     public function bank_soal()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['bank_soal'] = $this->Model_ujian->namaBankSoalAKL();
 
@@ -276,6 +292,7 @@ class Dashboard_akl extends CI_Controller
 
     public function hapus_banksoal($id_bank_soal_temp)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
 
         $this->db->where('id_bank_soal', $id_bank_soal_temp);
@@ -298,7 +315,7 @@ class Dashboard_akl extends CI_Controller
         </div>');
         redirect('Dashboard_akl/bank_soal');
     }
- 
+
     public function simpan_bank_soal()
     {
         $this->Model_keamanan->getKeamanan();
@@ -326,6 +343,7 @@ class Dashboard_akl extends CI_Controller
 
     public function upload_banksoal($id_bank_soal_temp)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['header'] = $this->Model_ujian->HeadersimpanBankSoalTemp($id_bank_soal_temp);
 
@@ -338,6 +356,7 @@ class Dashboard_akl extends CI_Controller
 
     public function upload_bank_soal()
     {
+        $this->require_login();
         // protect the upload endpoint
         if ($this->input->post('submit', TRUE) == 'upload') {
             $config['upload_path']      = './temp_doc/';
@@ -396,6 +415,7 @@ class Dashboard_akl extends CI_Controller
 
     public function detail_banksoal($id_bank_soal)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['header'] = $this->Model_ujian->headerBankSoal($id_bank_soal);
         $isi['soal'] = $this->Model_ujian->detailBankSoal($id_bank_soal);
@@ -409,6 +429,7 @@ class Dashboard_akl extends CI_Controller
 
     public function status_peserta()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         // $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
         $isi['rekap'] = $this->Model_ujian->data_status_pesertaAKL();
@@ -422,6 +443,7 @@ class Dashboard_akl extends CI_Controller
 
     public function rekap_nilai()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         // $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
         $isi['rekap'] = $this->Model_ujian->rekap_nilai_mapelAKL();

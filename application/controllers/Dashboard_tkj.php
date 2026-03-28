@@ -5,12 +5,13 @@ require_once APPPATH . 'third_party/spout/src/Spout/Autoloader/autoload.php';
 
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 
-class Dashboard_tkj extends CI_Controller
+class Dashboard_tkj extends MY_Controller
 {
 
 
     public function index()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         // $isi['admin'] = $this->db->get_where('auth', ['username' => $this->session->userdata('username')])->row_array();
         $isi['siswa'] = $this->Model_siswa->countSiswaTJKT();
@@ -30,6 +31,7 @@ class Dashboard_tkj extends CI_Controller
 
     public function siswa_tkj()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['data_siswa'] = $this->Model_siswa->dataSiswaTJKT();
 
@@ -61,6 +63,7 @@ class Dashboard_tkj extends CI_Controller
 
     public function siswa_tkj_block()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['data_siswa'] = $this->Model_siswa->dataSiswaTJKTBlock();
 
@@ -92,6 +95,7 @@ class Dashboard_tkj extends CI_Controller
 
     public function mata_pelajaran()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['mapel'] = $this->Model_mapel->dataMapelTJKT();
 
@@ -105,6 +109,7 @@ class Dashboard_tkj extends CI_Controller
 
     public function buat_mapel_jadwal($id_mapel)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['mapel'] = $this->Model_mapel->buat_mapel_jadwal($id_mapel);
 
@@ -118,6 +123,7 @@ class Dashboard_tkj extends CI_Controller
 
     public function simpan_jadwal()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
 
         $data = array(
@@ -149,6 +155,7 @@ class Dashboard_tkj extends CI_Controller
 
     public function jadwal_ujian_tkj()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
 
         $isi['ujian'] = $this->Model_ujian->jadwalUjianTJKT();
@@ -162,6 +169,7 @@ class Dashboard_tkj extends CI_Controller
 
     public function edit_jadwal($id_jadwal)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['mapel'] = $this->Model_ujian->edit_jadwal_id($id_jadwal);
 
@@ -174,6 +182,7 @@ class Dashboard_tkj extends CI_Controller
 
     public function simpan_edit_jadwal()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
 
         $id_jadwal = $this->input->post('id_jadwal', TRUE);
@@ -198,6 +207,7 @@ class Dashboard_tkj extends CI_Controller
 
     public function pilih_soal($id_jadwal)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
         $isi['bank_soal'] = $this->Model_ujian->pilihBankSoalTJKT();
@@ -239,6 +249,7 @@ class Dashboard_tkj extends CI_Controller
 
     public function detail_jadwal_soal($id_jadwal)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
         $isi['jadwal_soal'] = $this->Model_ujian->jadwalSoal_bankSoal($id_jadwal);
@@ -252,6 +263,7 @@ class Dashboard_tkj extends CI_Controller
 
     public function bank_soal()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['bank_soal'] = $this->Model_ujian->namaBankSoalTJKT();
 
@@ -264,6 +276,7 @@ class Dashboard_tkj extends CI_Controller
 
     public function hapus_banksoal($id_bank_soal_temp)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
 
         $this->db->where('id_bank_soal', $id_bank_soal_temp);
@@ -289,6 +302,7 @@ class Dashboard_tkj extends CI_Controller
 
     public function simpan_bank_soal()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
 
         $data = array(
@@ -314,6 +328,7 @@ class Dashboard_tkj extends CI_Controller
 
     public function upload_banksoal($id_bank_soal_temp)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['header'] = $this->Model_ujian->HeadersimpanBankSoalTemp($id_bank_soal_temp);
 
@@ -384,6 +399,7 @@ class Dashboard_tkj extends CI_Controller
 
     public function detail_banksoal($id_bank_soal)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['header'] = $this->Model_ujian->headerBankSoal($id_bank_soal);
         $isi['soal'] = $this->Model_ujian->detailBankSoal($id_bank_soal);
@@ -397,6 +413,7 @@ class Dashboard_tkj extends CI_Controller
 
     public function status_peserta()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         // $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
         $isi['rekap'] = $this->Model_ujian->data_status_pesertaTJKT();
@@ -410,6 +427,7 @@ class Dashboard_tkj extends CI_Controller
 
     public function rekap_nilai()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         // $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
         $isi['rekap'] = $this->Model_ujian->rekap_nilai_mapelTJKT();

@@ -6,12 +6,15 @@ require_once APPPATH . 'third_party/spout/src/Spout/Autoloader/autoload.php';
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 
 
-class Dashboard extends CI_Controller
+class Dashboard extends MY_Controller
 {
 
 
     public function index()
     {
+
+        $this->require_login();
+
         $this->Model_keamanan->getKeamanan();
         $isi['jurusan'] = $this->Model_jurusan->countJurusan();
         $isi['siswa'] = $this->Model_siswa->countSiswa();
@@ -34,6 +37,7 @@ class Dashboard extends CI_Controller
 
     public function token()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['token'] = $this->Model_token->dataToken();
         $isi['token_masuk'] = $this->Model_token->dataTokenMasuk();
@@ -48,6 +52,7 @@ class Dashboard extends CI_Controller
 
     public function token_masuk()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['token'] = $this->Model_token->dataTokenMasuk();
 
@@ -76,6 +81,7 @@ class Dashboard extends CI_Controller
 
     public function hapus_token_keluar()
     {
+        $this->require_login();
         $id = $this->input->post('id');
 
         $data = array(
@@ -91,6 +97,7 @@ class Dashboard extends CI_Controller
 
     public function refresh_token_masuk()
     {
+        $this->require_login();
         $id = $this->input->post('id');
 
         $data = array(
@@ -106,6 +113,8 @@ class Dashboard extends CI_Controller
 
     public function jurusan()
     {
+        $this->require_login();
+
         $this->Model_keamanan->getKeamanan();
         $isi['jurusan'] = $this->Model_jurusan->dataJurusan();
 
@@ -119,6 +128,7 @@ class Dashboard extends CI_Controller
 
     public function kelas()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['kelas'] = $this->Model_kelas->dataKelasMaster();
 
@@ -132,6 +142,8 @@ class Dashboard extends CI_Controller
 
     public function hapus_all_kelas()
     {
+        $this->require_login();
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $this->db->empty_table('a_kelas');
 
@@ -140,6 +152,7 @@ class Dashboard extends CI_Controller
 
     public function upload_kelas()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         if ($this->input->post('submit', TRUE) == 'upload') {
             $config['upload_path']      = './temp_doc/';
@@ -192,6 +205,7 @@ class Dashboard extends CI_Controller
 
     public function mata_pelajaran()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['mapel'] = $this->Model_mapel->dataMapel();
 
@@ -205,6 +219,7 @@ class Dashboard extends CI_Controller
 
     public function buat_mapel_jadwal($id_mapel)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['mapel'] = $this->Model_mapel->buat_mapel_jadwal($id_mapel);
 
@@ -218,6 +233,7 @@ class Dashboard extends CI_Controller
 
     public function simpan_jadwal()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
 
         $data = array(
@@ -248,6 +264,7 @@ class Dashboard extends CI_Controller
 
     public function hapus_all_mata_pelajaran()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $this->db->empty_table('a_mapel');
         $this->db->empty_table('a_jadwal');
@@ -272,6 +289,7 @@ class Dashboard extends CI_Controller
 
     public function upload_mata_peajaran()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         if ($this->input->post('submit', TRUE) == 'upload') {
             $config['upload_path']      = './temp_doc/';
@@ -337,6 +355,7 @@ class Dashboard extends CI_Controller
 
     public function siswa()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['siswa'] = $this->Model_siswa->dataSiswa();
 
@@ -350,6 +369,7 @@ class Dashboard extends CI_Controller
 
     public function siswa_block()
     {
+        $this->require_login();
         $data = array(
             'id' => $this->input->post('id'),
             'no_peserta' => $this->input->post('no_peserta'),
@@ -369,6 +389,7 @@ class Dashboard extends CI_Controller
 
     public function siswa_daftar_block()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['siswa'] = $this->Model_siswa->dataSiswaBlock();
 
@@ -382,6 +403,7 @@ class Dashboard extends CI_Controller
 
     public function siswa_buka_block()
     {
+        $this->require_login();
         $data = array(
             'id' => $this->input->post('id'),
             'no_peserta' => $this->input->post('no_peserta'),
@@ -403,6 +425,7 @@ class Dashboard extends CI_Controller
 
     public function hapus_all_peserta_ujian()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $this->db->empty_table('a_siswa');
         $this->session->set_flashdata('info', '<div class="row">
@@ -421,6 +444,7 @@ class Dashboard extends CI_Controller
 
     public function upload_peserta_ujian()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         if ($this->input->post('submit', TRUE) == 'upload') {
             $config['upload_path']      = './temp_doc/';
@@ -478,6 +502,7 @@ class Dashboard extends CI_Controller
 
     public function jadwal_ujian()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['ujian'] = $this->Model_ujian->jadwalUjian();
 
@@ -492,6 +517,7 @@ class Dashboard extends CI_Controller
 
     public function pilih_soal($id_jadwal)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
         $isi['bank_soal'] = $this->Model_ujian->pilihBankSoal();
@@ -505,6 +531,7 @@ class Dashboard extends CI_Controller
 
     public function simpan_pilih_soal()
     {
+        $this->require_login();
         $id_jadwal_soal = rand(11111111, 99999999);
         $id_jadwal = $this->input->post_get('id_jadwal');
         $id_bank_soal = $this->input->post_get('id_bank_soal');
@@ -533,6 +560,7 @@ class Dashboard extends CI_Controller
 
     public function hapus_all_jadwal()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $this->db->empty_table('a_jadwal');
         $this->session->set_flashdata('pesan', '<div class="row">
@@ -565,6 +593,7 @@ class Dashboard extends CI_Controller
 
     public function upload_bank_soal()
     {
+        $this->require_login();
         // protect the upload endpoint
         if ($this->input->post('submit', TRUE) == 'upload') {
             $config['upload_path']      = './temp_doc/';
@@ -623,6 +652,7 @@ class Dashboard extends CI_Controller
 
     public function detail_jadwal_soal($id_jadwal)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
         $isi['jadwal_soal'] = $this->Model_ujian->jadwalSoal_bankSoal($id_jadwal);
@@ -636,6 +666,7 @@ class Dashboard extends CI_Controller
 
     public function detail_soal($id_jadwal)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['header'] = $this->Model_ujian->detail_soal($id_jadwal);
         $isi['soal'] = $this->Model_ujian->data_soal($id_jadwal);
@@ -649,6 +680,7 @@ class Dashboard extends CI_Controller
 
     public function edit_jadwal($id_jadwal)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['mapel'] = $this->Model_ujian->edit_jadwal_id($id_jadwal);
 
@@ -662,7 +694,7 @@ class Dashboard extends CI_Controller
     public function simpan_edit_jadwal()
     {
         $this->Model_keamanan->getKeamanan();
-
+        $this->require_login();
         $id_jadwal = $this->input->post('id_jadwal', TRUE);
         $id_mapel = $this->input->post('id_mapel', TRUE);
         $tanggal_mulai = $this->input->post('tanggal_mulai', TRUE);
@@ -685,6 +717,7 @@ class Dashboard extends CI_Controller
 
     public function bank_soal()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['bank_soal'] = $this->Model_ujian->namaBankSoal();
 
@@ -697,6 +730,7 @@ class Dashboard extends CI_Controller
 
     public function hapus_banksoal($id_bank_soal_temp)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
 
         $this->db->where('id_bank_soal', $id_bank_soal_temp);
@@ -722,6 +756,7 @@ class Dashboard extends CI_Controller
 
     public function simpan_bank_soal()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
 
         $data = array(
@@ -747,6 +782,7 @@ class Dashboard extends CI_Controller
 
     public function upload_banksoal($id_bank_soal_temp)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['header'] = $this->Model_ujian->HeadersimpanBankSoalTemp($id_bank_soal_temp);
 
@@ -761,6 +797,7 @@ class Dashboard extends CI_Controller
 
     public function detail_banksoal($id_bank_soal)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['header'] = $this->Model_ujian->headerBankSoal($id_bank_soal);
         $isi['soal'] = $this->Model_ujian->detailBankSoal($id_bank_soal);
@@ -774,6 +811,7 @@ class Dashboard extends CI_Controller
 
     public function rekap_nilai()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         // $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
         $isi['rekap'] = $this->Model_ujian->rekap_nilai_mapel();
@@ -787,6 +825,7 @@ class Dashboard extends CI_Controller
 
     public function print_nilai($id_jadwal)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['header'] = $this->Model_ujian->header_print_nilai($id_jadwal);
         $isi['nilai'] = $this->Model_ujian->print_nilai($id_jadwal);
@@ -795,6 +834,7 @@ class Dashboard extends CI_Controller
 
     public function status_ujian()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
 
         $tanggal = date('Y-m-d');
@@ -809,6 +849,7 @@ class Dashboard extends CI_Controller
 
     public function status_peserta()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         // $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
         $isi['rekap'] = $this->Model_ujian->data_status_peserta();
@@ -822,6 +863,7 @@ class Dashboard extends CI_Controller
 
     public function hapus_all_status_peserta()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $this->db->empty_table('siswa_jawab');
         $this->db->empty_table('siswa_status');
@@ -831,6 +873,7 @@ class Dashboard extends CI_Controller
 
     public function akun_peserta()
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['akun'] = $this->Model_siswa->akun_peserta_ujiam();
 
@@ -843,6 +886,7 @@ class Dashboard extends CI_Controller
 
     public function akun_peserta_id($id_kelas)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['header'] = $this->Model_siswa->header_akun_peserta_ujiam_id($id_kelas);
         $isi['siswa'] = $this->Model_siswa->akun_peserta_ujiam_id($id_kelas);
@@ -853,7 +897,21 @@ class Dashboard extends CI_Controller
 
     public function logout()
     {
+        // Get session_id dari cookie
+        $session_id = get_cookie('app_session_id');
+
+        if ($session_id) {
+            // Hapus session dari database berdasarkan session_id
+            $this->Session_Model->delete_session($session_id);
+        }
+
+        // Hapus cookie
+        delete_cookie('app_session_id');
+
+        // Hapus session CodeIgniter
         $this->session->sess_destroy();
-        redirect('/Login');
+
+        // Redirect ke login
+        redirect('login');
     }
 }

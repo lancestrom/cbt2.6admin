@@ -4,6 +4,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Login extends CI_Controller
 {
 
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->load->helper(array('url', 'cookie'));
+    }
+
     public function index()
     {
 
@@ -17,7 +24,31 @@ class Login extends CI_Controller
         $password = $this->input->post('password');
         $pass = md5($password);
         $this->load->model('Model_login');
+
         $cek = $this->Model_login->cek_login($username, $pass);
+
+        $this->load->model('Session_Model');
+        $session_id = bin2hex(random_bytes(32));
+        $ipaddress = $this->input->ip_address();
+
+        // Simpan session ke database
+        if ($this->Session_Model->create_session($session_id, $username, $ipaddress)) {
+            // Set cookie untuk session
+            $this->input->set_cookie(array(
+                'name' => 'app_session_id',
+                'value' => $session_id,
+                'expire' => 86400, // 24 jam
+                'httponly' => TRUE,
+                'secure' => FALSE // Set ke TRUE jika pakai HTTPS
+            ));
+
+            // Set session CodeIgniter
+            $sess_data = array(
+                'username' => $username,
+                'session_id' => $session_id,
+                'logged_in' => TRUE
+            );
+        }
 
         if ($cek->num_rows() > 0) {
             foreach ($cek->result() as $ck) {
@@ -55,6 +86,32 @@ class Login extends CI_Controller
                     </button>
                   </div>');
             redirect('/');
+        }
+
+        if ($cek->num_rows() > 0) {
+            // Generate session_id
+            $this->load->model('Session_Model');
+            $session_id = bin2hex(random_bytes(32));
+            $ipaddress = $this->input->ip_address();
+
+            // Simpan session ke database
+            if ($this->Session_Model->create_session($session_id, $username, $ipaddress)) {
+                // Set cookie untuk session
+                $this->input->set_cookie(array(
+                    'name' => 'app_session_id',
+                    'value' => $session_id,
+                    'expire' => 86400, // 24 jam
+                    'httponly' => TRUE,
+                    'secure' => FALSE // Set ke TRUE jika pakai HTTPS
+                ));
+
+                // Set session CodeIgniter
+                $sess_data = array(
+                    'username' => $username,
+                    'session_id' => $session_id,
+                    'logged_in' => TRUE
+                );
+            }
         }
     }
 }
