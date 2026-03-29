@@ -1,155 +1,114 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
 require_once APPPATH . 'third_party/spout/src/Spout/Autoloader/autoload.php';
 
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 
-
 class Dashboard extends MY_Controller
 {
-
-
     public function index()
     {
-
         $this->require_login();
-
         $this->Model_keamanan->getKeamanan();
         $isi['jurusan'] = $this->Model_jurusan->countJurusan();
         $isi['siswa'] = $this->Model_siswa->countSiswa();
-
         $isi['kelas'] = $this->Model_kelas->countKelas();
         $isi['mapel'] = $this->Model_mapel->countMapel();
-        $isi['ujian'] = $this->Model_ujian->countUjian();
-
-        // Kelas
+        $isi['ujian'] = $this->Model_ujian->countUjian();        // Kelas
         $isi['x'] = $this->Model_siswa->dataSiswaX();
         $isi['xi'] = $this->Model_siswa->dataSiswaXI();
         $isi['xii'] = $this->Model_siswa->dataSiswaXII();
-
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'tampilan_home';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer', $isi);
     }
-
     public function token()
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['token'] = $this->Model_token->dataToken();
         $isi['token_masuk'] = $this->Model_token->dataTokenMasuk();
-
-
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'tampilan_token';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
-
     public function token_masuk()
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['token'] = $this->Model_token->dataTokenMasuk();
-
-
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'tampilan_token_masuk';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
-
     public function refresh_token()
     {
         $id = $this->input->post('id');
-
         $data = array(
             'id' => $this->input->post('id'),
             'token_keluar' => 'CBT' . rand(1111, 9999),
         );
-
         $this->db->where('id', $id);
         $this->db->update('token_keluar', $data);
-
         redirect('Dashboard/token');
     }
-
     public function hapus_token_keluar()
     {
-        $this->require_login();
         $id = $this->input->post('id');
-
         $data = array(
             'id' => $this->input->post('id'),
             'token_keluar' => null,
         );
-
         $this->db->where('id', $id);
         $this->db->update('token_keluar', $data);
-
         redirect('Dashboard/token');
     }
-
     public function refresh_token_masuk()
     {
-        $this->require_login();
         $id = $this->input->post('id');
-
         $data = array(
             'id' => $this->input->post('id'),
             'token_masuk' => 'CBT' . rand(1111, 9999),
         );
-
         $this->db->where('id', $id);
         $this->db->update('token_masuk', $data);
-
         redirect('Dashboard/token_masuk');
     }
-
     public function jurusan()
     {
         $this->require_login();
-
         $this->Model_keamanan->getKeamanan();
         $isi['jurusan'] = $this->Model_jurusan->dataJurusan();
-
-
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'tampilan_jurusan';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
-
     public function kelas()
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['kelas'] = $this->Model_kelas->dataKelasMaster();
-
-
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'tampilan_kelas';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
-
     public function hapus_all_kelas()
     {
         $this->require_login();
-        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $this->db->empty_table('a_kelas');
-
         redirect('Dashboard/kelas');
     }
-
     public function upload_kelas()
     {
         $this->require_login();
@@ -158,25 +117,17 @@ class Dashboard extends MY_Controller
             $config['upload_path']      = './temp_doc/';
             $config['allowed_types']    = 'xlsx|xls';
             $config['file_name']        = 'doc' . time();
-
             $this->load->library('upload', $config);
-
             if ($this->upload->do_upload('excel')) {
                 $file   = $this->upload->data();
-
                 $reader = ReaderEntityFactory::createXLSXReader();
                 $reader->open('temp_doc/' . $file['file_name']);
-
-
                 foreach ($reader->getSheetIterator() as $sheet) {
                     $numRow = 1;
                     $save   = array();
                     foreach ($sheet->getRowIterator() as $row) {
-
                         if ($numRow > 1) {
-
                             $cells = $row->getCells();
-
                             $data = array(
                                 'id'   => isset($cells[0]) ? trim((string)$cells[0]->getValue()) : null,
                                 'kode' => isset($cells[1]) ? trim((string)$cells[1]->getValue()) : null,
@@ -202,40 +153,32 @@ class Dashboard extends MY_Controller
             }
         }
     }
-
     public function mata_pelajaran()
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['mapel'] = $this->Model_mapel->dataMapel();
-
-
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'tampilan_mata_pelajaran';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
-
     public function buat_mapel_jadwal($id_mapel)
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['mapel'] = $this->Model_mapel->buat_mapel_jadwal($id_mapel);
-
-
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'Master/tampilan_buat_jadwal';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
-
     public function simpan_jadwal()
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
-
         $data = array(
             'id_jadwal' => rand(11111111, 99999999),
             'id_mapel' => $this->input->post('id_mapel', TRUE),
@@ -244,7 +187,6 @@ class Dashboard extends MY_Controller
             'waktu_selesai' => $this->input->post('waktu_selesai', TRUE),
             'durasi' => $this->input->post('durasi', true)
         );
-
         $this->db->insert('a_jadwal', $data);
         $this->session->set_flashdata('pesan', '<div class="row">
         <div class="col-md mt-2">
@@ -253,15 +195,10 @@ class Dashboard extends MY_Controller
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>
-
-        </div>
+            </div>        </div>
         </div>');
         redirect('Dashboard/mata_pelajaran');
     }
-
-
-
     public function hapus_all_mata_pelajaran()
     {
         $this->require_login();
@@ -272,7 +209,6 @@ class Dashboard extends MY_Controller
         $this->db->empty_table('bank_soal');
         $this->db->empty_table('jadwal_soal');
         $this->db->empty_table('siswa_jawab');
-
         $this->session->set_flashdata('pesan', '<div class="row">
         <div class="col-md mt-2">
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -280,13 +216,10 @@ class Dashboard extends MY_Controller
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>
-
-        </div>
+            </div>        </div>
         </div>');
         redirect('Dashboard/mata_pelajaran');
     }
-
     public function upload_mata_peajaran()
     {
         $this->require_login();
@@ -295,25 +228,17 @@ class Dashboard extends MY_Controller
             $config['upload_path']      = './temp_doc/';
             $config['allowed_types']    = 'xlsx|xls';
             $config['file_name']        = 'doc' . time();
-
             $this->load->library('upload', $config);
-
             if ($this->upload->do_upload('excel')) {
                 $file   = $this->upload->data();
-
                 $reader = ReaderEntityFactory::createXLSXReader();
                 $reader->open('temp_doc/' . $file['file_name']);
-
-
                 foreach ($reader->getSheetIterator() as $sheet) {
                     $numRow = 1;
                     $save   = array();
                     foreach ($sheet->getRowIterator() as $row) {
-
                         if ($numRow > 1) {
-
                             $cells = $row->getCells();
-
                             $data = array(
                                 'id_mapel'  => isset($cells[0]) ? trim((string)$cells[0]->getValue()) : null,
                                 'id_kelas'  => isset($cells[1]) ? trim((string)$cells[1]->getValue()) : null,
@@ -338,9 +263,7 @@ class Dashboard extends MY_Controller
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>
-
-        </div>
+            </div>        </div>
         </div>'
                     );
                     redirect('Dashboard/mata_pelajaran');
@@ -351,25 +274,19 @@ class Dashboard extends MY_Controller
             }
         }
     }
-
-
     public function siswa()
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['siswa'] = $this->Model_siswa->dataSiswa();
-
-
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'tampilan_siswa';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
-
     public function siswa_block()
     {
-        $this->require_login();
         $data = array(
             'id' => $this->input->post('id'),
             'no_peserta' => $this->input->post('no_peserta'),
@@ -381,29 +298,26 @@ class Dashboard extends MY_Controller
             'level' => $this->input->post('level'),
             'status' => 0,
         );
-
         $this->db->where('id', $this->input->post('id'));
         $this->db->update('a_siswa', $data);
+
+        $this->db->where('username', $this->input->post('username'));
+        $this->db->delete('sessions');
         redirect('Dashboard/siswa');
     }
-
     public function siswa_daftar_block()
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['siswa'] = $this->Model_siswa->dataSiswaBlock();
-
-
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'tampilan_siswa_daftar_block';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
-
     public function siswa_buka_block()
     {
-        $this->require_login();
         $data = array(
             'id' => $this->input->post('id'),
             'no_peserta' => $this->input->post('no_peserta'),
@@ -415,14 +329,10 @@ class Dashboard extends MY_Controller
             'level' => $this->input->post('level'),
             'status' => 1,
         );
-
         $this->db->where('id', $this->input->post('id'));
         $this->db->update('a_siswa', $data);
         redirect('Dashboard/siswa_daftar_block');
     }
-
-
-
     public function hapus_all_peserta_ujian()
     {
         $this->require_login();
@@ -435,13 +345,10 @@ class Dashboard extends MY_Controller
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>
-
-        </div>
+            </div>        </div>
         </div>');
         redirect('Dashboard/siswa');
     }
-
     public function upload_peserta_ujian()
     {
         $this->require_login();
@@ -450,25 +357,17 @@ class Dashboard extends MY_Controller
             $config['upload_path']      = './temp_doc/';
             $config['allowed_types']    = 'xlsx|xls';
             $config['file_name']        = 'doc' . time();
-
             $this->load->library('upload', $config);
-
             if ($this->upload->do_upload('excel')) {
                 $file   = $this->upload->data();
-
                 $reader = ReaderEntityFactory::createXLSXReader();
                 $reader->open('temp_doc/' . $file['file_name']);
-
-
                 foreach ($reader->getSheetIterator() as $sheet) {
                     $numRow = 1;
                     $save   = array();
                     foreach ($sheet->getRowIterator() as $row) {
-
                         if ($numRow > 1) {
-
                             $cells = $row->getCells();
-
                             $data = array(
                                 'id'          => isset($cells[0]) ? trim((string)$cells[0]->getValue()) : null,
                                 'no_peserta'  => isset($cells[1]) ? trim((string)$cells[1]->getValue()) : null,
@@ -499,49 +398,39 @@ class Dashboard extends MY_Controller
             }
         }
     }
-
     public function jadwal_ujian()
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['ujian'] = $this->Model_ujian->jadwalUjian();
-
-
-
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'Master/tampilan_ujian';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
-
     public function pilih_soal($id_jadwal)
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
         $isi['bank_soal'] = $this->Model_ujian->pilihBankSoal();
-
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'Master/tampilan_pilih_soal';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
-
     public function simpan_pilih_soal()
     {
-        $this->require_login();
         $id_jadwal_soal = rand(11111111, 99999999);
         $id_jadwal = $this->input->post_get('id_jadwal');
         $id_bank_soal = $this->input->post_get('id_bank_soal');
-
         $data = array(
             'id_jadwal_soal' => $id_jadwal_soal,
             'id_jadwal ' => $id_jadwal,
             'id_bank_soal' => $id_bank_soal
         );
-
         $this->db->insert('jadwal_soal', $data);
         $this->session->set_flashdata('pesan', '<div class="row">
         <div class="col-md mt-2">
@@ -550,14 +439,10 @@ class Dashboard extends MY_Controller
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>
-
-        </div>
+            </div>        </div>
         </div>');
-
         redirect('Dashboard/jadwal_ujian');
     }
-
     public function hapus_all_jadwal()
     {
         $this->require_login();
@@ -570,56 +455,39 @@ class Dashboard extends MY_Controller
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>
-
-        </div>
+            </div>        </div>
         </div>');
         redirect('Dashboard/jadwal_ujian');
     }
-
     public function upload_soal($id_jadwal)
     {
+        $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
-
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'Master/tampilan_upload_soal';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
-
-
-
     public function upload_bank_soal()
-    {
-        $this->require_login();
-        // protect the upload endpoint
+    {        // protect the upload endpoint
         if ($this->input->post('submit', TRUE) == 'upload') {
             $config['upload_path']      = './temp_doc/';
             $config['allowed_types']    = 'xlsx|xls';
             $config['file_name']        = 'doc' . time();
-
             $this->load->library('upload', $config);
-
             if ($this->upload->do_upload('excel')) {
                 $file   = $this->upload->data();
-
                 $reader = ReaderEntityFactory::createXLSXReader();
                 $reader->open('temp_doc/' . $file['file_name']);
-
-
                 foreach ($reader->getSheetIterator() as $sheet) {
                     $numRow = 1;
                     $save   = array();
                     $id_random = rand(11111111, 99999999);
                     foreach ($sheet->getRowIterator() as $row) {
-
                         if ($numRow > 1) {
-
-                            $cells = $row->getCells();
-
-                            // Extract cell values safely (cast to string and trim)
+                            $cells = $row->getCells();                            // Extract cell values safely (cast to string and trim)
                             $data = array(
                                 'id_soal'   => $cells[0],
                                 'id_bank_soal' => $cells[1],
@@ -638,7 +506,6 @@ class Dashboard extends MY_Controller
                     }
                     $this->Model_ujian->simpan($save);
                     $reader->close();
-
                     unlink('temp_doc/' . $file['file_name']);
                     $this->session->set_flashdata('pesan', '<div class="alert alert-success">Soal berhasil diunggah</div>');
                     redirect('Dashboard/bank_soal');
@@ -649,52 +516,45 @@ class Dashboard extends MY_Controller
             }
         }
     }
-
     public function detail_jadwal_soal($id_jadwal)
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
         $isi['jadwal_soal'] = $this->Model_ujian->jadwalSoal_bankSoal($id_jadwal);
-
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'Master/tampilan_detail_jadwal_soal';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
-
     public function detail_soal($id_jadwal)
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['header'] = $this->Model_ujian->detail_soal($id_jadwal);
         $isi['soal'] = $this->Model_ujian->data_soal($id_jadwal);
-
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'Master/tampilan_detail_soal';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
-
     public function edit_jadwal($id_jadwal)
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['mapel'] = $this->Model_ujian->edit_jadwal_id($id_jadwal);
-
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'Master/tampilan_edit_jadwal';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
-
     public function simpan_edit_jadwal()
     {
-        $this->Model_keamanan->getKeamanan();
         $this->require_login();
+        $this->Model_keamanan->getKeamanan();
         $id_jadwal = $this->input->post('id_jadwal', TRUE);
         $id_mapel = $this->input->post('id_mapel', TRUE);
         $tanggal_mulai = $this->input->post('tanggal_mulai', TRUE);
@@ -709,37 +569,29 @@ class Dashboard extends MY_Controller
             'waktu_selesai' => $waktu_selesal,
             'durasi' => $durasi
         );
-
         $this->db->where('id_jadwal', $id_jadwal);
         $this->db->update('a_jadwal', $data);
         redirect('Dashboard/jadwal_ujian');
     }
-
     public function bank_soal()
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['bank_soal'] = $this->Model_ujian->namaBankSoal();
-
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'Master/tampilan_bank_soal';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
-
     public function hapus_banksoal($id_bank_soal_temp)
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
-
         $this->db->where('id_bank_soal', $id_bank_soal_temp);
         $this->db->delete('bank_soal');
-
         $this->db->where('id_bank_soal', $id_bank_soal_temp);
         $this->db->delete('soal');
-
-
         $this->session->set_flashdata('pesan', '<div class="row">
         <div class="col-md mt-2">
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -747,24 +599,19 @@ class Dashboard extends MY_Controller
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>
-
-        </div>
+            </div>        </div>
         </div>');
         redirect('Dashboard/bank_soal');
     }
-
     public function simpan_bank_soal()
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
-
         $data = array(
             'id_bank_soal' => rand(11111111, 99999999),
             'nama_bank_soal' => $this->input->post('nama_bank_soal', TRUE),
             'jurusan' => $this->input->post('jurusan', TRUE)
         );
-
         $this->db->insert('bank_soal', $data);
         $this->session->set_flashdata('pesan', '<div class="row">
         <div class="col-md mt-2">
@@ -773,56 +620,45 @@ class Dashboard extends MY_Controller
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>
-
-        </div>
+            </div>        </div>
         </div>');
         redirect('Dashboard/bank_soal');
     }
-
     public function upload_banksoal($id_bank_soal_temp)
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['header'] = $this->Model_ujian->HeadersimpanBankSoalTemp($id_bank_soal_temp);
-
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'Master/tampilan_bank_soal_upload';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
-
-
-
     public function detail_banksoal($id_bank_soal)
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['header'] = $this->Model_ujian->headerBankSoal($id_bank_soal);
         $isi['soal'] = $this->Model_ujian->detailBankSoal($id_bank_soal);
-
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'Master/tampilan_detail_bank_soal';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
-
     public function rekap_nilai()
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         // $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
         $isi['rekap'] = $this->Model_ujian->rekap_nilai_mapel();
-
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'Master/tampilan_rekap_nilai';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
-
     public function print_nilai($id_jadwal)
     {
         $this->require_login();
@@ -831,87 +667,100 @@ class Dashboard extends MY_Controller
         $isi['nilai'] = $this->Model_ujian->print_nilai($id_jadwal);
         $this->load->view('Master/tampilan_print_nilai', $isi);
     }
-
     public function status_ujian()
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
-
         $tanggal = date('Y-m-d');
         $isi['status_ujian'] = $this->Model_ujian->data_status_ujian($tanggal);
-
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'Master/tampilan_status_ujian';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
-
     public function status_peserta()
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         // $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
         $isi['rekap'] = $this->Model_ujian->data_status_peserta();
-
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'Master/tampilan_status_peserta';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
-
     public function hapus_all_status_peserta()
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $this->db->empty_table('siswa_jawab');
         $this->db->empty_table('siswa_status');
-
         redirect('Dashboard/status_peserta');
     }
-
     public function akun_peserta()
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['akun'] = $this->Model_siswa->akun_peserta_ujiam();
-
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'tampilan_akun_peserta';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
-
     public function akun_peserta_id($id_kelas)
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['header'] = $this->Model_siswa->header_akun_peserta_ujiam_id($id_kelas);
         $isi['siswa'] = $this->Model_siswa->akun_peserta_ujiam_id($id_kelas);
-
         $this->load->view('tampilan_akun_peserta_id', $isi);
     }
 
+    public function status_login_admin()
+    {
+        $this->require_login();
+        $this->Model_keamanan->getKeamanan();
+        $isi['login_admin'] = $this->Session_Model->dataLoginAdmin();
+        $isi2['title'] = 'CBT | Administrator';
+        $isi['content'] = 'tampilan_status_login_admin';
+        $this->load->view('templates/header', $isi2);
+        $this->load->view('tampilan_dashboard', $isi);
+        $this->load->view('templates/footer');
+    }
+
+    public function status_login_peserta()
+    {
+        $this->require_login();
+        $this->Model_keamanan->getKeamanan();
+        $isi['login_peserta'] = $this->Session_Model->dataLoginSiswa();
+        $isi2['title'] = 'CBT | Administrator';
+        $isi['content'] = 'tampilan_status_login_peserta';
+        $this->load->view('templates/header', $isi2);
+        $this->load->view('tampilan_dashboard', $isi);
+        $this->load->view('templates/footer');
+    }
+
+    public function hapus_all_status_login()
+    {
+        $this->require_login();
+        $this->Model_keamanan->getKeamanan();
+        $this->db->empty_table('sessions');
+        redirect('Dashboard/status_login_peserta');
+    }
 
     public function logout()
     {
         // Get session_id dari cookie
         $session_id = get_cookie('app_session_id');
-
         if ($session_id) {
             // Hapus session dari database berdasarkan session_id
             $this->Session_Model->delete_session($session_id);
-        }
-
-        // Hapus cookie
-        delete_cookie('app_session_id');
-
-        // Hapus session CodeIgniter
-        $this->session->sess_destroy();
-
-        // Redirect ke login
+        }        // Hapus cookie
+        delete_cookie('app_session_id');        // Hapus session CodeIgniter
+        $this->session->sess_destroy();        // Redirect ke login
         redirect('login');
     }
 }

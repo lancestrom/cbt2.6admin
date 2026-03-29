@@ -105,4 +105,22 @@ class Session_Model extends CI_Model
         $this->db->where('timestamp <', $expired_time);
         return $this->db->delete('sessions');
     }
+
+    public function dataLoginAdmin()
+    {
+        $sql = "SELECT auth.id,auth.username,auth.nama,auth.level,sessions.ipaddress,sessions.timestamp FROM `sessions`
+INNER JOIN auth
+ON sessions.username=auth.username;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function dataLoginSiswa()
+    {
+        $sql = "SELECT a_siswa.id,a_siswa.username,a_siswa.nama_siswa,a_siswa.kelas,sessions.ipaddress,sessions.timestamp FROM `sessions`
+INNER JOIN a_siswa
+ON sessions.username=a_siswa.username;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
 }

@@ -92,6 +92,9 @@
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="<?= base_url() ?>Dashboard/akun_peserta">Akun Peserta</a>
+                    <a class="collapse-item" href="<?= base_url() ?>Dashboard/status_login_admin">Status Login Admin</a>
+                    <a class="collapse-item" href="<?= base_url() ?>Dashboard/status_login_peserta">Status Login
+                        Peserta</a>
                     <a class="collapse-item" href="<?= base_url() ?>Dashboard/status_ujian">Status Ujian</a>
                     <a class="collapse-item" href="<?= base_url() ?>Dashboard/status_peserta">Status Peserta</a>
                     <a class="collapse-item" href="<?= base_url() ?>Dashboard/rekap_nilai">Cetak Daftar Nilai</a>
