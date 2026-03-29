@@ -49,7 +49,7 @@
                 <h5 class="text-center"><img src="<?= base_url() ?>assets/images/logo.png"
                         style="width: 180px;height: 180px;" alt="IMG"></h5>
                 <form class="login100-form validate-form mt-4" method="POST"
-                    action="<?= base_url() ?>Login/proses_login">
+                    action="<?= site_url('proses_login') ?>">
                     <span class="login100-form-title p-b-59 text-center text-uppercase">
                         CBT ADMIN <br> SMK Tunas harapan
                     </span>
