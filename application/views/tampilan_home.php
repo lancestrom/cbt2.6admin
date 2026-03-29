@@ -57,7 +57,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md">
+    <div class="col-md mb-3">
         <div class="card">
             <div class="card-header bg-primary text-white">
                 <h5 class="text-uppercase text-center font-weight-bolder">
@@ -89,7 +89,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md">
+    <div class="col-md mb-3">
         <div class="card">
             <div class="card-header bg-danger text-white">
                 <h5 class="text-uppercase text-center font-weight-bolder">
@@ -121,7 +121,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md">
+    <div class="col-md mb-3">
         <div class="card">
             <div class="card-header bg-info text-white">
                 <h5 class="text-uppercase text-center font-weight-bolder">
