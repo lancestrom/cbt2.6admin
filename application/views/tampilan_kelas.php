@@ -7,10 +7,12 @@
         <div class="card">
             <div class="card-body">
                 <!-- <a class="btn btn-success btn-sm" href="<?= base_url() ?>Dashboard/tambah_jurusan"><i class="fas fa-plus-square"></i> Tambah Jurusan</a> -->
-                <button type="button" class="btn btn-success btn-sm text-uppercase font-weight-bold" data-toggle="modal" data-target="#exampleModal">
+                <button type="button" class="btn btn-success btn-sm text-uppercase font-weight-bold" data-toggle="modal"
+                    data-target="#exampleModal">
                     <i class="fas fa-plus-square"></i> Upload Kelas
                 </button>
-                <a class="btn btn-danger btn-sm text-uppercase font-weight-bold" href="<?= base_url() ?>Dashboard/hapus_all_kelas"><i class="fas fa-trash"></i> Hapus Kelas</a>
+                <a class="btn btn-danger btn-sm text-uppercase font-weight-bold"
+                    href="<?= base_url() ?>Dashboard/hapus_all_kelas"><i class="fas fa-trash"></i> Hapus Kelas</a>
             </div>
         </div>
     </div>
@@ -39,13 +41,13 @@
                                 $no = 1;
                                 foreach ($kelas as $row) {
                                 ?>
-                                    <td><?php echo $no++; ?></td>
-                                    <td class="text-center"><?= $row['id_kelas'] ?></td>
-                                    <td class="text-center"><?= $row['kelas'] ?></td>
-                                    <td class="text-center"><?= $row['kode'] ?></td>
-                                    <td><?= $row['jurusan'] ?></td>
+                                <td><?php echo $no++; ?></td>
+                                <td class="text-center"><?= $row['id_kelas'] ?></td>
+                                <td class="text-center"><?= $row['kelas'] ?></td>
+                                <td class="text-center"><?= $row['kode'] ?></td>
+                                <td><?= $row['jurusan'] ?></td>
                             </tr>
-                        <?php } ?>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>

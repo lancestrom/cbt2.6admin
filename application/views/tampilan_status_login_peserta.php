@@ -1,5 +1,5 @@
 <div class="alert alert-success" role="alert">
-    <h4 class="text-center font-weight-bold text-uppercase ">status login admin</h4>
+    <h4 class="text-center font-weight-bold text-uppercase ">status login siswa</h4>
 </div>
 
 <div class="row">
@@ -19,16 +19,16 @@
     <div class="col-md">
         <div class="card">
             <div class="card-body">
-                <div class="table-responsive text-uppercase text-center">
+                <div class="table-responsive">
                     <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr class="text-center">
-                                <th scope="col">#</th>
-                                <th scope="col">username</th>
-                                <th scope="col">nama Siswa</th>
-                                <th scope="col">kelas</th>
-                                <th scope="col">IP</th>
-                                <th scope="col">Waktu Login</th>
+                                <th scope="col" class="text-uppercase">#</th>
+                                <th scope="col" class="text-uppercase">username</th>
+                                <th scope="col" class="text-uppercase">nama siswa</th>
+                                <th scope="col" class="text-uppercase">kelas</th>
+                                <th scope="col" class="text-uppercase">ip</th>
+                                <th scope="col" class="text-uppercase">waktu login</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,12 +37,12 @@
                                 $no = 1;
                                 foreach ($login_peserta as $row) {
                                 ?>
-                                    <td><?php echo $no++; ?></td>
+                                    <td class="text-center"><?php echo $no++; ?></td>
                                     <td class="text-center"><?= $row['username'] ?></td>
                                     <td class="text-center"><?= $row['nama_siswa'] ?></td>
                                     <td class="text-center"><?= $row['kelas'] ?></td>
                                     <td class="text-center"><?= $row['ipaddress'] ?></td>
-                                    <td class="text-center"><?= $row['timestamp'] ?></td>
+                                    <td><?= $row['timestamp'] ?></td>
                             </tr>
                         <?php } ?>
                         </tbody>

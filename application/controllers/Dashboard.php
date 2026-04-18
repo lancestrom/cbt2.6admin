@@ -730,7 +730,7 @@ class Dashboard extends MY_Controller
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
-
+ 
     public function status_login_peserta()
     {
         $this->require_login();
