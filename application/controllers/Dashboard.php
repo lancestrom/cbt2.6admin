@@ -338,6 +338,7 @@ class Dashboard extends MY_Controller
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $this->db->empty_table('a_siswa');
+        $this->db->empty_table('sessions');
         $this->session->set_flashdata('info', '<div class="row">
         <div class="col-md mt-2">
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -730,7 +731,7 @@ class Dashboard extends MY_Controller
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
- 
+
     public function status_login_peserta()
     {
         $this->require_login();
