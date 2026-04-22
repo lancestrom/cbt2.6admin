@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md">
         <div class="alert alert-success" role="alert">
-            <h4 class="text-center font-weight-bold">TOKEN</h4>
+            <h4 class="text-center font-weight-bold text-uppercase">TOKEN keluar</h4>
         </div>
         <div class="row">
             <div class="col-md">
@@ -19,7 +19,7 @@
                                             </h6>
                                         </th>
                                         <th scope="col">
-                                            <h6 class="font-weight-bold" style="text-transform: uppercase;">TOEKN KELUAR
+                                            <h6 class="font-weight-bold" style="text-transform: uppercase;">TOKEN keluar
                                             </h6>
                                         </th>
                                         <th scope="col">
@@ -111,7 +111,7 @@
                                             </h6>
                                         </th>
                                         <th scope="col">
-                                            <h6 class="font-weight-bold" style="text-transform: uppercase;">TOEKN KELUAR
+                                            <h6 class="font-weight-bold" style="text-transform: uppercase;">TOKEN MASUK
                                             </h6>
                                         </th>
                                         <th scope="col">
