@@ -42,14 +42,13 @@
     <div class="limiter">
         <div class="container-login100">
             <div class="login100-more"
-                style="background-size: cover; background-image: url('https://smkth-jakbar.com/assets/images/background3.jpeg');">
+                style="background-size: cover; background-image: url('<?= base_url() ?>assets/images/background3.jpeg');">
             </div>
 
             <div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
                 <h5 class="text-center"><img src="<?= base_url() ?>assets/images/logo.png"
                         style="width: 180px;height: 180px;" alt="IMG"></h5>
-                <form class="login100-form validate-form mt-4" method="POST"
-                    action="<?= site_url('proses_login') ?>">
+                <form class="login100-form validate-form mt-4" method="POST" action="<?= site_url('proses_login') ?>">
                     <span class="login100-form-title p-b-59 text-center text-uppercase">
                         CBT ADMIN <br> SMK Tunas harapan
                     </span>
