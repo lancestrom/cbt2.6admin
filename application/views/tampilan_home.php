@@ -80,10 +80,10 @@
                                 $no = 1;
                                 foreach ($x as $row) {
                                 ?>
-                                    <td class="text-center"><?= $row['kelas'] ?></td>
-                                    <td class="text-center"><?= $row['jumlah_siswa'] ?> Siswa</td>
+                                <td class="text-center"><?= $row['kelas'] ?></td>
+                                <td class="text-center"><?= $row['jumlah_siswa'] ?> Siswa</td>
                             </tr>
-                        <?php } ?>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -112,10 +112,10 @@
                                 $no = 1;
                                 foreach ($xi as $row) {
                                 ?>
-                                    <td class="text-center"><?= $row['kelas'] ?></td>
-                                    <td class="text-center"><?= $row['jumlah_siswa'] ?> Siswa</td>
+                                <td class="text-center"><?= $row['kelas'] ?></td>
+                                <td class="text-center"><?= $row['jumlah_siswa'] ?> Siswa</td>
                             </tr>
-                        <?php } ?>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -127,7 +127,7 @@
             <div class="card-header bg-info text-white">
                 <h5 class="text-uppercase text-center font-weight-bolder">
                     kelas xii <br>
-                    <?= $jumlah_kelas_xii['jumlah_siswa'] ?> Siswa
+                    <?= $jumlah_kelas_xii ['jumlah_siswa'] ?> Siswa
                 </h5>
             </div>
             <div class="card-body">
@@ -145,10 +145,10 @@
                                 $no = 1;
                                 foreach ($xii as $row) {
                                 ?>
-                                    <td class="text-center"><?= $row['kelas'] ?></td>
-                                    <td class="text-center"><?= $row['jumlah_siswa'] ?> Siswa</td>
+                                <td class="text-center"><?= $row['kelas'] ?></td>
+                                <td class="text-center"><?= $row['jumlah_siswa'] ?> Siswa</td>
                             </tr>
-                        <?php } ?>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
