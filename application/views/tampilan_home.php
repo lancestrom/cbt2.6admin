@@ -61,7 +61,8 @@
         <div class="card">
             <div class="card-header bg-primary text-white">
                 <h5 class="text-uppercase text-center font-weight-bolder">
-                    kelas x
+                    kelas x <br>
+                    <?= $jumlah_kelas_x['jumlah_siswa'] ?> Siswa
                 </h5>
             </div>
             <div class="card-body">
@@ -93,8 +94,8 @@
         <div class="card">
             <div class="card-header bg-danger text-white">
                 <h5 class="text-uppercase text-center font-weight-bolder">
-                    kelas xi
-                </h5>
+                    kelas xi <br>
+                    <?= $jumlah_kelas_xi['jumlah_siswa'] ?> Siswa
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -125,7 +126,8 @@
         <div class="card">
             <div class="card-header bg-info text-white">
                 <h5 class="text-uppercase text-center font-weight-bolder">
-                    kelas xii
+                    kelas xii <br>
+                    <?= $jumlah_kelas_xii['jumlah_siswa'] ?> Siswa
                 </h5>
             </div>
             <div class="card-body">

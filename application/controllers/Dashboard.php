@@ -14,7 +14,13 @@ class Dashboard extends MY_Controller
         $isi['siswa'] = $this->Model_siswa->countSiswa();
         $isi['kelas'] = $this->Model_kelas->countKelas();
         $isi['mapel'] = $this->Model_mapel->countMapel();
-        $isi['ujian'] = $this->Model_ujian->countUjian();        // Kelas
+        $isi['ujian'] = $this->Model_ujian->countUjian();
+
+        $isi['jumlah_kelas_x'] = $this->Model_siswa->jumlahKelasX();
+        $isi['jumlah_kelas_xi'] = $this->Model_siswa->jumlahKelasXI();
+        $isi['jumlah_kelas_xii'] = $this->Model_siswa->jumlahKelasXII();
+
+
         $isi['x'] = $this->Model_siswa->dataSiswaX();
         $isi['xi'] = $this->Model_siswa->dataSiswaXI();
         $isi['xii'] = $this->Model_siswa->dataSiswaXII();

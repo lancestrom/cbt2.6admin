@@ -53,6 +53,36 @@ GROUP BY a_siswa.kelas;";
         return $query->result_array();
     }
 
+    public function jumlahKelasX()
+    {
+        $sql = "SELECT COUNT(*) AS jumlah_siswa FROM `a_siswa`
+INNER JOIN a_kelas
+ON a_siswa.kelas=a_kelas.slug
+WHERE a_kelas.kelas LIKE '%X %';";
+        $query = $this->db->query($sql);
+        return $query->row_array();
+    }
+
+    public function jumlahKelasXI()
+    {
+        $sql = "SELECT COUNT(*) AS jumlah_siswa FROM `a_siswa`
+INNER JOIN a_kelas
+ON a_siswa.kelas=a_kelas.slug
+WHERE a_kelas.kelas LIKE '%XI %';";
+        $query = $this->db->query($sql);
+        return $query->row_array();
+    }
+
+    public function jumlahKelasXII()
+    {
+        $sql = "SELECT COUNT(*) AS jumlah_siswa FROM `a_siswa`
+INNER JOIN a_kelas
+ON a_siswa.kelas=a_kelas.slug
+WHERE a_kelas.kelas LIKE '%XII %';";
+        $query = $this->db->query($sql);
+        return $query->row_array();
+    }
+
     public function dataSiswaX()
     {
         return $this->dataSiswaByTingkat('X');
