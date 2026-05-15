@@ -215,6 +215,8 @@ class Dashboard extends MY_Controller
         $this->db->empty_table('bank_soal');
         $this->db->empty_table('jadwal_soal');
         $this->db->empty_table('siswa_jawab');
+        $this->db->empty_table('siswa_status');
+
         $this->session->set_flashdata('pesan', '<div class="row">
         <div class="col-md mt-2">
             <div class="alert alert-danger alert-dismissible fade show" role="alert">

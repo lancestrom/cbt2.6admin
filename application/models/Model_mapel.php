@@ -37,7 +37,15 @@ WHERE a_mapel.nama_mapel LIKE '%TJKT%';";
     public function countMapelPM()
     {
         $sql = "SELECT COUNT(*) AS mapel FROM `a_mapel`
-WHERE a_mapel.nama_mapel LIKE '%PM%' or a_mapel.nama_mapel LIKE '%DKV%';";
+WHERE a_mapel.nama_mapel LIKE '%PM%'";
+        $query = $this->db->query($sql);
+        return $query->row()->mapel;
+    }
+
+    public function countMapelDKV()
+    {
+        $sql = "SELECT COUNT(*) AS mapel FROM `a_mapel`
+WHERE a_mapel.nama_mapel LIKE '%DKV%';";
         $query = $this->db->query($sql);
         return $query->row()->mapel;
     }
@@ -87,7 +95,17 @@ WHERE a_mapel.id_mapel NOT IN (SELECT a_jadwal.id_mapel FROM `a_jadwal`) AND a_m
         $sql = "SELECT a_mapel.id_mapel,a_kelas.kelas,a_mapel.nama_mapel FROM `a_mapel`
 INNER JOIN a_kelas
 ON a_mapel.id_kelas=a_kelas.id
-WHERE a_mapel.id_mapel NOT IN (SELECT a_jadwal.id_mapel FROM `a_jadwal`) AND a_mapel.nama_mapel LIKE '%pm%' OR a_mapel.nama_mapel LIKE '%dkv%';";
+WHERE a_mapel.id_mapel NOT IN (SELECT a_jadwal.id_mapel FROM `a_jadwal`) AND a_mapel.nama_mapel LIKE '%pm%';";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function dataMapelDKV()
+    {
+        $sql = "SELECT a_mapel.id_mapel,a_kelas.kelas,a_mapel.nama_mapel FROM `a_mapel`
+INNER JOIN a_kelas
+ON a_mapel.id_kelas=a_kelas.id
+WHERE a_mapel.id_mapel NOT IN (SELECT a_jadwal.id_mapel FROM `a_jadwal`) AND a_mapel.nama_mapel LIKE '%dkv%';";
         $query = $this->db->query($sql);
         return $query->result_array();
     }

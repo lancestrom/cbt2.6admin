@@ -46,7 +46,17 @@ WHERE a_mapel.nama_mapel LIKE '%TJKT%';";
         $sql = "SELECT COUNT(*) AS ujian FROM `a_jadwal`
 INNER JOIN a_mapel
 on a_jadwal.id_mapel=a_mapel.id_mapel
-WHERE a_mapel.nama_mapel LIKE '%PM%' or a_mapel.nama_mapel LIKE '%DKV%';";
+WHERE a_mapel.nama_mapel LIKE '%PM%'";
+        $query = $this->db->query($sql);
+        return $query->row()->ujian;
+    }
+
+    public function countUjianDKV()
+    {
+        $sql = "SELECT COUNT(*) AS ujian FROM `a_jadwal`
+INNER JOIN a_mapel
+on a_jadwal.id_mapel=a_mapel.id_mapel
+WHERE a_mapel.nama_mapel LIKE '%DKV%';";
         $query = $this->db->query($sql);
         return $query->row()->ujian;
     }
@@ -105,7 +115,22 @@ INNER JOIN a_kelas
 ON a_mapel.id_kelas=a_kelas.id
 INNER JOIN a_siswa
 on a_kelas.slug=a_siswa.kelas
-WHERE a_jadwal.tanggal_mulai='$tanggal' AND (a_mapel.nama_mapel LIKE '%PM%' OR a_mapel.nama_mapel LIKE '%DKV%')
+WHERE a_jadwal.tanggal_mulai='$tanggal' AND (a_mapel.nama_mapel LIKE '%PM%')
+GROUP BY a_jadwal.id_jadwal;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function ujian_hari_ini_dkv($tanggal)
+    {
+        $sql = "SELECT a_jadwal.id_jadwal,a_mapel.id_mapel,a_mapel.id_kelas,a_mapel.nama_mapel,COUNT(*) AS jumlah_siswa,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai FROM `a_jadwal`
+INNER JOIN a_mapel
+ON a_jadwal.id_mapel=a_mapel.id_mapel
+INNER JOIN a_kelas
+ON a_mapel.id_kelas=a_kelas.id
+INNER JOIN a_siswa
+on a_kelas.slug=a_siswa.kelas
+WHERE a_jadwal.tanggal_mulai='$tanggal' AND (a_mapel.nama_mapel LIKE '%DKV%')
 GROUP BY a_jadwal.id_jadwal;";
         $query = $this->db->query($sql);
         return $query->result_array();
@@ -160,7 +185,18 @@ WHERE a_mapel.nama_mapel LIKE '%TJKT%';";
 FROM `a_jadwal`
 INNER join a_mapel
 ON a_jadwal.id_mapel=a_mapel.id_mapel
-WHERE a_mapel.nama_mapel LIKE '%PM%' OR a_mapel.nama_mapel LIKE '%DKV%';";
+WHERE a_mapel.nama_mapel LIKE '%PM%'";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function jadwalUjianDKV()
+    {
+        $sql = "SELECT a_jadwal.id_jadwal,a_mapel.nama_mapel,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai,a_jadwal.durasi as waktu
+FROM `a_jadwal`
+INNER join a_mapel
+ON a_jadwal.id_mapel=a_mapel.id_mapel
+WHERE a_mapel.nama_mapel LIKE '%DKV%'";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
@@ -314,11 +350,23 @@ GROUP BY bank_soal.id_bank_soal;";
         $sql = "SELECT bank_soal.id_bank_soal,bank_soal.nama_bank_soal,bank_soal.jurusan,IF(COUNT(*)>0,count(soal.soal),'0') AS jumlah_soal FROM `soal`
 RIGHT JOIN bank_soal
 ON bank_soal.id_bank_soal=soal.id_bank_soal
-WHERE bank_soal.jurusan LIKE '%PM%' OR bank_soal.jurusan LIKE '%DKV%'  OR bank_soal.jurusan LIKE '%UMUM%'
+WHERE bank_soal.jurusan LIKE '%PM%' OR bank_soal.jurusan LIKE '%UMUM%'
 GROUP BY bank_soal.id_bank_soal;";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
+
+    public function namaBankSoalDKV()
+    {
+        $sql = "SELECT bank_soal.id_bank_soal,bank_soal.nama_bank_soal,bank_soal.jurusan,IF(COUNT(*)>0,count(soal.soal),'0') AS jumlah_soal FROM `soal`
+RIGHT JOIN bank_soal
+ON bank_soal.id_bank_soal=soal.id_bank_soal
+WHERE bank_soal.jurusan LIKE '%DKV%' OR bank_soal.jurusan LIKE '%UMUM%'
+GROUP BY bank_soal.id_bank_soal;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
 
     public function headerBankSoal($id_bank_soal)
     {
@@ -386,7 +434,17 @@ GROUP BY bank_soal.id_bank_soal;";
         $sql = "SELECT bank_soal.id_bank_soal,bank_soal.nama_bank_soal,bank_soal.jurusan,count(bank_soal.id_bank_soal) AS jumlah_soal FROM `soal`
 INNER JOIN bank_soal
 ON bank_soal.id_bank_soal=soal.id_bank_soal
-WHERE bank_soal.jurusan LIKE '%PM%' OR bank_soal.jurusan LIKE '%DKV%' OR bank_soal.jurusan LIKE '%UMUM%'
+WHERE bank_soal.jurusan LIKE '%PM%' OR bank_soal.jurusan LIKE '%UMUM%'
+GROUP BY bank_soal.id_bank_soal;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+    public function pilihBankSoalDKV()
+    {
+        $sql = "SELECT bank_soal.id_bank_soal,bank_soal.nama_bank_soal,bank_soal.jurusan,count(bank_soal.id_bank_soal) AS jumlah_soal FROM `soal`
+INNER JOIN bank_soal
+ON bank_soal.id_bank_soal=soal.id_bank_soal
+WHERE bank_soal.jurusan LIKE '%DKV%' OR bank_soal.jurusan LIKE '%UMUM%'
 GROUP BY bank_soal.id_bank_soal;";
         $query = $this->db->query($sql);
         return $query->result_array();
@@ -468,7 +526,20 @@ INNER JOIN a_mapel
 ON siswa_jawab.id_mapel=a_mapel.id_mapel
 INNER JOIN a_jadwal
 ON a_mapel.id_mapel=a_jadwal.id_mapel
-WHERE a_mapel.nama_mapel LIKE '%PM%' OR a_mapel.nama_mapel LIKE '%DKV%'
+WHERE a_mapel.nama_mapel LIKE '%PM%'
+GROUP BY a_mapel.id_mapel;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function rekap_nilai_mapelDKV()
+    {
+        $sql = "SELECT a_mapel.id_mapel,a_jadwal.id_jadwal,a_mapel.nama_mapel FROM `siswa_jawab`
+INNER JOIN a_mapel
+ON siswa_jawab.id_mapel=a_mapel.id_mapel
+INNER JOIN a_jadwal
+ON a_mapel.id_mapel=a_jadwal.id_mapel
+WHERE a_mapel.nama_mapel LIKE '%DKV%'
 GROUP BY a_mapel.id_mapel;";
         $query = $this->db->query($sql);
         return $query->result_array();
@@ -601,7 +672,22 @@ INNER JOIN a_mapel
 ON a_jadwal.id_mapel=a_mapel.id_mapel
 INNER JOIN a_siswa
 ON siswa_status.username=a_siswa.username  
-WHERE a_siswa.jurusan LIKE '%PM%' OR a_siswa.jurusan LIKE '%DKV%'
+WHERE a_siswa.jurusan LIKE '%PM%'
+ORDER BY `siswa_status`.`status` ASC;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function data_status_pesertaDKV()
+    {
+        $sql = "SELECT siswa_status.id_status_peserta,siswa_status.id_jadwal,siswa_status.username,a_siswa.nama_siswa,a_mapel.nama_mapel,siswa_status.status FROM `siswa_status`
+INNER JOIN a_jadwal
+ON siswa_status.id_jadwal=a_jadwal.id_jadwal
+INNER JOIN a_mapel
+ON a_jadwal.id_mapel=a_mapel.id_mapel
+INNER JOIN a_siswa
+ON siswa_status.username=a_siswa.username  
+WHERE a_siswa.jurusan LIKE '%DKV%'
 ORDER BY `siswa_status`.`status` ASC;";
         $query = $this->db->query($sql);
         return $query->result_array();

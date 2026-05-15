@@ -16,7 +16,7 @@ class Model_kelas extends CI_Model
                 WHERE kelas LIKE '%AKL%'";
         $query = $this->db->query($sql);
         return $query->row()->kelas;
-    } 
+    }
 
     public function countKelasBDP()
     {
@@ -45,7 +45,7 @@ class Model_kelas extends CI_Model
     public function countKelasPM()
     {
         $sql = "SELECT count(*) AS kelas_pm FROM `a_kelas`
-WHERE kelas LIKE '%PM%' or kelas LIKE '%DKV%'";
+WHERE kelas LIKE '%PM%';";
         $query = $this->db->query($sql);
         return $query->row()->kelas_pm;
     }

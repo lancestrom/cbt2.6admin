@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md">
         <div class="alert alert-success" role="alert">
-            <h2 class="text-center font-weight-bold">PM</h2>
+            <h2 class="text-center font-weight-bold">DKV</h2>
         </div>
 
         <div class="row mb-3">
