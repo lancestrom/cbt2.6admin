@@ -11,7 +11,7 @@
     <div class="col-md mt-3">
         <div class="card">
             <div class="card-body">
-                <form method="post" action="<?= base_url() ?>Dashboard_pm/simpan_jadwal">
+                <form method="post" action="<?= base_url() ?>Dashboard_dkv/simpan_jadwal">
                     <div class="form-group">
                         <input type="text" value="<?= $mapel['id_mapel'] ?>" name="id_mapel" class="form-control"
                             hidden>

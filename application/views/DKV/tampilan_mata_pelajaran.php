@@ -33,7 +33,7 @@
                                     <td class="text-center">
                                         <h5>
                                             <a class="btn btn-primary btn-sm"
-                                                href="<?= base_url() ?>Dashboard_pm/buat_mapel_jadwal/<?= $row['id_mapel'] ?>">Buat
+                                                href="<?= base_url() ?>Dashboard_dkv/buat_mapel_jadwal/<?= $row['id_mapel'] ?>">Buat
                                                 jadwal</a>
                                         </h5>
 
