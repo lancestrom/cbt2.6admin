@@ -30,7 +30,7 @@ class Dashboard_dkv extends MY_Controller
         $this->load->view('templates/footer');
     }
 
-    public function siswa_DKV()
+    public function siswa_dkv()
     {
 
         $this->require_login();
@@ -60,7 +60,7 @@ class Dashboard_dkv extends MY_Controller
 
         $this->db->where('id', $this->input->post('id'));
         $this->db->update('a_siswa', $data);
-        redirect('Dashboard_DKV/siswa_DKV');
+        redirect('Dashboard_dkv/siswa_dkv');
     }
 
     public function siswa_DKV_block()
@@ -92,7 +92,7 @@ class Dashboard_dkv extends MY_Controller
 
         $this->db->where('id', $this->input->post('id'));
         $this->db->update('a_siswa', $data);
-        redirect('Dashboard_DKV/siswa_DKV_block');
+        redirect('Dashboard_dkv/siswa_dkv_block');
     }
 
     public function mata_pelajaran()
