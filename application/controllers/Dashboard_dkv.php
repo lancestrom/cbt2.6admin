@@ -38,7 +38,7 @@ class Dashboard_dkv extends MY_Controller
         $isi['data_siswa'] = $this->Model_siswa->dataSiswaDKV();
 
         $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'DKV/tampilan_siswa_DKV';
+        $isi['content'] = 'DKV/tampilan_siswa_dkv';
         $this->load->view('templates/header', $isi2);
         $this->load->view('DKV/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
@@ -70,7 +70,7 @@ class Dashboard_dkv extends MY_Controller
         $isi['data_siswa'] = $this->Model_siswa->dataSiswaDKVBlock();
 
         $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'DKV/tampilan_siswa_DKV_block';
+        $isi['content'] = 'DKV/tampilan_siswa_dkv_block';
         $this->load->view('templates/header', $isi2);
         $this->load->view('DKV/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
