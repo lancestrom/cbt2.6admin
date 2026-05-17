@@ -15,13 +15,13 @@ class Dashboard_dkv extends MY_Controller
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         // $isi['admin'] = $this->db->get_where('auth', ['username' => $this->session->userdata('username')])->row_array();
-        $isi['siswa'] = $this->Model_siswa->countSiswaDKV();
-        $isi['kelas'] = $this->Model_kelas->countKelasDKV();
-        $isi['ujian'] = $this->Model_ujian->countUjianDKV();
-        $isi['mapel'] = $this->Model_mapel->countMapelDKV();
+        $isi['siswa'] = $this->Model_siswa->countSiswadkv();
+        $isi['kelas'] = $this->Model_kelas->countKelasdkv();
+        $isi['ujian'] = $this->Model_ujian->countUjiandkv();
+        $isi['mapel'] = $this->Model_mapel->countMapeldkv();
 
         $tanggal = date('Y-m-d');
-        $isi['ujian_hari_ini'] = $this->Model_ujian->ujian_hari_ini_DKV($tanggal);
+        $isi['ujian_hari_ini'] = $this->Model_ujian->ujian_hari_ini_dkv($tanggal);
 
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'DKV/tampilan_home';
@@ -35,7 +35,7 @@ class Dashboard_dkv extends MY_Controller
 
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
-        $isi['data_siswa'] = $this->Model_siswa->dataSiswaDKV();
+        $isi['data_siswa'] = $this->Model_siswa->dataSiswadkv();
 
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'DKV/tampilan_siswa_dkv';
@@ -63,11 +63,11 @@ class Dashboard_dkv extends MY_Controller
         redirect('Dashboard_dkv/siswa_dkv');
     }
 
-    public function siswa_DKV_block()
+    public function siswa_dkv_block()
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
-        $isi['data_siswa'] = $this->Model_siswa->dataSiswaDKVBlock();
+        $isi['data_siswa'] = $this->Model_siswa->dataSiswadkvBlock();
 
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'DKV/tampilan_siswa_dkv_block';
@@ -99,7 +99,7 @@ class Dashboard_dkv extends MY_Controller
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
-        $isi['mapel'] = $this->Model_mapel->dataMapelDKV();
+        $isi['mapel'] = $this->Model_mapel->dataMapeldkv();
 
 
         $isi2['title'] = 'CBT | Administrator';
@@ -149,18 +149,18 @@ class Dashboard_dkv extends MY_Controller
 
         </div>
         </div>');
-        redirect('Dashboard_DKV/mata_pelajaran');
+        redirect('Dashboard_dkv/mata_pelajaran');
     }
 
 
 
 
-    public function jadwal_ujian_DKV()
+    public function jadwal_ujian_dkv()
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
 
-        $isi['ujian'] = $this->Model_ujian->jadwalUjianDKV();
+        $isi['ujian'] = $this->Model_ujian->jadwalUjiandkv();
 
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'DKV/Ujian/tampilan_ujian';
@@ -204,7 +204,7 @@ class Dashboard_dkv extends MY_Controller
 
         $this->db->where('id_jadwal', $id_jadwal);
         $this->db->update('a_jadwal', $data);
-        redirect('Dashboard_DKV/jadwal_ujian_DKV');
+        redirect('Dashboard_dkv/jadwal_ujian_dkv');
     }
 
     public function pilih_soal($id_jadwal)
@@ -212,7 +212,7 @@ class Dashboard_dkv extends MY_Controller
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
-        $isi['bank_soal'] = $this->Model_ujian->pilihBankSoalDKV();
+        $isi['bank_soal'] = $this->Model_ujian->pilihBankSoaldkv();
 
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'DKV/Ujian/tampilan_pilih_soal';
@@ -246,7 +246,7 @@ class Dashboard_dkv extends MY_Controller
         </div>
         </div>');
 
-        redirect('Dashboard_DKV/jadwal_ujian_DKV');
+        redirect('Dashboard_dkv/jadwal_ujian_dkv');
     }
 
     public function detail_jadwal_soal($id_jadwal)
@@ -257,7 +257,7 @@ class Dashboard_dkv extends MY_Controller
         $isi['jadwal_soal'] = $this->Model_ujian->jadwalSoal_bankSoal($id_jadwal);
 
         $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'DKV/Ujian/tampilan_detail_jadwal_soal';
+        $isi['content'] = 'dkv/Ujian/tampilan_detail_jadwal_soal';
         $this->load->view('templates/header', $isi2);
         $this->load->view('DKV/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
@@ -267,7 +267,7 @@ class Dashboard_dkv extends MY_Controller
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
-        $isi['bank_soal'] = $this->Model_ujian->namaBankSoalDKV();
+        $isi['bank_soal'] = $this->Model_ujian->namaBankSoaldkv();
 
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'DKV/Ujian/tampilan_bank_soal';
@@ -299,7 +299,7 @@ class Dashboard_dkv extends MY_Controller
 
         </div>
         </div>');
-        redirect('Dashboard_DKV/bank_soal');
+        redirect('Dashboard_dkv/bank_soal');
     }
 
     public function simpan_bank_soal()
@@ -325,7 +325,7 @@ class Dashboard_dkv extends MY_Controller
 
         </div>
         </div>');
-        redirect('Dashboard_DKV/bank_soal');
+        redirect('Dashboard_dkv/bank_soal');
     }
 
     public function upload_banksoal($id_bank_soal_temp)
@@ -390,11 +390,11 @@ class Dashboard_dkv extends MY_Controller
 
                     unlink('temp_doc/' . $file['file_name']);
                     $this->session->set_flashdata('pesan', '<div class="alert alert-success">Soal berhasil diunggah</div>');
-                    redirect('Dashboard_DKV/bank_soal');
+                    redirect('Dashboard_dkv/bank_soal');
                 }
             } else {
                 $this->session->set_flashdata('pesan', '<div class="alert alert-danger">Upload error: ' . strip_tags($this->upload->display_errors()) . '</div>');
-                redirect('Dashboard_DKV/bank_soal');
+                redirect('Dashboard_dkv/bank_soal');
             }
         }
     }
@@ -407,7 +407,7 @@ class Dashboard_dkv extends MY_Controller
         $isi['soal'] = $this->Model_ujian->detailBankSoal($id_bank_soal);
 
         $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'DKV//Ujian/tampilan_detail_bank_soal';
+        $isi['content'] = 'DKV/Ujian/tampilan_detail_bank_soal';
         $this->load->view('templates/header', $isi2);
         $this->load->view('DKV/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
@@ -418,7 +418,7 @@ class Dashboard_dkv extends MY_Controller
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         // $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
-        $isi['rekap'] = $this->Model_ujian->data_status_pesertaDKV();
+        $isi['rekap'] = $this->Model_ujian->data_status_pesertadkv();
 
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'DKV/Ujian/tampilan_status_peserta';
@@ -432,7 +432,7 @@ class Dashboard_dkv extends MY_Controller
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         // $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
-        $isi['rekap'] = $this->Model_ujian->rekap_nilai_mapelDKV();
+        $isi['rekap'] = $this->Model_ujian->rekap_nilai_mapeldkv();
 
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'DKV/Ujian/tampilan_rekap_nilai';
