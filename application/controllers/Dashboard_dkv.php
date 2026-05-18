@@ -257,7 +257,7 @@ class Dashboard_dkv extends MY_Controller
         $isi['jadwal_soal'] = $this->Model_ujian->jadwalSoal_bankSoal($id_jadwal);
 
         $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'dkv/Ujian/tampilan_detail_jadwal_soal';
+        $isi['content'] = 'DKV/Ujian/tampilan_detail_jadwal_soal';
         $this->load->view('templates/header', $isi2);
         $this->load->view('DKV/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
