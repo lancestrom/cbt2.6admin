@@ -606,14 +606,15 @@ GROUP BY a_jadwal.id_jadwal;";
 
     public function data_status_peserta()
     {
-        $sql = "SELECT siswa_status.id_status_peserta,siswa_status.id_jadwal,siswa_status.username,a_siswa.nama_siswa,a_mapel.nama_mapel,siswa_status.status FROM `siswa_status`
+        $sql = "SELECT siswa_status.id_status_peserta,siswa_status.id_jadwal,siswa_status.username,a_siswa.nama_siswa,a_mapel.nama_mapel,siswa_status.status
+FROM `siswa_status`
 INNER JOIN a_jadwal
 ON siswa_status.id_jadwal=a_jadwal.id_jadwal
 INNER JOIN a_mapel
 ON a_jadwal.id_mapel=a_mapel.id_mapel
 INNER JOIN a_siswa
-ON siswa_status.username=a_siswa.username  
-ORDER BY `siswa_status`.`status` ASC";
+ON siswa_status.username=a_siswa.username
+GROUP BY siswa_status.id_jadwal,siswa_status.username;";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
@@ -628,7 +629,7 @@ ON a_jadwal.id_mapel=a_mapel.id_mapel
 INNER JOIN a_siswa
 ON siswa_status.username=a_siswa.username  
 WHERE a_siswa.jurusan LIKE '%AKL%'
-ORDER BY `siswa_status`.`status` ASC;";
+GROUP BY siswa_status.id_jadwal,siswa_status.username;";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
@@ -643,7 +644,7 @@ ON a_jadwal.id_mapel=a_mapel.id_mapel
 INNER JOIN a_siswa
 ON siswa_status.username=a_siswa.username  
 WHERE a_siswa.jurusan LIKE '%MPLB%'
-ORDER BY `siswa_status`.`status` ASC;";
+GROUP BY siswa_status.id_jadwal,siswa_status.username;";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
@@ -658,7 +659,7 @@ ON a_jadwal.id_mapel=a_mapel.id_mapel
 INNER JOIN a_siswa
 ON siswa_status.username=a_siswa.username  
 WHERE a_siswa.jurusan LIKE '%TJKT%'
-ORDER BY `siswa_status`.`status` ASC;";
+GROUP BY siswa_status.id_jadwal,siswa_status.username;";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
@@ -673,7 +674,7 @@ ON a_jadwal.id_mapel=a_mapel.id_mapel
 INNER JOIN a_siswa
 ON siswa_status.username=a_siswa.username  
 WHERE a_siswa.jurusan LIKE '%PM%'
-ORDER BY `siswa_status`.`status` ASC;";
+GROUP BY siswa_status.id_jadwal,siswa_status.username;";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
@@ -688,7 +689,7 @@ ON a_jadwal.id_mapel=a_mapel.id_mapel
 INNER JOIN a_siswa
 ON siswa_status.username=a_siswa.username  
 WHERE a_siswa.jurusan LIKE '%DKV%'
-ORDER BY `siswa_status`.`status` ASC;";
+GROUP BY siswa_status.id_jadwal,siswa_status.username;";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
