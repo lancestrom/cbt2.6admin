@@ -163,7 +163,13 @@ class Dashboard extends MY_Controller
     {
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
-        $isi['mapel'] = $this->Model_mapel->dataMapel();
+
+        $isi['mapel_tjkt'] = $this->Model_mapel->jumlahMapelTJKT();
+        $isi['mapel_akl'] = $this->Model_mapel->jumlahMapelAKL();
+        $isi['mapel_mplb'] = $this->Model_mapel->jumlahMapelMPLB();
+        $isi['mapel_pm'] = $this->Model_mapel->jumlahMapelPM();
+        $isi['mapel_dkv'] = $this->Model_mapel->jumlahMapelDKV();
+
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'tampilan_mata_pelajaran';
         $this->load->view('templates/header', $isi2);

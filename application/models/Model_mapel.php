@@ -50,6 +50,42 @@ WHERE a_mapel.nama_mapel LIKE '%DKV%';";
         return $query->row()->mapel;
     }
 
+    public function jumlahMapelTJKT()
+    {
+        $sql = "SELECT count(*) as jumlah_mapel FROM `a_mapel`
+WHERE a_mapel.nama_mapel LIKE '%TJKT%';";
+        $query = $this->db->query($sql);
+        return $query->row()->jumlah_mapel;
+    }
+    public function jumlahMapelAKL()
+    {
+        $sql = "SELECT count(*) as jumlah_mapel FROM `a_mapel`
+WHERE a_mapel.nama_mapel LIKE '%AKL%';";
+        $query = $this->db->query($sql);
+        return $query->row()->jumlah_mapel;
+    }
+    public function jumlahMapelMPLB()
+    {
+        $sql = "SELECT count(*) as jumlah_mapel FROM `a_mapel`
+WHERE a_mapel.nama_mapel LIKE '%MPLB%';";
+        $query = $this->db->query($sql);
+        return $query->row()->jumlah_mapel;
+    }
+    public function jumlahMapelPM()
+    {
+        $sql = "SELECT count(*) as jumlah_mapel FROM `a_mapel`
+WHERE a_mapel.nama_mapel LIKE '%PM%';";
+        $query = $this->db->query($sql);
+        return $query->row()->jumlah_mapel;
+    }
+    public function jumlahMapelDKV()
+    {
+        $sql = "SELECT count(*) as jumlah_mapel FROM `a_mapel`
+WHERE a_mapel.nama_mapel LIKE '%DKV%';";
+        $query = $this->db->query($sql);
+        return $query->row()->jumlah_mapel;
+    }
+
     public function dataMapel()
     {
         $sql = "SELECT * FROM `a_mapel`
