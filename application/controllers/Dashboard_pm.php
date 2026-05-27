@@ -129,7 +129,7 @@ class Dashboard_pm extends MY_Controller
         $this->Model_keamanan->getKeamanan();
 
         $data = array(
-            'id_jadwal' => rand(11111111, 99999999),
+            'id_jadwal' => rand(111111, 999999),
             'id_mapel' => $this->input->post('id_mapel', TRUE),
             'tanggal_mulai' => $this->input->post('tanggal_mulai', TRUE),
             'waktu_mulai' => $this->input->post('waktu_mulai', TRUE),
