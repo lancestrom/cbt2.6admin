@@ -751,6 +751,8 @@ class Dashboard extends MY_Controller
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['login_peserta'] = $this->Session_Model->dataLoginSiswa();
+        $isi['tabel_login_peserta'] = $this->Session_Model->tabelLoginSiswa();
+
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'tampilan_status_login_peserta';
         $this->load->view('templates/header', $isi2);

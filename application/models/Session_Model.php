@@ -123,4 +123,16 @@ ON sessions.username=a_siswa.username;";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
+
+    public function tabelLoginSiswa()
+    {
+        $sql = "SELECT a_kelas.id,a_kelas.kelas,COUNT(*) AS jumlah_login FROM `sessions`
+INNER JOIN a_siswa
+ON sessions.username=a_siswa.username
+INNER JOIN a_kelas
+ON a_siswa.kelas=a_kelas.slug
+GROUP BY a_kelas.id;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
 }
