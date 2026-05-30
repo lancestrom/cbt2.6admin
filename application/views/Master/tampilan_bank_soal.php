@@ -41,23 +41,23 @@
                                 $no = 1;
                                 foreach ($bank_soal as $row) {
                                 ?>
-                                    <td><?php echo $no++; ?></td>
-                                    <td class="text-center"><?= $row['id_bank_soal'] ?></td>
-                                    <td class="text-center"><?= $row['nama_bank_soal'] ?></td>
-                                    <td class="text-center"><?= $row['jurusan'] ?></td>
-                                    <td class="text-center"><?= $row['jumlah_soal'] ?> Soal</td>
-                                    <td>
-                                        <h5 class="text-center">
-                                            <a class="btn btn-primary btn-sm text-uppercase font-weight-bolder"
-                                                href="<?= base_url() ?>Dashboard/upload_banksoal/<?= $row['id_bank_soal'] ?>">UPLOAD</a>
-                                            <a class="btn btn-success btn-sm text-uppercase font-weight-bolder"
-                                                href="<?= base_url() ?>Dashboard/detail_banksoal/<?= $row['id_bank_soal'] ?>">DETAIL</a>
-                                            <a class="btn btn-danger btn-sm text-uppercase font-weight-bolder"
-                                                href="<?= base_url() ?>Dashboard/hapus_banksoal/<?= $row['id_bank_soal'] ?>">HAPUS</a>
-                                        </h5>
-                                    </td>≈
+                                <td><?php echo $no++; ?></td>
+                                <td class="text-center"><?= $row['id_bank_soal'] ?></td>
+                                <td class="text-center"><?= $row['nama_bank_soal'] ?></td>
+                                <td class="text-center"><?= $row['jurusan'] ?></td>
+                                <td class="text-center"><?= $row['jumlah_soal'] ?> Soal</td>
+                                <td>
+                                    <h5 class="text-center">
+                                        <a class="btn btn-primary btn-sm text-uppercase font-weight-bolder"
+                                            href="<?= base_url() ?>Dashboard/upload_banksoal/<?= $row['id_bank_soal'] ?>">UPLOAD</a>
+                                        <a class="btn btn-success btn-sm text-uppercase font-weight-bolder"
+                                            href="<?= base_url() ?>Dashboard/detail_banksoal/<?= $row['id_bank_soal'] ?>">DETAIL</a>
+                                        <a class="btn btn-danger btn-sm text-uppercase font-weight-bolder"
+                                            href="<?= base_url() ?>Dashboard/hapus_banksoal/<?= $row['id_bank_soal'] ?>">HAPUS</a>
+                                    </h5>
+                                </td>
                             </tr>
-                        <?php } ?>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>

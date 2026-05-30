@@ -55,7 +55,7 @@
                                             <a class="btn btn-danger btn-sm text-uppercase font-weight-bolder"
                                                 href="<?= base_url() ?>Dashboard_akl/hapus_banksoal/<?= $row['id_bank_soal'] ?>">HAPUS</a>
                                         </h5>
-                                    </td>≈
+                                    </td>
                             </tr>
                         <?php } ?>
                         </tbody>
