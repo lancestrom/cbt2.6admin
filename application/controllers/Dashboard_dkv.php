@@ -101,7 +101,6 @@ class Dashboard_dkv extends MY_Controller
         $this->Model_keamanan->getKeamanan();
         $isi['mapel'] = $this->Model_mapel->dataMapeldkv();
 
-
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'DKV/tampilan_mata_pelajaran';
         $this->load->view('templates/header', $isi2);
@@ -261,6 +260,14 @@ class Dashboard_dkv extends MY_Controller
         $this->load->view('templates/header', $isi2);
         $this->load->view('DKV/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
+    }
+
+    public function hapus_jadwal_dkv($id_jadwal)
+    {
+        $this->db->where('id_jadwal', $id_jadwal);
+        $this->db->delete('a_jadwal');
+
+        redirect('Dashboard_dkv/jadwal_ujian_dkv');
     }
 
     public function bank_soal()

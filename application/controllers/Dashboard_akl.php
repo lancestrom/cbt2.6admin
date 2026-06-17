@@ -277,6 +277,14 @@ class Dashboard_akl extends MY_Controller
         $this->load->view('templates/footer');
     }
 
+    public function hapus_jadwal_akl($id_jadwal)
+    {
+        $this->db->where('id_jadwal', $id_jadwal);
+        $this->db->delete('a_jadwal');
+
+        redirect('Dashboard_akl/jadwal_ujian_akl');
+    }
+
     public function bank_soal()
     {
         $this->require_login();

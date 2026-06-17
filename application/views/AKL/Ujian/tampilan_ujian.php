@@ -55,6 +55,8 @@
                                                 href="<?= base_url() ?>Dashboard_akl/edit_jadwal/<?= $row['id_jadwal']; ?>">EDIT</a>
                                             <a class="btn btn-success btn-sm"
                                                 href="<?= base_url() ?>Dashboard_akl/detail_jadwal_soal/<?= $row['id_jadwal']; ?>">DETAIL</a>
+                                            <a class="btn btn-danger btn-sm"
+                                                href="<?= base_url() ?>Dashboard_akl/hapus_jadwal_akl/<?= $row['id_jadwal']; ?>">HAPUS</a>
                                         </h5>
                                     </td>
                             </tr>

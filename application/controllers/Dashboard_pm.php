@@ -263,6 +263,14 @@ class Dashboard_pm extends MY_Controller
         $this->load->view('templates/footer');
     }
 
+    public function hapus_jadwal_pm($id_jadwal)
+    {
+        $this->db->where('id_jadwal', $id_jadwal);
+        $this->db->delete('a_jadwal');
+
+        redirect('Dashboard_pm/jadwal_ujian_pm');
+    }
+
     public function bank_soal()
     {
         $this->require_login();

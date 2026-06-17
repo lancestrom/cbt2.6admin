@@ -53,6 +53,8 @@
                                                 href="<?= base_url() ?>Dashboard_dkv/edit_jadwal/<?= $row['id_jadwal']; ?>">EDIT</a>
                                             <a class="btn btn-success btn-sm"
                                                 href="<?= base_url() ?>Dashboard_dkv/detail_jadwal_soal/<?= $row['id_jadwal']; ?>">DETAIL</a>
+                                            <a class="btn btn-danger btn-sm"
+                                                href="<?= base_url() ?>Dashboard_dkv/hapus_jadwal_dkv/<?= $row['id_jadwal']; ?>">HAPUS</a>
                                         </h5>
                                     </td>
                             </tr>

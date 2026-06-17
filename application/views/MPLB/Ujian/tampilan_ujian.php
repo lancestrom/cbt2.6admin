@@ -53,6 +53,8 @@
                                             href="<?= base_url() ?>Dashboard_otkp/edit_jadwal/<?= $row['id_jadwal']; ?>">EDIT</a>
                                         <a class="btn btn-success btn-sm"
                                             href="<?= base_url() ?>Dashboard_otkp/detail_jadwal_soal/<?= $row['id_jadwal']; ?>">DETAIL</a>
+                                        <a class="btn btn-danger btn-sm"
+                                            href="<?= base_url() ?>Dashboard_otkp/hapus_jadwal_mplb/<?= $row['id_jadwal']; ?>">HAPUS</a>
                                     </h5>
                                 </td>
                             </tr>

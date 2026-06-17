@@ -57,7 +57,7 @@
                                 <td>
                                     <h4 class="badge badge-secondary"><?= number_format($row['waktu']); ?> Menit</h4>
                                 </td>
-                                <td>
+                                <td class="font-weight-bold text-center">
                                     <h5 class="text-center">
                                         <a class="btn btn-primary btn-sm"
                                             href="<?= base_url() ?>Dashboard/pilih_soal/<?= $row['id_jadwal']; ?>">TAMBAH</a>
@@ -65,6 +65,8 @@
                                             href="<?= base_url() ?>Dashboard/edit_jadwal/<?= $row['id_jadwal']; ?>">EDIT</a>
                                         <a class="btn btn-success btn-sm"
                                             href="<?= base_url() ?>Dashboard/detail_jadwal_soal/<?= $row['id_jadwal']; ?>">DETAIL</a>
+                                        <a class="btn btn-danger btn-sm"
+                                            href="<?= base_url() ?>Dashboard/hapus_jadwal/<?= $row['id_jadwal']; ?>">HAPUS</a>
                                     </h5>
                                 </td>
                             </tr>

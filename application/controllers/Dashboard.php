@@ -170,6 +170,8 @@ class Dashboard extends MY_Controller
         $isi['mapel_pm'] = $this->Model_mapel->jumlahMapelPM();
         $isi['mapel_dkv'] = $this->Model_mapel->jumlahMapelDKV();
 
+        $isi['mapel'] = $this->Model_mapel->dataMapel();
+
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'tampilan_mata_pelajaran';
         $this->load->view('templates/header', $isi2);
@@ -542,6 +544,14 @@ class Dashboard extends MY_Controller
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
+    }
+
+    public function hapus_jadwal($id_jadwal)
+    {
+        $this->db->where('id_jadwal', $id_jadwal);
+        $this->db->delete('a_jadwal');
+
+        redirect('Dashboard/jadwal_ujian');
     }
     public function detail_soal($id_jadwal)
     {

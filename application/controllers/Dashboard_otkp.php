@@ -262,6 +262,14 @@ class Dashboard_otkp extends MY_Controller
         $this->load->view('MPLB/tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
+ 
+    public function hapus_jadwal_mplb($id_jadwal)
+    {
+        $this->db->where('id_jadwal', $id_jadwal);
+        $this->db->delete('a_jadwal');
+
+        redirect('Dashboard_otkp/jadwal_ujian_mplb');
+    }
 
     public function bank_soal()
     {

@@ -54,6 +54,8 @@
                                                 href="<?= base_url() ?>Dashboard_tkj/edit_jadwal/<?= $row['id_jadwal']; ?>">EDIT</a>
                                             <a class="btn btn-success btn-sm"
                                                 href="<?= base_url() ?>Dashboard_tkj/detail_jadwal_soal/<?= $row['id_jadwal']; ?>">DETAIL</a>
+                                            <a class="btn btn-danger btn-sm"
+                                                href="<?= base_url() ?>Dashboard_tkj/hapus_jadwal_tjkt/<?= $row['id_jadwal']; ?>">HAPUS</a>
                                         </h5>
                                     </td>
                             </tr>

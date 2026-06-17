@@ -11,9 +11,14 @@
                     data-target="#exampleModal">
                     <i class="fas fa-plus-square"></i> Upload Mapel
                 </button>
+                <button type="button" class="btn btn-primary btn-sm text-uppercase font-weight-bold" data-toggle="modal"
+                    data-target="#detailMapelModal">
+                    <i class="fas fa-search"></i> Mapel Detail
+                </button>
                 <a class="btn btn-danger btn-sm text-uppercase font-weight-bold"
                     href="<?= base_url() ?>Dashboard/hapus_all_mata_pelajaran"><i class="fas fa-trash"></i> Hapus
                     Mapel</a>
+
             </div>
         </div>
     </div>
@@ -21,97 +26,51 @@
 
 <?= $this->session->flashdata('pesan') ?>
 
-<div class="row mt-4">
-    <!-- TJKT Card -->
-    <div class="col-xl-4 col-md-6 mb-4">
-        <div class="card border-left-primary shadow h-100 py-2">
+<div class="row mt-2">
+    <div class="col-md">
+        <div class="card">
             <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">TJKT</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $mapel_tjkt ?> Mapel</div>
-                        <div class="small text-muted">Teknik Jaringan Komputer</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-network-wired fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered text-center" id="dataTable" width="100%"
+                        cellspacing="0">
+                        <thead class="text-uppercase">
+                            <tr class="text-center">
+                                <th scope="col">#</th>
+                                <th scope="col">ID </th>
+                                <th scope="col">Kelas</th>
+                                <th scope="col">Mapel</th>
+                                <th scope="col">AKSI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <?php
+                                $no = 1;
+                                foreach ($mapel as $row) {
+                                ?>
+                                <td><?php echo $no++; ?></td>
+                                <td class="text-center"><?= $row['id_mapel'] ?></td>
+                                <td class="text-center"><?= $row['kelas'] ?></td>
+                                <td class="text-center"><?= $row['nama_mapel'] ?></td>
+                                <td class="text-center">
+                                    <h5>
+                                        <a class="btn btn-primary btn-sm"
+                                            href="<?= base_url() ?>Dashboard_akl/buat_mapel_jadwal/<?= $row['id_mapel'] ?>">Buat
+                                            jadwal</a>
+                                    </h5>
 
-    <!-- AKL Card -->
-    <div class="col-xl-4 col-md-6 mb-4">
-        <div class="card border-left-success shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">AKL</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $mapel_akl ?> Mapel</div>
-                        <div class="small text-muted">Akuntansi</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-file-invoice-dollar fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MPLB Card -->
-    <div class="col-xl-4 col-md-6 mb-4">
-        <div class="card border-left-info shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">MPLB</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $mapel_mplb ?> Mapel</div>
-                        <div class="small text-muted">Manajemen Perkantoran</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-building fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- PM Card -->
-    <div class="col-xl-6 col-md-6 mb-4">
-        <div class="card border-left-warning shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pemasaran</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $mapel_pm ?> Mapel</div>
-                        <div class="small text-muted">Bisnis Digital</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-bullhorn fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- DKV Card -->
-    <div class="col-xl-6 col-md-12 mb-4">
-        <div class="card border-left-danger shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">DKV</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $mapel_dkv ?> Mapel</div>
-                        <div class="small text-muted">Desain Komunikasi Visual</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-paint-brush fa-2x text-gray-300"></i>
-                    </div>
+                                </td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -133,6 +92,119 @@
                     <button type="submit" name="submit" value="upload" class="btn btn-primary">Upload</button>
                 </div>
                 <?= form_close(); ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="detailMapelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Detail Mata Pelajaran</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row mt-4">
+                    <!-- TJKT Card -->
+                    <div class="col-xl-4 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">TJKT
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $mapel_tjkt ?> Mapel
+                                        </div>
+                                        <div class="small text-muted">Teknik Jaringan Komputer</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-network-wired fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AKL Card -->
+                    <div class="col-xl-4 col-md-6 mb-4">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">AKL</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $mapel_akl ?> Mapel
+                                        </div>
+                                        <div class="small text-muted">Akuntansi</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-file-invoice-dollar fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MPLB Card -->
+                    <div class="col-xl-4 col-md-6 mb-4">
+                        <div class="card border-left-info shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">MPLB</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $mapel_mplb ?> Mapel
+                                        </div>
+                                        <div class="small text-muted">Manajemen Perkantoran</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-building fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PM Card -->
+                    <div class="col-xl-6 col-md-6 mb-4">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pemasaran
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $mapel_pm ?> Mapel</div>
+                                        <div class="small text-muted">Bisnis Digital</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-bullhorn fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DKV Card -->
+                    <div class="col-xl-6 col-md-12 mb-4">
+                        <div class="card border-left-danger shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">DKV</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $mapel_dkv ?> Mapel
+                                        </div>
+                                        <div class="small text-muted">Desain Komunikasi Visual</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-paint-brush fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
