@@ -26,20 +26,21 @@
                                 $no = 1;
                                 foreach ($mapel as $row) {
                                 ?>
-                                    <td><?php echo $no++; ?></td>
-                                    <td class="text-center"><?= $row['id_mapel'] ?></td>
-                                    <td class="text-center"><?= $row['kelas'] ?></td>
-                                    <td class="text-center"><?= $row['nama_mapel'] ?></td>
-                                    <td class="text-center">
-                                        <h5>
-                                            <a class="btn btn-primary btn-sm"
-                                                href="<?= base_url() ?>Dashboard_pm/buat_mapel_jadwal/<?= $row['id_mapel'] ?>">Buat
-                                                jadwal</a>
-                                        </h5>
+                                <td><?php echo $no++; ?></td>
+                                <td class="text-center"><?= $row['id_mapel'] ?></td>
+                                <td class="text-center"><?= $row['kelas'] ?></td>
+                                <td class="text-center"><?= $row['nama_mapel'] ?></td>
+                                <td class="text-center">
+                                    <h5>
+                                        <a class="btn btn-primary btn-sm"
+                                            href="<?= base_url() ?>Dashboard_pm/buat_mapel_jadwal/<?= $row['id_mapel'] ?>"
+                                            target="_blank">Buat
+                                            jadwal</a>
+                                    </h5>
 
-                                    </td>
+                                </td>
                             </tr>
-                        <?php } ?>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
