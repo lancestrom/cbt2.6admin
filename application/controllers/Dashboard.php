@@ -295,6 +295,16 @@ class Dashboard extends MY_Controller
         $this->require_login();
         $this->Model_keamanan->getKeamanan();
         $isi['siswa'] = $this->Model_siswa->dataSiswa();
+
+        $isi['jumlah_kelas_x'] = $this->Model_siswa->jumlahKelasX();
+        $isi['jumlah_kelas_xi'] = $this->Model_siswa->jumlahKelasXI();
+        $isi['jumlah_kelas_xii'] = $this->Model_siswa->jumlahKelasXII();
+
+
+        $isi['x'] = $this->Model_siswa->dataSiswaX();
+        $isi['xi'] = $this->Model_siswa->dataSiswaXI();
+        $isi['xii'] = $this->Model_siswa->dataSiswaXII();
+
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'tampilan_siswa';
         $this->load->view('templates/header', $isi2);
