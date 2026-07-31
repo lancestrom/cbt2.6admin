@@ -199,7 +199,7 @@ class Dashboard extends MY_Controller
             'tanggal_mulai' => $this->input->post('tanggal_mulai', TRUE),
             'waktu_mulai' => $this->input->post('waktu_mulai', TRUE),
             'waktu_selesai' => $this->input->post('waktu_selesai', TRUE),
-            'durasi' => $this->input->post('durasi', true)
+            // 'durasi' => $this->input->post('durasi', true)
         );
         $this->db->insert('a_jadwal', $data);
         $this->session->set_flashdata('pesan', '<div class="row">
@@ -595,14 +595,14 @@ class Dashboard extends MY_Controller
         $tanggal_mulai = $this->input->post('tanggal_mulai', TRUE);
         $waktu_mulai = $this->input->post('waktu_mulai', TRUE);
         $waktu_selesal = $this->input->post('waktu_selesai', TRUE);
-        $durasi = $this->input->post('durasi');
+        // $durasi = $this->input->post('durasi');
         $data = array(
             'id_jadwal' =>  $id_jadwal,
             'id_mapel' => $id_mapel,
             'tanggal_mulai' => $tanggal_mulai,
             'waktu_mulai' => $waktu_mulai,
             'waktu_selesai' => $waktu_selesal,
-            'durasi' => $durasi
+            // 'durasi' => $durasi
         );
         $this->db->where('id_jadwal', $id_jadwal);
         $this->db->update('a_jadwal', $data);

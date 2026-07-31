@@ -134,11 +134,20 @@ WHERE a_jadwal.tanggal_mulai='$tanggal' AND (a_mapel.nama_mapel LIKE '%DKV%')
 GROUP BY a_jadwal.id_jadwal;";
         $query = $this->db->query($sql);
         return $query->result_array();
-    }
+    } 
 
     public function jadwalUjian()
     {
-        $sql = "SELECT a_jadwal.id_jadwal,a_mapel.nama_mapel,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai,a_jadwal.durasi AS waktu
+        //         $sql = "SELECT a_jadwal.id_jadwal,a_mapel.nama_mapel,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai,a_jadwal.durasi AS waktu
+        // FROM `a_jadwal`
+        // INNER join a_mapel
+        // ON a_jadwal.id_mapel=a_mapel.id_mapel;";
+        $sql = "SELECT a_jadwal.id_jadwal,a_mapel.nama_mapel,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai,a_jadwal.durasi AS waktu,
+TIMESTAMPDIFF(
+    MINUTE,
+    a_jadwal.waktu_mulai,
+    a_jadwal.waktu_selesai
+) AS selisih_menit
 FROM `a_jadwal`
 INNER join a_mapel
 ON a_jadwal.id_mapel=a_mapel.id_mapel;";
