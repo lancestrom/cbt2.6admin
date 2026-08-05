@@ -388,7 +388,7 @@ $config['encryption_key'] = 'aku_cinta_th_jakbar_center_of_excelent';
 |
 */
 $config['sess_driver'] = 'files';
-$config['sess_cookie_name'] = 'cbt_smk_th_session';
+$config['sess_cookie_name'] = 'cbt_smk_th_session_admin';
 $config['sess_samesite'] = 'Lax';
 $config['sess_expiration'] = 7200;
 $config['sess_save_path'] = NULL;
