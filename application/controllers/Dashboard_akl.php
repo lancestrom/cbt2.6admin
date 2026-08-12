@@ -147,7 +147,7 @@ class Dashboard_akl extends MY_Controller
             'tanggal_mulai' => $this->input->post('tanggal_mulai', TRUE),
             'waktu_mulai' => $this->input->post('waktu_mulai', TRUE),
             'waktu_selesai' => $this->input->post('waktu_selesai', TRUE),
-            'durasi' => $this->input->post('durasi', true)
+            // 'durasi' => $this->input->post('durasi', true)
         );
 
         $this->db->insert('a_jadwal', $data);

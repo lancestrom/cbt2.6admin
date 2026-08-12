@@ -134,7 +134,7 @@ WHERE a_jadwal.tanggal_mulai='$tanggal' AND (a_mapel.nama_mapel LIKE '%DKV%')
 GROUP BY a_jadwal.id_jadwal;";
         $query = $this->db->query($sql);
         return $query->result_array();
-    } 
+    }
 
     public function jadwalUjian()
     {
@@ -157,55 +157,94 @@ ON a_jadwal.id_mapel=a_mapel.id_mapel;";
 
     public function jadwalUjianAKL()
     {
-        $sql = "SELECT a_jadwal.id_jadwal,a_mapel.nama_mapel,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai,a_jadwal.durasi as waktu
+        $sql = "SELECT a_jadwal.id_jadwal,a_mapel.nama_mapel,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai,a_jadwal.durasi AS waktu,
+TIMESTAMPDIFF(
+    MINUTE,
+    a_jadwal.waktu_mulai,
+    a_jadwal.waktu_selesai
+) AS selisih_menit
 FROM `a_jadwal`
 INNER join a_mapel
 ON a_jadwal.id_mapel=a_mapel.id_mapel
-WHERE a_mapel.nama_mapel LIKE '%AKL%';";
+INNER JOIN a_kelas
+ON a_mapel.id_kelas=a_kelas.id
+WHERE a_kelas.kode='AKL'
+";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
 
     public function jadwalUjianMPLB()
     {
-        $sql = "SELECT a_jadwal.id_jadwal,a_mapel.nama_mapel,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai,a_jadwal.durasi as waktu
+        $sql = "SELECT a_jadwal.id_jadwal,a_mapel.nama_mapel,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai,a_jadwal.durasi AS waktu,
+TIMESTAMPDIFF(
+    MINUTE,
+    a_jadwal.waktu_mulai,
+    a_jadwal.waktu_selesai
+) AS selisih_menit
 FROM `a_jadwal`
 INNER join a_mapel
 ON a_jadwal.id_mapel=a_mapel.id_mapel
-WHERE a_mapel.nama_mapel LIKE '%MPLB%';";
+INNER JOIN a_kelas
+ON a_mapel.id_kelas=a_kelas.id
+WHERE a_kelas.kode='MPLB'
+";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
 
     public function jadwalUjianTJKT()
     {
-        $sql = "SELECT a_jadwal.id_jadwal,a_mapel.nama_mapel,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai,a_jadwal.durasi as waktu
+        $sql = "SELECT a_jadwal.id_jadwal,a_mapel.nama_mapel,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai,a_jadwal.durasi AS waktu,
+TIMESTAMPDIFF(
+    MINUTE,
+    a_jadwal.waktu_mulai,
+    a_jadwal.waktu_selesai
+) AS selisih_menit
 FROM `a_jadwal`
 INNER join a_mapel
 ON a_jadwal.id_mapel=a_mapel.id_mapel
-WHERE a_mapel.nama_mapel LIKE '%TJKT%';";
+INNER JOIN a_kelas
+ON a_mapel.id_kelas=a_kelas.id
+WHERE a_kelas.kode='TJKT'
+";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
 
     public function jadwalUjianPM()
     {
-        $sql = "SELECT a_jadwal.id_jadwal,a_mapel.nama_mapel,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai,a_jadwal.durasi as waktu
+        $sql = "SELECT a_jadwal.id_jadwal,a_mapel.nama_mapel,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai,a_jadwal.durasi AS waktu,
+TIMESTAMPDIFF(
+    MINUTE,
+    a_jadwal.waktu_mulai,
+    a_jadwal.waktu_selesai
+) AS selisih_menit
 FROM `a_jadwal`
 INNER join a_mapel
 ON a_jadwal.id_mapel=a_mapel.id_mapel
-WHERE a_mapel.nama_mapel LIKE '%PM%'";
+INNER JOIN a_kelas
+ON a_mapel.id_kelas=a_kelas.id
+WHERE a_kelas.kode='PM'
+";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
 
     public function jadwalUjianDKV()
     {
-        $sql = "SELECT a_jadwal.id_jadwal,a_mapel.nama_mapel,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai,a_jadwal.durasi as waktu
+        $sql = "SELECT a_jadwal.id_jadwal,a_mapel.nama_mapel,a_jadwal.tanggal_mulai,a_jadwal.waktu_mulai,a_jadwal.waktu_selesai,a_jadwal.durasi AS waktu,
+TIMESTAMPDIFF(
+    MINUTE,
+    a_jadwal.waktu_mulai,
+    a_jadwal.waktu_selesai
+) AS selisih_menit
 FROM `a_jadwal`
 INNER join a_mapel
 ON a_jadwal.id_mapel=a_mapel.id_mapel
-WHERE a_mapel.nama_mapel LIKE '%DKV%'";
+INNER JOIN a_kelas
+ON a_mapel.id_kelas=a_kelas.id
+WHERE a_kelas.kode='DKV'";
         $query = $this->db->query($sql);
         return $query->result_array();
     }

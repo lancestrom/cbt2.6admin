@@ -45,7 +45,7 @@
                                         <h4 class="badge badge-danger"><?= $row['waktu_selesai']; ?></h4>
                                     </td>
                                     <td>
-                                        <h4 class="badge badge-secondary"><?= number_format($row['waktu']); ?> Menit</h4>
+                                        <h4 class="badge badge-secondary"><?= number_format($row['selisih_menit']); ?> Menit</h4>
                                     </td>
                                     <td>
                                         <h5 class="text-center">
