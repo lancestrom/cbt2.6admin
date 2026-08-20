@@ -212,7 +212,7 @@ class Dashboard_akl extends MY_Controller
             'tanggal_mulai' => $tanggal_mulai,
             'waktu_mulai' => $waktu_mulai,
             'waktu_selesai' => $waktu_selesal,
-            'durasi' => $this->input->post('durasi', true)
+            // 'durasi' => $this->input->post('durasi', true)
         );
 
         $this->db->where('id_jadwal', $id_jadwal);

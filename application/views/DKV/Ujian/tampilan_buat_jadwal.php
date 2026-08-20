@@ -35,7 +35,7 @@
                                 <input type="time" class="form-control" name="waktu_selesai">
                             </div>
                         </div>
-                        <div class="col-md">
+                        <!-- <div class="col-md">
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Durasi</label>
                                 <select class="form-control" name="durasi">
@@ -53,7 +53,7 @@
                                     <option value="120">120 Menit</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
